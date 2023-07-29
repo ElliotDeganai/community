@@ -1,0 +1,5 @@
+Next steps:
+doc value creation vue to adapt with new fields
+
+npm:
+npm i @tiptap/extension-color @tiptap/extension-text-style @tiptap/vue-3 @tiptap/starter-kit @tiptap/extension-highlight moment @tiptap/extension-text-align @tiptap/extension-underline vuex wavesurfer.js @types/wavesurfer.js @vue-stripe/vue-stripe --save

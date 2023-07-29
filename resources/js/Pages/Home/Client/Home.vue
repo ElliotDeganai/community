@@ -1,0 +1,239 @@
+<template>
+    <div class="" >
+        <div class="relative z-50">
+            <div>
+                <div class="h-screen w-full">
+                    <div class="w-full h-full relative">
+                        <img v-if="$page.props.auth.user" class="w-full h-full object-cover" :src="$helpers.getImageUrl(getCoverSection().category.posts[0])" />
+                        <video class="w-full h-full object-cover" v-else autoplay muted loop>
+                            <source src="/storage/video/intro-2.mp4" type="video/mp4">
+                            <source src="/storage/video/intro-2.mp4" type="video/ogg">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div v-if="!$page.props.auth.user" class="absolute top-0 left-0 w-full h-full text-white">
+                            <div class="w-full h-full flex flex-wrap justify-center content-center">
+                                <Link :href="route('login')" class="shrink-0 flex items-center font-bold text-lg lg:text-2xl text-stone-800 rounded-full px-3 py-2 bg-white/75">Connecte-toi</Link>
+                            </div>
+                        </div>
+                        <div v-if="$page.props.auth.user" class="flex flex-wrap content-center justify-center w-full h-48 absolute bottom-0 py-16">
+                            <Down @click="scrollToRsvp()" class="cursor-pointer opacity-75 loader" :getSize="16" :getColor="'text-white'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative" v-if="$page.props.auth.user">
+            <div class="px-8 lg:px-32 py-8 lg:py-16">
+                <div class="title-home">{{getSummarySection().category.posts[0].name}}</div>
+                <div class="summary-home" :key="post.id" v-for="post in getSummarySection().category.posts">
+                    <div class="">
+                        <div class="w-full" :key="field.id" v-for="field in getSummarySection().page_fields">
+                            <div class="py-8" v-if="$helpers.getFieldDocValueObject(field, post) !== ''">
+                                <div class="w-full">
+                                    <DocValue :getdoc="$helpers.getFieldDocValueObject(field, post)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-0 lg:px-32">
+                        <video class="w-full h-56 lg:h-78 object-cover" controls>
+                            <source src="/storage/video/intro-2.mp4" type="video/mp4">
+                            <source src="/storage/video/intro-2.mp4" type="video/ogg">
+                            Your browser does not support the video tag.
+                        </video>
+                </div>
+            </div>
+        </div>
+        <div class="relative" v-if="$page.props.auth.user">
+            <div ref="targetRef" class="px-4 lg:px-16 py-8">
+                <div class="px-4 lg:px-16 border border-amber-200 rounded-lg py-8">
+                    <div>
+                        <div class="title-home">RSVP</div>
+                    </div>
+                    <div v-if="$page.props.status.message" class="p-2 lg:p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
+                    <div class="py-8 summary-home">
+                        <div v-if="$page.props.auth.user.has_answered && !updateMode">
+                            <div>
+                                <div>Dear <span class="font-bold">{{$page.props.auth.user.name}}</span>, you already answered to our RSVP, you can review and edit your answers below.</div>
+                            </div>
+                            <div>
+                                <div class="py-4">
+                                    <label class="label-fields">
+                                        Will come to the party ? <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_partying == 0">No</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>Yes</span>
+                                    </label>
+                                </div>
+                                <div v-if="$page.props.auth.user.has_company" class="py-4">
+                                    <label class="label-fields">
+                                        Will be accompanied ? <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_accompanied == 0">No</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>Yes</span>
+                                    </label>
+                                </div>
+                                <div class="">
+                                    <button @click.prevent="changeAnswers()" class="btn-submit-fields">Change my answers</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <form @submit.prevent="submit">
+                                <div>
+                                    <div>Dear <span class="font-bold">{{$page.props.auth.user.name}}</span>, can you please tell me if you will be there for my Birthday ?</div>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div class="py-4">
+                                        <label class="label-fields"  for="is_partying">Will you come have fun with us ?</label>
+                                        <div class="py-2">
+                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="0" /> No
+                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="1" /> Yes
+                                            <!-- <div class="error-msg" v-if="errors.is_partying">{{ errors.is_partying }}</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="form.user.has_company">
+                                    <div></div>
+                                    <div class="py-4">
+                                        <label class="label-fields"  for="is_accompanied">Will you come with your + 1</label>
+                                        <div class="py-2">
+                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="0" /> No
+                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="1" /> Yes
+                                            <!-- <div class="error-msg" v-if="errors.is_accompanied">{{ errors.is_accompanied }}</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" flex flex-wrap justify-around w-full">
+                                    <button class="btn-submit-fields" type="submit">Submit</button>
+                                    <button @click.prevent="cancel()" class="btn-submit-fields">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import BreezeGuestLayout from '@/Layouts/Guest.vue';
+import Carousel from './../Help/Carousel/Carousel.vue'
+import helpers from '../../../helpers'
+import DocValue from './../Help/DocumentationValue.vue'
+import Checkout from '../../Stripe/Checkout.vue'
+import store from '../../../Store/index';
+import Vuex from "vuex";
+import Products from './Help/Products.vue'
+import Speak from './Help/Speak.vue'
+import { useForm } from "@inertiajs/inertia-vue3";
+import { Link } from '@inertiajs/inertia-vue3';
+import Down from '../../Help/Icon/Down.vue'
+export default {
+/*     setup(props) {
+        const form = useForm({
+            user:
+        });
+        return { form };
+    }, */
+    props: ['getposts', 'getcategories', 'getintent'],
+    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down},
+    layout: BreezeGuestLayout,
+    data() {
+        return {
+            page: this.$page.props.pages.filter(page => page.title == 'Home')[0],
+            sections: this.$page.props.pages.filter(page => page.title == 'Home')[0].page_sections,
+            model: this.$page.props.auth.user,
+            updateMode: false,
+            form : useForm({
+                id: this.$page.props.auth.user ? this.$page.props.auth.user.id : null,
+                user: this.$page.props.auth.user ? this.$page.props.auth.user : null,
+                name: this.$page.props.auth.user ? this.$page.props.auth.user.name : null,
+                has_answered: this.$page.props.auth.user ? this.$page.props.auth.user.has_answered : null,
+                has_company: this.$page.props.auth.user ? this.$page.props.auth.user.has_company : null,
+                is_accompanied: this.$page.props.auth.user ? this.$page.props.auth.user.is_accompanied : null,
+                is_partying: this.$page.props.auth.user ? this.$page.props.auth.user.is_partying : null,
+            })
+        }
+    },
+    methods: {
+        getValue(docValue){
+            return helpers.getValue(docValue);
+        },
+        toggleDisplay(id){
+            let refKey = 'post_'+id;
+            let element = this.$refs[refKey][0];
+            element.classList.contains('hidden') ? element.classList.replace('hidden', 'block') : element.classList.replace('block', 'hidden');
+        },
+        toggleCategory(id){
+            let refKey = 'category_'+id;
+            let element = this.$refs[refKey][0];
+            element.classList.contains('hidden') ? element.classList.replace('hidden', 'block') : element.classList.replace('block', 'hidden');
+        },
+        getFieldDocValue(field, post){
+            return helpers.getFieldDocValue(field, post);
+        },
+        ...Vuex.mapActions([
+            "saveCartItem", "addCartItemQuantity"
+        ]),
+        setProductCart(product){
+            let product_in_cart = this.cart.filter(item => item.id == product.id);
+            if (product_in_cart.length == 0) {
+                let cart_item = {
+                    product: product,
+                    quantity: 1
+                };
+                //console.log(cart_item)
+                this.saveCartItem(cart_item);
+            } else {
+                this.addCartItemQuantity(product_in_cart[0]);
+            }
+        },
+        getCoverSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Cover');
+        },
+        getSummarySection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Summary');
+        },
+        submit() {
+            let self = this;
+                    this.form.has_answered = 1;
+            this.form.put(route("users.update", this.form.id),  {
+                onSuccess: (form) => {
+                    self.updateMode = false;
+                },
+                preserveScroll: true
+            });
+        },
+        cancel() {
+            this.updateMode = false;
+        },
+        changeAnswers() {
+            this.updateMode = !this.updateMode;
+        },
+        setUpdateMode() {
+            this.updateMode = !this.updateMode;
+        },
+        scrollToRsvp() {
+            this.$refs.targetRef.scrollIntoView({ behavior: 'smooth' });
+        }
+    },
+    computed: {
+        ...Vuex.mapState([
+            "cart"
+        ])
+    },
+    mounted() {
+    },
+}
+</script>
+
+<style>
+
+.loader {
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-30%); }
+  100% { transform: translateY(0); }
+
+}
+</style>
