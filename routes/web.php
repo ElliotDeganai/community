@@ -113,6 +113,7 @@ Route::get('/news', [HomeController::class, 'news'])->name('news');
 Route::get('/free', [HomeController::class, 'free'])->name('free');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq'); */
+//
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
