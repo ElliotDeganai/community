@@ -9,7 +9,7 @@
         <!-- Fonts -->
         {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
         <link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        {{-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> --}}
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
