@@ -60,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-8">
+                <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="py-8">
                     <button class="btn-delete text-2xl" @click="this.$store.dispatch('set_model', {model: post, route: 'resource', type: 'resource'})">Delete</button>
                 </div>
             </div>

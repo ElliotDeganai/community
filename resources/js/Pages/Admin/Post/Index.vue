@@ -63,7 +63,7 @@
                                 <div class="text-left w-1/8 py-2">{{post.published_at}}</div>
                                 <div class="text-left w-1/8 py-2">{{post.body}}</div>
                                 <div class="text-left w-1/8 py-2">{{post.slug}}</div>
-                                <button class="btn-delete" @click="this.$store.dispatch('set_model', {model: post, route: 'resource', type: 'resource'})">Delete</button>
+                                <button v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="btn-delete" @click="this.$store.dispatch('set_model', {model: post, route: 'resource', type: 'resource'})">Delete</button>
 <!--                                 <div>
                                     <Link as="button" data-message="Are you sure ?" class="btn-delete" method="delete" :href="route('posts.destroy', post.id)" :preserve-state="false">
                                         Delete

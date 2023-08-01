@@ -12,7 +12,7 @@
                         <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
                     </div>
                     <div class="py-8">
-                        <Link :href="route('categories.create')" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
+                        <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" :href="route('categories.create')" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                             Add a new Category
                         </Link>
                     </div>
@@ -54,10 +54,10 @@
                                     </div>
                                     <div v-else class="text-left w-1/7 py-2"></div>
                                     <div class="text-left w-1/7 py-2">{{formatDate(category.updated_at)}}</div>
-                                    <div class="px-3 py-2">
+                                    <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="px-3 py-2">
                                         <Link class="btn-add" :href="route('categories.edit', category.id)">Edit</Link>
                                     </div>
-                                    <div class="px-3 ">
+                                    <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="px-3 ">
                                         <button class="btn-delete" @click="this.$store.dispatch('set_model', {model: category, route: 'template', type: 'template'})">Delete</button>
                                     </div>
                                     <div class="px-3 py-2">
