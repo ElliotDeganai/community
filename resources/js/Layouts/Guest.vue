@@ -23,7 +23,7 @@
                             <Link :href="route('home')" class="shrink-0 flex items-center">
                                 <div class="h-16">
                                     <!-- <BreezeApplicationLogo class="block h-9 w-auto" /> -->
-                                    <img :src="'../storage/home/logo-transparent.png'" alt="" class="h-full" />
+                                    <img :src="'../storage/home/level35.png'" alt="" class="h-full" />
                                 </div>
                                 <div class="text-lg lg:text-2xl font-bold">Level 35</div>
                             </Link>

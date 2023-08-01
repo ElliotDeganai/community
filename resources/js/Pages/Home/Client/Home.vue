@@ -36,10 +36,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-0 lg:px-32">
-                        <video class="w-full h-56 lg:h-78 object-cover" controls>
-                            <source src="/storage/video/intro-2.mp4" type="video/mp4">
-                            <source src="/storage/video/intro-2.mp4" type="video/ogg">
+                <div ref="explanations" class="px-0 lg:px-32">
+                        <video class="w-full h-56 lg:h-86 object-cover" controls>
+                            <source src="/storage/video/Level35.mp4" type="video/mp4">
+                            <source src="/storage/video/Level35.mp4" type="video/ogg">
                             Your browser does not support the video tag.
                         </video>
                 </div>
@@ -49,42 +49,40 @@
             <div ref="targetRef" class="px-4 lg:px-16 py-8">
                 <div class="px-4 lg:px-16 border border-amber-200 rounded-lg py-8">
                     <div>
-                        <div class="title-home">RSVP</div>
+                        <div class="title-home">{{getValueByFieldName("Title")}}</div>
                     </div>
                     <div v-if="$page.props.status.message" class="p-2 lg:p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
                     <div class="py-8 summary-home">
                         <div v-if="$page.props.auth.user.has_answered && !updateMode">
-                            <div>
-                                <div>Dear <span class="font-bold">{{$page.props.auth.user.name}}</span>, you already answered to our RSVP, you can review and edit your answers below.</div>
+                            <div v-html="replaceUser(createDiv(getValueByFieldName('Question - Description')))">
                             </div>
                             <div>
                                 <div class="py-4">
                                     <label class="label-fields">
-                                        Will come to the party ? <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_partying == 0">No</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>Yes</span>
+                                        {{getValueByFieldName("Question - Coming")}} <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_partying == 0">{{getValueByFieldName("Option - No")}}</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>{{getValueByFieldName("Option - Yes")}}</span>
                                     </label>
                                 </div>
                                 <div v-if="$page.props.auth.user.has_company" class="py-4">
                                     <label class="label-fields">
-                                        Will be accompanied ? <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_accompanied == 0">No</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>Yes</span>
+                                        {{getValueByFieldName("Question - Plus 1")}} <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_accompanied == 0">{{getValueByFieldName("Option - No")}}</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>{{getValueByFieldName("Option - Yes")}}</span>
                                     </label>
                                 </div>
                                 <div class="">
-                                    <button @click.prevent="changeAnswers()" class="btn-submit-fields">Change my answers</button>
+                                    <button @click.prevent="changeAnswers()" class="btn-submit-fields">{{getValueByFieldName("Button - Change answers")}}</button>
                                 </div>
                             </div>
                         </div>
                         <div v-else>
                             <form @submit.prevent="submit">
-                                <div>
-                                    <div>Dear <span class="font-bold">{{$page.props.auth.user.name}}</span>, can you please tell me if you will be there for my Birthday ?</div>
+                                <div v-html="replaceUser(createDiv(getValueByFieldName('Answer - Description')))">
                                 </div>
                                 <div>
                                     <div></div>
                                     <div class="py-4">
-                                        <label class="label-fields"  for="is_partying">Will you come have fun with us ?</label>
+                                        <label class="label-fields"  for="is_partying">{{getValueByFieldName("Question - Coming")}}</label>
                                         <div class="py-2">
-                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="0" /> No
-                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="1" /> Yes
+                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="0" /> {{getValueByFieldName("Option - No")}}
+                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="1" /> {{getValueByFieldName("Option - Yes")}}
                                             <!-- <div class="error-msg" v-if="errors.is_partying">{{ errors.is_partying }}</div> -->
                                         </div>
                                     </div>
@@ -92,17 +90,17 @@
                                 <div v-if="form.user.has_company">
                                     <div></div>
                                     <div class="py-4">
-                                        <label class="label-fields"  for="is_accompanied">Will you come with your + 1</label>
+                                        <label class="label-fields"  for="is_accompanied">{{getValueByFieldName("Question - Plus 1")}}</label>
                                         <div class="py-2">
-                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="0" /> No
-                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="1" /> Yes
+                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="0" /> {{getValueByFieldName("Option - No")}}
+                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="1" /> {{getValueByFieldName("Option - Yes")}}
                                             <!-- <div class="error-msg" v-if="errors.is_accompanied">{{ errors.is_accompanied }}</div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class=" flex flex-wrap justify-around w-full">
-                                    <button class="btn-submit-fields" type="submit">Submit</button>
-                                    <button @click.prevent="cancel()" class="btn-submit-fields">Cancel</button>
+                                    <button class="btn-submit-fields" type="submit">{{getValueByFieldName("Button - Validate")}}</button>
+                                    <button @click.prevent="cancel()" class="btn-submit-fields">{{getValueByFieldName("Button - Cancel")}}</button>
                                 </div>
                             </form>
                         </div>
@@ -139,6 +137,7 @@ export default {
         return {
             page: this.$page.props.pages.filter(page => page.title == 'Home')[0],
             sections: this.$page.props.pages.filter(page => page.title == 'Home')[0].page_sections,
+            rsvp: this.getRsvpSection().category.posts[0],
             model: this.$page.props.auth.user,
             updateMode: false,
             form : useForm({
@@ -191,6 +190,9 @@ export default {
         getSummarySection(){
             return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Summary');
         },
+        getRsvpSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'RSVP');
+        },
         submit() {
             let self = this;
                     this.form.has_answered = 1;
@@ -211,7 +213,26 @@ export default {
             this.updateMode = !this.updateMode;
         },
         scrollToRsvp() {
-            this.$refs.targetRef.scrollIntoView({ behavior: 'smooth' });
+            this.$refs.explanations.scrollIntoView({ behavior: 'smooth' });
+        },
+        replaceUser(text) {
+            if (text) {
+                return text.replace("%user%", '<span class="font-bold">'+this.$page.props.auth.user.name+'</span>');
+            } else {
+                return null;
+            }
+        },
+        createDiv(text) {
+            if (text) {
+                console.log('<div>'+text+'</div>')
+                return '<div>'+text+'</div>';
+            } else {
+                return null;
+            }
+        },
+        getValueByFieldName(field_name) {
+            console.log(this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getRsvpSection(), field_name) , this.rsvp).docValue)
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getRsvpSection(), field_name) , this.rsvp).docValue;
         }
     },
     computed: {
