@@ -22,8 +22,8 @@
                 </div>
             </div>
         </div>
-        <div class="relative" v-if="$page.props.auth.user">
-            <div class="px-8 lg:px-32 py-8 lg:py-16">
+        <div class="relative px-0 lg:px-32 xl:px-32" v-if="$page.props.auth.user">
+            <div ref="summary" class="px-8 lg:px-32 xl:px-32 py-8 lg:py-16">
                 <div class="title-home">{{getSummarySection().category.posts[0].name}}</div>
                 <div class="summary-home" :key="post.id" v-for="post in getSummarySection().category.posts">
                     <div class="">
@@ -36,17 +36,17 @@
                         </div>
                     </div>
                 </div>
-                <div ref="explanations" class="px-0 lg:px-32">
-                        <video class="w-full h-56 lg:h-86 object-cover" controls>
-                            <source src="/storage/video/Level35.mp4" type="video/mp4">
-                            <source src="/storage/video/Level35.mp4" type="video/ogg">
+                <div ref="explanations" class="">
+                        <video class="w-full h-56 lg:h-90 object-cover" controls>
+                            <source class="w-full h-full" src="/storage/video/Level35.mp4" type="video/mp4">
+                            <source class="w-full h-full" src="/storage/video/Level35.mp4" type="video/ogg">
                             Your browser does not support the video tag.
                         </video>
                 </div>
             </div>
         </div>
         <div class="relative" v-if="$page.props.auth.user">
-            <div ref="targetRef" class="px-4 lg:px-16 py-8">
+            <div ref="targetRef" class="px-4 lg:px-32 py-8">
                 <div class="px-4 lg:px-16 border border-amber-200 rounded-lg py-8">
                     <div>
                         <div class="title-home">{{getValueByFieldName("Title")}}</div>
@@ -54,7 +54,7 @@
                     <div v-if="$page.props.status.message" class="p-2 lg:p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
                     <div class="py-8 summary-home">
                         <div v-if="$page.props.auth.user.has_answered && !updateMode">
-                            <div v-html="replaceUser(createDiv(getValueByFieldName('Question - Description')))">
+                            <div v-html="replaceUser(createDiv(getValueByFieldName('Answer - Description')))">
                             </div>
                             <div>
                                 <div class="py-4">
@@ -74,7 +74,8 @@
                         </div>
                         <div v-else>
                             <form @submit.prevent="submit">
-                                <div v-html="replaceUser(createDiv(getValueByFieldName('Answer - Description')))">
+
+                                <div v-html="replaceUser(createDiv(getValueByFieldName('Question - Description')))">
                                 </div>
                                 <div>
                                     <div></div>
@@ -87,8 +88,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div v-if="form.user.has_company">
-                                    <div></div>
+                                <div class="py-4" v-if="form.user.has_company">
+
+
+                                    <div v-html="replaceUser(createDiv(getValueByFieldName('Question - Plus 1 - Description')))">
+                                    </div>
                                     <div class="py-4">
                                         <label class="label-fields"  for="is_accompanied">{{getValueByFieldName("Question - Plus 1")}}</label>
                                         <div class="py-2">
@@ -213,7 +217,7 @@ export default {
             this.updateMode = !this.updateMode;
         },
         scrollToRsvp() {
-            this.$refs.explanations.scrollIntoView({ behavior: 'smooth' });
+            this.$refs.summary.scrollIntoView({ behavior: 'smooth' });
         },
         replaceUser(text) {
             if (text) {
@@ -231,7 +235,6 @@ export default {
             }
         },
         getValueByFieldName(field_name) {
-            console.log(this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getRsvpSection(), field_name) , this.rsvp).docValue)
             return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getRsvpSection(), field_name) , this.rsvp).docValue;
         }
     },

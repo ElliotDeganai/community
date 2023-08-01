@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Stripe\StripeController;
 
 use App\Http\Controllers\PayPalController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,7 @@ foreach ($pages as $page) {
     Route::get($page->url, function() use ($page) {
         return Inertia::render('Home/Client/'.$page->template, [
             'getpage' => $page,
+            'getusers' => User::with('roles')->get(),
 
         ]);
     })->name($page->url_name);

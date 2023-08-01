@@ -36,7 +36,7 @@
     }
 
     .summary-home {
-        @apply w-full flex flex-wrap text-sm lg:text-base;
+        @apply w-full flex flex-wrap text-sm lg:text-2xl;
     }
 
   }
