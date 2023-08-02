@@ -1,6 +1,6 @@
 <template>
     <div class="relative">
-        <div class="pt-32 w-full h-full">
+        <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="pt-32 w-full h-full">
             <div class="w-full py-8 lg:py-24 z-10">
                 <div class="title-home">Résumé</div>
             </div>

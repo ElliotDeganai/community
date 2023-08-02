@@ -70,9 +70,8 @@ foreach ($pages as $page) {
         return Inertia::render('Home/Client/'.$page->template, [
             'getpage' => $page,
             'getusers' => User::with('roles')->get(),
-
         ]);
-    })->name($page->url_name);
+    })->middleware('restricted')->name($page->url_name);
 }
 
 

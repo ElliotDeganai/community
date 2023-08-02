@@ -246,11 +246,14 @@ export default {
     },
     mounted() {
         let roles = [];
-        for (let index = 0; index < this.form.roles.length; index++) {
-            roles.push(this.form.roles[index].id);
+        if (this.form.roles) {
+            for (let index = 0; index < this.form.roles.length; index++) {
+                roles.push(this.form.roles[index].id);
+            }
+            this.form.roles = [];
+            this.form.roles = roles;
+
         }
-        this.form.roles = [];
-        this.form.roles = roles;
     },
 }
 </script>

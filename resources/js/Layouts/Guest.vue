@@ -14,7 +14,7 @@
             </div>
         </div>
         <div :class="[product ? 'h-screen overflow-hidden' : 'min-h-screen h-full']" class="relative ">
-            <nav :class="[(scrollPosition === null || scrollPosition < 0.1) && $page.url_name === 'resume' ? 'text-white' : 'bg-amber-50 text-amber-900']" class="border-b fixed top-0 w-full border-gray-200 z-60">
+            <nav :class="[(scrollPosition === null || scrollPosition < 0.1) ? 'text-white' : 'bg-amber-50 text-amber-900']" class="border-b fixed top-0 w-full border-gray-200 z-60">
                 <!-- Primary Navigation Menu -->
                 <div class=" mx-auto px-4 sm:px-6 lg:px-16">
                     <div class="flex justify-between h-16">

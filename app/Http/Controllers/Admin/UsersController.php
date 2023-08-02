@@ -94,7 +94,7 @@ class UsersController extends Controller
 /*         if (Auth::user()->cant('manageUsers', $user)) {
             return redirect()->route('admin')->with('status', "You cannot edit users !");
         } */
-        //dd($request);
+        //dd($request->url());
         if (Auth::user()->isClient()) {
             //dd('test');
             $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered']));
