@@ -147,6 +147,7 @@ export default {
             form : useForm({
                 id: this.$page.props.auth.user ? this.$page.props.auth.user.id : null,
                 user: this.$page.props.auth.user ? this.$page.props.auth.user : null,
+                roles: this.$page.props.auth.user ? this.$page.props.auth.user.roles : null,
                 name: this.$page.props.auth.user ? this.$page.props.auth.user.name : null,
                 has_answered: this.$page.props.auth.user ? this.$page.props.auth.user.has_answered : null,
                 has_company: this.$page.props.auth.user ? this.$page.props.auth.user.has_company : null,
@@ -244,6 +245,12 @@ export default {
         ])
     },
     mounted() {
+        let roles = [];
+        for (let index = 0; index < this.form.roles.length; index++) {
+            roles.push(this.form.roles[index].id);
+        }
+        this.form.roles = [];
+        this.form.roles = roles;
     },
 }
 </script>

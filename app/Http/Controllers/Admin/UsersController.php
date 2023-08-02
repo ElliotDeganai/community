@@ -101,9 +101,14 @@ class UsersController extends Controller
             $user->save();
             return redirect()->route('home')->with('status', "Dear $user->name, your answers has been saved !");
         } else {
+            //dd($request->roles);
             $user->fill($request->only(['name', 'email', 'city', 'address', 'zip_code', 'is_partying', 'is_accompanied', 'has_company', 'has_answered']));
             $user->save();
-            $user->roles()->sync($request->roles);
+            for ($i=0; $i < count($request->roles); $i++) {
+                //dd($request->roles[$i]);
+                $user->roles()->sync($request->roles[$i]);
+            }
+            //$user->roles()->sync($request->roles);
             return redirect()->route('users.index')->with('status', "$user->name was updated !");
         }
     }

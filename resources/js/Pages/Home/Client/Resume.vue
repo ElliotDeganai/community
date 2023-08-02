@@ -1,31 +1,31 @@
 <template>
     <div class="relative">
         <div class="pt-32 w-full h-full">
-            <div class="w-full py-24 z-10">
+            <div class="w-full py-8 lg:py-24 z-10">
                 <div class="title-home">Résumé</div>
             </div>
             <div>
-                <div class="flex flex-wrap px-32">
+                <div class="flex flex-wrap px-2 lg:px-32">
                     <div class="w-1/3">
-                        <div class="font-bold text-green-700 text-xl">Viendront</div>
+                        <div class="font-bold text-green-700 text-base lg:text-xl">Viendront</div>
                         <div>
-                            <div :key="user.id" v-for="user in coming">
+                            <div class="text-sm lg:text-base" :key="user.id" v-for="user in coming">
                                 {{user.name}}
                             </div>
                         </div>
                     </div>
                     <div class="w-1/3">
-                        <div class="font-bold text-gray-900 text-xl">N'ont pas répondu</div>
+                        <div class="font-bold text-gray-900 text-base lg:text-xl">N'ont pas répondu</div>
                         <div>
-                            <div :key="user.id" v-for="user in noAnswers">
+                            <div class="text-sm lg:text-base" :key="user.id" v-for="user in noAnswers">
                                 {{user.name}}
                             </div>
                         </div>
                     </div>
                     <div class="w-1/3">
-                        <div class="font-bold text-red-700 text-xl">Ne Viendront Pas</div>
+                        <div class="font-bold text-red-700 text-base lg:text-xl">Ne Viendront Pas</div>
                         <div>
-                            <div :key="user.id" v-for="user in notComing">
+                            <div class="text-sm lg:text-base" :key="user.id" v-for="user in notComing">
                                 {{user.name}}
                             </div>
                         </div>
@@ -56,8 +56,8 @@ export default {
     methods: {
     },
     computed: {
-        coming() { return this.allUsers.filter(u => u.is_partying)},
-        notComing() { return this.allUsers.filter(u => !u.is_partying)},
+        coming() { return this.allUsers.filter(u => u.is_partying && u.has_answered)},
+        notComing() { return this.allUsers.filter(u => !u.is_partying && u.has_answered)},
         noAnswers() { return this.allUsers.filter(u => !u.has_answered)},
     },
     created() {
