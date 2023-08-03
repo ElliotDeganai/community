@@ -25,25 +25,25 @@ class UserTableSeeder extends Seeder
         $dev = User::create([
             'name' => 'Developper',
             'email' => 'dev@laracms.fr',
-            'password' => bcrypt('password')
+            'password' => bcrypt('5N5wUjLS1u76W$4')
         ]);
 
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@laracms.fr',
-            'password' => bcrypt('password')
+            'password' => bcrypt('s8@MX53919YkXS6')
         ]);
 
         $editor = User::create([
             'name' => 'Editor',
             'email' => 'editor@laracms.fr',
-            'password' => bcrypt('password')
+            'password' => bcrypt('@N^69ah&WdRL9vO')
         ]);
 
         $client1 = User::create([
             'name' => 'Client',
             'email' => 'client@laracms.fr',
-            'password' => bcrypt('password')
+            'password' => bcrypt('16JanV1992.1')
         ]);
 
         $client2 = User::create([
