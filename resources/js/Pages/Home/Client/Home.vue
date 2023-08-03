@@ -127,6 +127,7 @@ import Speak from './Help/Speak.vue'
 import { useForm } from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3';
 import Down from '../../Help/Icon/Down.vue'
+import Loading from '../Client/Help/Loading.vue'
 export default {
 /*     setup(props) {
         const form = useForm({
@@ -135,7 +136,7 @@ export default {
         return { form };
     }, */
     props: ['getposts', 'getcategories', 'getintent'],
-    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down},
+    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down, Loading},
     layout: BreezeGuestLayout,
     data() {
         return {
@@ -153,7 +154,7 @@ export default {
                 has_company: this.$page.props.auth.user ? this.$page.props.auth.user.has_company : null,
                 is_accompanied: this.$page.props.auth.user ? this.$page.props.auth.user.is_accompanied : null,
                 is_partying: this.$page.props.auth.user ? this.$page.props.auth.user.is_partying : null,
-            })
+            }),
         }
     },
     methods: {
@@ -236,7 +237,7 @@ export default {
         },
         getValueByFieldName(field_name) {
             return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getRsvpSection(), field_name) , this.rsvp).docValue;
-        }
+        },
     },
     computed: {
         ...Vuex.mapState([
@@ -244,6 +245,7 @@ export default {
         ])
     },
     mounted() {
+        this.$emit("siteReady");
         let roles = [];
         if (this.form.roles) {
             for (let index = 0; index < this.form.roles.length; index++) {
@@ -260,10 +262,10 @@ export default {
 <style>
 
 .loader {
-  animation: loading 1s linear infinite;
+  animation: bouncing 1s linear infinite;
 }
 
-@keyframes loading {
+@keyframes bouncing {
   0% { transform: translateY(0); }
   50% { transform: translateY(-30%); }
   100% { transform: translateY(0); }
