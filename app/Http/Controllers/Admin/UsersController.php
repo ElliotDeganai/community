@@ -118,7 +118,7 @@ class UsersController extends Controller
         $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered']));
         $user->save();
         //$user->roles()->sync($request->roles);
-        return redirect()->route('home')->with('status', "Dear $user->name, your answers has been saved !");
+        return redirect()->route('home')->with('status', "Chèr(e) $user->name, tes réponses ont bien été enregistrées !");
     }
 
     /**
