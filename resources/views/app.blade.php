@@ -17,8 +17,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
         <!-- Scripts -->
-        <script src="https://js.stripe.com/v3"></script>
-        <script src="https://www.paypal.com/sdk/js?client-id=AULhHrRiQcike52hiLTXebHidwX2chUjKVxiF-U6tFL7eU4bGF5aUi5s53ENxz48YbTsZzwp5i7ZOVdY"></script>
+        {{-- <script src="https://js.stripe.com/v3"></script> --}}
+        {{-- <script src="https://www.paypal.com/sdk/js?client-id=AULhHrRiQcike52hiLTXebHidwX2chUjKVxiF-U6tFL7eU4bGF5aUi5s53ENxz48YbTsZzwp5i7ZOVdY"></script> --}}
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
         @inertiaHead
