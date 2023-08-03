@@ -26,7 +26,7 @@ createInertiaApp({
         const VueApp = createApp({ render: () => h(app, props) });
 
         VueApp.config.globalProperties.$helpers = helpers;
-        VueApp.config.globalProperties.$stripe = options;
+        //VueApp.config.globalProperties.$stripe = options;
         return VueApp
             .use(plugin)
             .use(require('moment'))
