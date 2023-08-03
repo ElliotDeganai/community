@@ -2,9 +2,9 @@
     <div class="bg-amber-50  relative" style="font-family:  'Kalam', cursive;">
 
         <transition name="loading-fade">
-            <loading class="z-60" v-if="loadingUp"></loading>
+            <loading class="z-70" v-if="isLoading"></loading>
         </transition>
-        <div v-show="!loadingUp">
+        <div v-show="!isLoading">
 
             <div class="w-full h-full flex flex-wrap absolute top-0 left-0 overflow-hidden">
                 <div class="w-1/4 hidden lg:inline" :key="i" v-for="i in 24">
@@ -181,6 +181,9 @@ export default {
         ]),
         getScroll() {
             return this.scrollPosition;
+        },
+        isLoading() {
+            return this.loadingUp && this.$page.url === '/';
         }
     },
     async created() {
@@ -191,6 +194,7 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.updateScroll);
         this.loadingSite();
+        console.log(this.$page.url)
     },
 }
 </script>

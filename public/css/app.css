@@ -871,6 +871,12 @@ body{
 .z-30 {
   z-index: 30;
 }
+.z-70 {
+  z-index: 70;
+}
+.z-80 {
+  z-index: 80;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1138,6 +1144,9 @@ body{
 .w-4\/5 {
   width: 80%;
 }
+.w-70 {
+  width: 22rem;
+}
 .w-68 {
   width: 20rem;
 }
@@ -1149,9 +1158,6 @@ body{
 }
 .w-3 {
   width: 0.75rem;
-}
-.w-70 {
-  width: 22rem;
 }
 .max-w-xl {
   max-width: 36rem;
