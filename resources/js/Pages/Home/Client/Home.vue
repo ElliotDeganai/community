@@ -229,7 +229,6 @@ export default {
         },
         createDiv(text) {
             if (text) {
-                console.log('<div>'+text+'</div>')
                 return '<div>'+text+'</div>';
             } else {
                 return null;
