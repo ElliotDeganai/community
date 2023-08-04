@@ -6,27 +6,66 @@
             </div>
             <div>
                 <div class="flex flex-wrap px-2 lg:px-32">
+                    <div class="w-1/3 relative">
+                        <div class="font-bold py-2 px-1 text-white bg-green-700 text-base lg:text-xl w-full text-center truncate">Viendront</div>
+                        <div class="px-2 lg:px-8 absolute top-0 right-0 py-2">
+                            <Couple class="text-white" :getSize="4" />
+                        </div>
+                    </div>
                     <div class="w-1/3">
-                        <div class="font-bold text-green-700 text-base lg:text-xl">Viendront</div>
+                        <div class="font-bold py-2 px-1 text-white bg-gray-900 text-base lg:text-xl w-full text-center truncate">N'ont pas répondu</div>
                         <div>
-                            <div class="text-sm lg:text-base" :key="user.id" v-for="user in coming">
+                        </div>
+                    </div>
+                    <div class="w-1/3">
+                        <div class="font-bold py-2 px-1 text-white bg-red-700 text-base lg:text-xl w-full text-center truncate">Ne Viendront Pas</div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap px-2 lg:px-32">
+                    <div class="w-1/3 px-2">
+                        <div class="relative">
+                            <div class="text-sm lg:text-base relative w-full text-center py-2" :key="user.id" v-for="user in coming">
+                                {{user.name}}
+                                <div class="px-1 lg:px-8 absolute top-0 right-0 py-2">
+                                    <span v-if="user.has_company && user.is_accompanied" class="text-green-700 font-bold" >
+                                        <Couple class="" :getSize="4" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-1/3 px-2">
+                        <div>
+                            <div class="text-sm lg:text-base w-full text-center py-2" :key="user.id" v-for="user in noAnswers">
                                 {{user.name}}
                             </div>
                         </div>
                     </div>
-                    <div class="w-1/3">
-                        <div class="font-bold text-gray-900 text-base lg:text-xl">N'ont pas répondu</div>
+                    <div class="w-1/3 px-2">
                         <div>
-                            <div class="text-sm lg:text-base" :key="user.id" v-for="user in noAnswers">
+                            <div class="text-sm lg:text-base w-full text-center py-2" :key="user.id" v-for="user in notComing">
                                 {{user.name}}
                             </div>
                         </div>
                     </div>
-                    <div class="w-1/3">
-                        <div class="font-bold text-red-700 text-base lg:text-xl">Ne Viendront Pas</div>
-                        <div>
-                            <div class="text-sm lg:text-base" :key="user.id" v-for="user in notComing">
-                                {{user.name}}
+                </div>
+                <div class="py-8 px-2 lg:px-32">
+                    <div>
+                        <div class="title-home">Récapitulatif</div>
+                        <div class="py-8">
+                            <div class="flex border">
+                                <div class="bg-sky-200 px-3 py-2 lg:w-1/5 truncate">Nombre d'invités présents</div>
+                                <div class="px-3 py-2">{{coming.length}}</div>
+                            </div>
+                            <div class="flex border">
+                                <div class="bg-sky-200 px-3 py-2 lg:w-1/5 truncate">Nombre de moitié présentes</div>
+                                <div class="px-3 py-2">{{coming.filter(u => u.is_accompanied).length}}</div>
+                            </div>
+                            <div class="flex border">
+                                <div class="bg-sky-900 text-white px-3 py-2 lg:w-1/5 truncate">Nombre total de personnes présentes</div>
+                                <div class="px-3 py-2">{{coming.length + coming.filter(u => u.is_accompanied).length}}</div>
                             </div>
                         </div>
                     </div>
@@ -39,8 +78,9 @@
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import helpers from '../../../helpers'
 import DocValue from './../Help/DocumentationValue.vue'
+import Couple from '../Help/Icon/Couple.vue'
 export default {
-    components:  {BreezeGuestLayout, DocValue},
+    components:  {BreezeGuestLayout, DocValue, Couple},
     layout: BreezeGuestLayout,
     props: {
         getusers: Array,
