@@ -10,9 +10,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-4 lg:px-32  py-8 lg:py-16">
+                <div ref="instruction" class="px-4 lg:px-32  py-8 lg:py-16">
                     <div>
-                        <div class="title-home">Vos instructions de vol de votre hotesse préférée</div>
+                        <div class="title-home">Les instructions de vol de votre hotesse préférée</div>
                         <div class="flex flex-wrap relative py-8 lg:py-16">
                             <div class="w-full relative" :key="field.id" v-for="field in getAudioSection().page_fields">
                                 <div class="w-full h-full rounded-xl z-0 absolute top-0 left-0 opacity-25 bg-amber-800"></div>
@@ -214,7 +214,7 @@ export default {
             this.updateMode = !this.updateMode;
         },
         scrollToRsvp() {
-            this.$refs.summary.scrollIntoView({ behavior: 'smooth' });
+            this.$refs.instruction.scrollIntoView({ behavior: 'smooth' });
         },
         replaceUser(text) {
             if (text) {

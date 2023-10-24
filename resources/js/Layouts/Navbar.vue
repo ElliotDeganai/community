@@ -21,7 +21,7 @@
             </div> -->
             <div v-if="$page.props.pages.length > 0" class="base:flex lg:flex xl:flex flex-wrap justify-around hidden sm:hidden " >
                 <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
-                    <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient)" :href="route(page.url_name)" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
+                    <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient)" :href="route(page.url_name)" :class="[page.id === $page.props.getpage.id ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
                 </div>
             </div>
             <div v-if="$page.props.is_ecommerce == 1" class="py-2 px-3 shrink-0 flex items-center" >
