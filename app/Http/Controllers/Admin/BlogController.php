@@ -39,7 +39,7 @@ class BlogController extends Controller
                         ->with('category')
                         ->with('docValues.medias')
                         ->with('docValues.documentation')
-                        ->paginate(5);
+                        ->paginate(10);
         }else {
             $posts=Auth::user()->posts()->whereHas('category', function ($query) {
                 return $query->where('type', '=', 'custom');
@@ -49,7 +49,7 @@ class BlogController extends Controller
                         ->with('category')
                         ->with('docValues.documentation')
                         ->withCount('docValues.medias')
-                        ->paginate(5);
+                        ->paginate(10);
         }
         return Inertia::render('Admin/Post/Index', ['getposts' => $posts]);
     }
@@ -67,7 +67,7 @@ class BlogController extends Controller
             ->with('category')
             ->with('docValues.medias')
             ->with('docValues.documentation')
-            ->paginate(5);
+            ->paginate(10);
         }else {
             $posts=Auth::user()
             ->posts()->with('user')
@@ -75,7 +75,7 @@ class BlogController extends Controller
             ->with('docValues.documentation')
             ->with('posts.category')
             ->withCount('docValues.medias')
-            ->paginate(5);
+            ->paginate(10);
         }
         return Inertia::render('Admin/Post/Index', [
             'getcategory' => $text_category,

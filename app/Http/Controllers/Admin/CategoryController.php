@@ -31,7 +31,7 @@ class CategoryController extends Controller
                                 ->with('documentations')
                                 ->with('category')
                                 ->withCount('posts')
-                                ->paginate(5);
+                                ->paginate(10);
         }else {
             //$categories=Auth::user()->categories()->where('category.type', 'custom')->with('user')->with('documentations')->with('category')->withCount('posts')->paginate(5);
 
@@ -39,7 +39,7 @@ class CategoryController extends Controller
                                 ->with('documentations')
                                 ->with('category')
                                 ->withCount('posts')
-                                ->paginate(5);
+                                ->paginate(10);
         }
         return Inertia::render('Admin/Category/Index', ['getcategories' => $categories]);
     }
