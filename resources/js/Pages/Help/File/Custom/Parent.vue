@@ -28,14 +28,14 @@
                 </div>
             </div>
         </div>
-        <File @files-updated="captureFile($event)" :getType="type"></File>
+        <File @files-updated="captureFile($event)" :getType="type" :getId="getId"></File>
     </div>
 </template>
 <script>
 import File from "./File.vue"
 import { Link } from '@inertiajs/inertia-vue3';
 export default {
-    props: ["getFiles", "geterror", "getType", "getObject"],
+    props: ["getFiles", "geterror", "getType", "getObject", "getId"],
   components: { File, Link },
   data() {
     return {

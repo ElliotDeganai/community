@@ -92,6 +92,7 @@ Route::get('/admin', function() {
     ]);
 })->middleware('admin')->name('admin');
 
+Route::resource('/admin/fields', PageFieldController::class);
 Route::resource('/admin/pages', PagesController::class, ['except' => ['pages.show']]);
 Route::resource('/admin/users', UsersController::class);
 Route::resource('/admin/posts', BlogController::class);

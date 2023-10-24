@@ -79,7 +79,8 @@ const helpers = {
             return {
                 docValue: doc_value.value_audio,
                 type: 'audio',
-                medias: doc_value.medias
+                medias: doc_value.medias,
+                id: doc_value.id
             };
         }
     },

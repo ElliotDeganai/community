@@ -94,15 +94,15 @@ class UsersController extends Controller
 /*         if (Auth::user()->cant('manageUsers', $user)) {
             return redirect()->route('admin')->with('status', "You cannot edit users !");
         } */
-        //dd($request->url());
+        //dd($request);
         if (Auth::user()->isClient()) {
-            //dd('test');
-            $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered']));
+            //dd($request);
+            $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered', 'flight_taken']));
             $user->save();
-            return redirect()->route('home')->with('status', "Dear $user->name, your answers has been saved !");
+            return redirect()->back()->with('status', "Dear $user->name, your answers has been saved !");
         } else {
             //dd($request->roles);
-            $user->fill($request->only(['name', 'email', 'city', 'address', 'zip_code', 'is_partying', 'is_accompanied', 'has_company', 'has_answered']));
+            $user->fill($request->only(['name', 'email', 'city', 'address', 'zip_code', 'is_partying', 'is_accompanied', 'has_company', 'has_answered', 'flight_taken']));
             $user->save();
             for ($i=0; $i < count($request->roles); $i++) {
                 //dd($request->roles[$i]);

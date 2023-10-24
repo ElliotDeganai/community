@@ -18,66 +18,9 @@
                     </div>
                 </div>
             </div>
-            <div :class="[product ? 'h-screen overflow-hidden' : 'min-h-screen h-full']" class="relative ">
-                <nav :class="[((scrollPosition === null && $page.url !== '/resume') || (scrollPosition < 0.1 && $page.url !== '/resume')) ? 'text-white' : 'bg-amber-50 text-amber-900']" class="border-b fixed top-0 w-full border-gray-200 z-60">
-                    <!-- Primary Navigation Menu -->
-                    <div class=" mx-auto px-4 sm:px-6 lg:px-16">
-                        <div class="flex justify-between h-16">
-                            <div class="flex ">
-                                <!-- Logo -->
-                                <Link :href="route('home')" class="shrink-0 flex items-center">
-                                    <div class="h-16">
-                                        <!-- <BreezeApplicationLogo class="block h-9 w-auto" /> -->
-                                        <img :src="'../storage/home/level35.png'" alt="" class="h-full" />
-                                    </div>
-                                    <div class="text-lg lg:text-2xl font-bold">Level 35</div>
-                                </Link>
-                            </div>
-    <!--                         <div>
-                                <router-link to="/default">Go to Home</router-link>
-                            </div> -->
-                            <div v-if="$page.props.pages.length > 0" class="flex flex-wrap justify-around" >
-                                <div class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
-                                    <Link v-if="page.url_name !== 'home' && $page.props.auth.user && (!$page.props.auth.isClient && page.url_name == 'resume')" :href="route(page.url_name)" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
-                                </div>
-                            </div>
-                            <div v-if="$page.props.is_ecommerce == 1" class="py-2 px-3 shrink-0 flex items-center" >
-                                <Link :href="route('checkout')" class="text-white font-bold px-3 py-2 bg-sky-900 flex flex-wrap rounded-full">
-                                    <span class="pr-4"><Cart :getSize="5" /></span>
-                                    <span>Cart {{ cart.length }}</span>
-                                </Link>
-                            </div>
+            <div :class="[product ? 'h-screen overflow-hidden' : 'min-h-screen h-full']" class="relative w-full">
+                <Navbar @toggleLateral="changeMobileNav" class="" />
 
-                            <div v-if="$page.props.auth.user" class="sm:flex sm:items-center sm:ml-6">
-                                <!-- Settings Dropdown -->
-                                <div class="lg:ml-3 relative">
-                                    <BreezeDropdown align="right" width="48">
-                                        <template #trigger>
-                                            <span class="inline-flex rounded-md">
-                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white/75 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                                    <span class="text-xs lg:text-base">{{ $page.props.auth.user.name }}</span>
-                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </button>
-                                            </span>
-                                        </template>
-
-                                        <template #content>
-                                            <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('admin')" as="button">
-                                                Admin
-                                            </BreezeDropdownLink>
-                                            <BreezeDropdownLink :href="route('logout')" method="post" as="button">
-                                                Log Out
-                                            </BreezeDropdownLink>
-                                        </template>
-                                    </BreezeDropdown>
-                                </div>
-                            </div>
-                            <!-- <Link v-else :href="route('login')" class="shrink-0 flex items-center font-bold text-xl text-stone-800 rounded-full px-3 py-2 bg-white">Connecte-toi</Link> -->
-                        </div>
-                    </div>
-                </nav>
                 <div class="relative h-full min-h-screen">
                     <main  class="h-full relative">
                         <!-- <div class=" bg-white absolute opacity-90 w-full h-full top-0 left-0"></div> -->
@@ -97,6 +40,18 @@
                     <Modal v-if="product">
                     </Modal>
                 </div>
+                <div class="relative w-full h-full base:hidden lg:hidden xl:hidden z-70 top-0 left-0">
+                    <transition name="nav-mobile">
+                        <div v-if="mobileNav" @toggleLateral="changeMobileNav" @click="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-full h-full bg-black opacity-75 top-0 left-0">
+                        </div>
+                    </transition>
+
+                    <transition name="nav-mobile">
+                        <div v-if="mobileNav" @toggleLateral="changeMobileNav" @click="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-3/5 h-full top-0">
+                            <NavMobile class="" />
+                        </div>
+                    </transition>
+                </div>
             </div>
         </div>
     </div>
@@ -115,9 +70,11 @@ import Vuex from "vuex";
 import Modal from './Help/Modal.vue'
 import Cart from '../Pages/Help/Icon/Cart.vue'
 import Loading from '../Pages/Home/Client/Help/Loading.vue';
+import Navbar from './Navbar.vue'
+import NavMobile from './NavMobile.vue'
 
 export default {
-    components: {Link, BreezeDropdown, BreezeDropdownLink, BreezeNavLink, BreezeResponsiveNavLink, BreezeApplicationLogo, DocValue, Modal, Cart, Palm, Loading},
+    components: {Link, BreezeDropdown, BreezeDropdownLink, BreezeNavLink, BreezeResponsiveNavLink, BreezeApplicationLogo, DocValue, Modal, Cart, Palm, Loading, Navbar, NavMobile},
     store: store,
     //layout: BreezeGuestLayout,
     props: {
@@ -133,6 +90,8 @@ export default {
             scrollPosition: null,
             siteReady: false,
             loadingUp: true,
+            mobileNav: false,
+            textClass: '',
         }
     },
     methods: {
@@ -173,7 +132,16 @@ export default {
         },
         fadeLoading(){
             this.loadingUp = false;
-        }
+        },
+
+        changeMobileNav(){
+            this.mobileNav = !this.mobileNav;
+            if(this.mobileNav){
+                this.textClass = 'h-screen overflow-hidden'
+            }else{
+                this.textClass = ''
+            }
+        },
     },
     computed:{
         ...Vuex.mapState([
@@ -217,6 +185,39 @@ export default {
         to{ opacity: 0; }
     }
 
+
+
+     .nav-mobile-enter-active{
+        animation: nav-mobileInVisibility .4s linear, nav-mobileIn .4s linear;
+    }
+
+       .nav-mobile-leave-active, .nav-mobile-leave-to, .nav-mobile-leave{
+        animation: nav-mobileOutVisibility .4s linear, nav-mobileOut .4s linear;
+    }
+
+     @keyframes nav-mobileIn{
+        from{ transform: translateX(-100%); }
+        to{ transform: translateX(0); }
+    }
+    @keyframes nav-mobileInVisibility{
+        from{ opacity: 0; }
+        to{ opacity: 1; }
+    }
+
+    @keyframes nav-mobileOut{
+        from{ transform: translateX(0); }
+        to{ transform: translateX(-100%); }
+
+    }
+
+    @keyframes nav-mobileOutVisibility{
+        from{ opacity: 1; }
+        to{ opacity: 0; }
+    }
+
+     .nav-mobile-enter-active{
+        animation: nav-mobileInVisibility .4s linear, nav-mobileIn .4s linear;
+    }
 
 </style>
 

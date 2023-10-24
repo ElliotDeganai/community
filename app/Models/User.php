@@ -44,6 +44,7 @@ class User extends Authenticatable
         'has_company',
         'has_answered',
         'is_accompanied',
+        'flight_taken',
     ];
 
     /**
