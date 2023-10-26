@@ -27,6 +27,9 @@
                     <div class="py-8">
                         <div class="title-home">Les billets</div>
                         <div>
+                            <div class="px-3 py-3 rounded-xl md:rounded-2xl bg-amber-900 text-white">Répondre au RSVP</div>
+                        </div>
+                        <div>
                             <div class="w-full" :key="field.id" v-for="field in getPassSection().page_fields">
                                 <div class="py-2 md:py-4 lg:py-8" v-if="$helpers.getFieldDocValueObject(field, getPass()) !== ''">
                                     <div class="w-full">
@@ -38,7 +41,7 @@
                     </div>
                     <div class="px-4 lg:px-16 border border-amber-200 rounded-lg py-2 md:py-4 lg:py-8">
                         <div class="title-home">Informations supplémentaires</div>
-                        <div ref="summary">
+                        <div id="rsvp" ref="rsvp">
                             <div class="w-full summary-home" :key="field.id" v-for="field in getFlightInfoSection().page_fields">
                                 <div class="py-2 md:py-4 lg:py-8 flex" v-if="$helpers.getFieldDocValueObject(field, getFlightInfoSection().category.posts[0]) !== ''">
                                     <div class="pr-2 md:pr-4 lg:pr-8" v-if="field.name == 'Flight'">
@@ -304,4 +307,8 @@ export default {
         from{ opacity: 1; }
         to{ opacity: 0; }
     }
+
+html {
+  scroll-behavior: smooth;
+}
 </style>
