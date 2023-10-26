@@ -54,7 +54,7 @@
         </div>
         <div>
             <transition name="nav">
-                <div class="relative overflow-hidden" v-if="getScroll >= 0.1 && page.url_name === 'boarding'">
+                <div class="relative overflow-hidden" v-if="getScroll >= 0.1 && $page.props.getpage.url_name === 'boarding'">
                     <div class="py-3 bg-amber-900 text-white w-full text-center flex flex-wrap justify-center">
                         <a href="#rsvp" class="w-full scale">Répondre au RSVP</a>
                     </div>
