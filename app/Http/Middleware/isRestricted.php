@@ -18,16 +18,19 @@ class isRestricted
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->url() === config('url').'/resume'){
-            dd(Auth::user()->isDev());
-            if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isDev() ||Auth::user()->isEditor())) {
-                return $next($request);
+        if (Auth::check()) {
+            if ($request->url() === config('url').'/resume'){
+                if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isDev() ||Auth::user()->isEditor())) {
+                    return $next($request);
+                }else {
+                    return redirect(RouteServiceProvider::HOME);
+                }
             }else {
-                return redirect(RouteServiceProvider::HOME);
+                return $next($request);
             }
-        }else {
-            return $next($request);
+            //return redirect(RouteServiceProvider::HOME);
+        }else{
+            return redirect(RouteServiceProvider::HOME);
         }
-        //return redirect(RouteServiceProvider::HOME);
     }
 }
