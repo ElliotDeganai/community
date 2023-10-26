@@ -27,9 +27,6 @@
                     <div class="py-8">
                         <div class="title-home">Les billets</div>
                         <div>
-                            <div class="px-3 py-3 rounded-xl md:rounded-2xl bg-amber-900 text-white">Répondre au RSVP</div>
-                        </div>
-                        <div>
                             <div class="w-full" :key="field.id" v-for="field in getPassSection().page_fields">
                                 <div class="py-2 md:py-4 lg:py-8" v-if="$helpers.getFieldDocValueObject(field, getPass()) !== ''">
                                     <div class="w-full">
