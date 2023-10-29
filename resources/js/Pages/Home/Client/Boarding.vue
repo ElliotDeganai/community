@@ -63,7 +63,7 @@
                                             <transition name="slide" class="relative">
                                                 <div class="relative py-4 px-4">
                                                     <div class="w-full h-full rounded-xl z-0 absolute top-0 left-0 opacity-25 bg-amber-800"></div>
-                                                    <div class="z-10 pl-2 md:pl-4 lg:pl-8" :key="user.id" v-for="user in $page.props.getusers.filter(user => user.team === $page.props.auth.user.team)">
+                                                    <div class="z-10 pl-2 md:pl-4 lg:pl-8" :key="user.id" v-for="user in $page.props.getusers.filter(user => user.team === $page.props.auth.user.team && user.id !== $page.props.auth.user.id)">
                                                         <span class="z-10 relative">-</span> <span class="z-10 relative">{{user.name}}</span>
                                                     </div>
                                                 </div>
