@@ -135,7 +135,7 @@ export default {
         return{
             //page: this.$page.props.pages.filter(page => page.title == 'Faq')[0],
             //  sections: this.$page.props.pages.filter(page => page.title == 'Faq')[0].page_sections
-            allUsers: this.getusers
+            allUsers: this.getusers.filter(u => u.roles[0].name === 'client')
         }
     },
     methods: {
