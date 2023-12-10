@@ -18,7 +18,8 @@
                     <div class="py-2">
                         <form  @submit.prevent="submit">
                             <div>
-                                <Fields @modelSubmited="submit()" :getmodel="form" :categories="getcategories" :errors="errors" />
+                                <Fields @modelSubmited="submit()" :getparent="getparent" :getparentpost="getparent"
+                                 :getmodel="form" :categories="getcategories" :errors="errors" />
                             </div>
                         </form>
                     </div>
@@ -33,7 +34,7 @@ import Fields from '../../Help/Form/Post/Fields.vue'
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
 export default {
-    setup () {
+    setup (props) {
         const form = reactive({
             name: null,
             slug: null,
@@ -45,19 +46,22 @@ export default {
             doc_values: [],
             excerpt: null,
             image: null,
-        })
+        });
+        const getparent = props.getparent;
 
         function submit() {
             Inertia.post('/admin/posts', form);
         }
 
-        return { form, submit }
+        return { form, submit, getparent }
     },
     layout: Layout,
     props: {
         errors: Object,
         getcategories: Array,
         gettype: Object,
+        getparent: Object,
+        getpage: Object,
     },
     data() {
         return {

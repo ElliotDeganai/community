@@ -91,10 +91,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-/*         if (Auth::user()->cant('manageUsers', $user)) {
-            return redirect()->route('admin')->with('status', "You cannot edit users !");
-        } */
-        //dd($request);
+        dd('start campaign', $request);
         if (Auth::user()->isClient()) {
             //dd($request);
             $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered', 'flight_taken']));
@@ -112,13 +109,17 @@ class UsersController extends Controller
             return redirect()->route('users.index')->with('status', "$user->name was updated !");
         }
     }
-    public function updateRsvp(Request $request, User $user)
+    public function startCampaign(Request $request)
     {
-        dd('test');
-        $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered']));
-        $user->save();
+        //dd('start campaign', $request->users);
+        for ($i=0; $i < count($request->users); $i++) {
+            //dd($request->roles[$i]);
+            $user = User::find($request->users[$i]['id']);
+            $user->user_id = $request->users[$i]['new_user'];
+            $user->save();
+        }
         //$user->roles()->sync($request->roles);
-        return redirect()->route('home')->with('status', "Chèr(e) $user->name, tes réponses ont bien été enregistrées !");
+        return redirect()->route('resume')->with('status', "Chèr(e) $user->name, tes réponses ont bien été enregistrées !");
     }
 
     /**

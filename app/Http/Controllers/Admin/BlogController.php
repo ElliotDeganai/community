@@ -8,18 +8,20 @@ use App\Http\Requests\WorkWithPost;
 use App\Models\Category;
 use App\Models\DocValue;
 use App\Models\Post;
+use App\Models\Page;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Mockery\Undefined;
 use App\Repositories\Home\CategoryRepository;
+use Illuminate\Support\Facades\Route;
 
 class BlogController extends Controller
 {
     public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->middleware('admin');
+        //$this->middleware('admin');
         $this->categoryRepository = $categoryRepository;
 
     }
@@ -31,6 +33,9 @@ class BlogController extends Controller
     public function index()
     {
 
+        if (Auth::user()->cant('viewAll', Post::class)) {
+            return redirect()->route('home')->with('status', "You cannot access the page !");
+        }
         if (true) {
             $posts=Post::whereHas('category', function ($query) {
                             return $query->where('type', '=', 'custom');
@@ -126,6 +131,29 @@ class BlogController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create_gift()
+    {
+
+        $category = Category::all()->last();
+        $parent = Post::all()->first();
+        //dd(Auth::user(), Auth::user()->cant('create', Post::class));
+        if (Auth::user()->cant('create', Post::class)) {
+            return redirect()->route('posts.index')->with('status', "You cannot create posts !");
+        }
+        //dd(Page::find(3));
+        return Inertia::render('Home/Client/Help/Cadeau/Create', [
+            'getcategories' => Category::where('id', $category->id)->with('documentations')->with('posts')->with('category')->with('category.posts')->get(),
+            'gettype' => 'Cadeau',
+            'getparent' => $parent,
+            'getpage' => Page::find(3)
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -133,7 +161,9 @@ class BlogController extends Controller
      */
     public function store(WorkWithPost $request)
     {
-        //dd($request);
+
+        $page = Page::where('title', 'Wishlist')->first();
+        //dd($page);
         if (Auth::user()->cant('create', Post::class)) {
             return redirect()->route('posts.index')->with('status', "You cannot create posts !");
         }
@@ -187,7 +217,19 @@ class BlogController extends Controller
             }
             $doc->save();
         }
-        return redirect()->route('posts.index')->with('status', 'The post has been created !');
+        if (Auth::user()->isEditor()) {
+            //dd($page);
+/*             $page->load('pageSections.category.posts.docValues');
+                return Inertia::render('Home/Client/'.$page->template, [
+                    'getpage' => $page,
+                    'getusers' => User::with('roles', 'user')->get()
+                ]); */
+
+                return redirect()->route($page->url_name)->with('status', 'The post has been created !');
+        }else {
+            return redirect()->route('posts.index')->with('status', 'The post has been created !');
+        }
+
     }
 
     /**
@@ -243,6 +285,44 @@ class BlogController extends Controller
                                 //->load('category.documentations.docOptions'),
             'getcategories' => Category::where('type', 'custom')->with('documentations')->get(),
             'getParentCategory' => $parentCat
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function edit_gift($postId)
+    {
+        $post = Post::find($postId);
+        $parent = null;
+        if (Auth::user()->cant('update', $post)) {
+            return redirect()->route('posts.index');
+        }
+        $parentCat = null;
+        if ($post->categoryHasParent()) {
+            $category = $post->category;
+            //dd($category);
+            $parentCat = $this->categoryRepository->getCategoryWithPosts($category->category_id);
+            if ($post->post_id) {
+                $parent = Post::find($post->post_id);
+            }
+        }
+
+        //dd($post);
+        return Inertia::render('Home/Client/Help/Cadeau/Edit', [
+            'getpost' => $post->load('user')
+                                ->load('docValues')
+                                ->load('docValues.medias')
+                                ->load('category')
+                                ->load('post')
+                                ->load('category.documentations'),
+                                //->load('category.documentations.docOptions'),
+            'getcategories' => Category::where('type', 'custom')->with('documentations')->get(),
+            'getParentCategory' => $parentCat,
+            'getparent' => $parent
         ]);
     }
 
@@ -345,7 +425,13 @@ class BlogController extends Controller
                 }
             }
         }
-        return redirect()->route('posts.index')->with('status', "The post $post->title has been updated !");
+        $page = Page::where('title', 'Wishlist')->first();
+        if (Auth::user()->isEditor()) {
+            return redirect()->route($page->url_name)->with('status', 'The post has been created !');
+        }else {
+            return redirect()->route('posts.index')->with('status', "The post $post->title has been updated !");
+        }
+
     }
 
     /**
@@ -356,6 +442,7 @@ class BlogController extends Controller
      */
     public function destroy(Post $post)
     {
+        $page = Page::where('title', 'Wishlist')->first();
         if (Auth::user()->cant('delete', $post)) {
             return redirect()->route('posts.index')->with('status', "You cannot delete other author posts !");
         }
@@ -368,6 +455,11 @@ class BlogController extends Controller
 
         $post->delete();
         //$deleted = DocValue::where('post_id', $post->id)->delete();
-        return redirect()->route('posts.index')->with('status', "The post has been deleted !");
+        if (Auth::user()->isEditor()) {
+            return redirect()->route($page->url_name)->with('status', 'The post has been created !');
+        }else {
+            return redirect()->route('posts.index')->with('status', "The post has been deleted !");
+        }
+
     }
 }

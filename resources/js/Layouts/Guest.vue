@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-amber-50  relative" style="font-family:  'Kalam', cursive;">
+    <div :class="[delete_modal ? 'h-screen overflow-hidden' : '']" class="bg-red-900  relative" style="font-family:  'Kalam', cursive;">
 
         <transition name="loading-fade">
             <loading class="z-70" v-if="isLoading"></loading>
@@ -8,13 +8,13 @@
 
             <div class="w-full h-full flex flex-wrap absolute top-0 left-0 overflow-hidden">
                 <div class="w-1/4 hidden lg:inline" :key="i" v-for="i in 24">
-                    <div class="w-full py-4 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
-                        <Palm :getSize="10" />
+                    <div class="w-full p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm  opacity-10">
+                        <Gift :getSize="10" />
                     </div>
                 </div>
                 <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 48">
-                    <div class="w-full py-1 lg:py-4 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
-                        <Palm :getSize="10" />
+                    <div class="w-full p-1 lg:p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm opacity-20">
+                        <Gift :getSize="10" />
                     </div>
                 </div>
             </div>
@@ -28,11 +28,11 @@
                     </main>
                     <div v-if="!$page.props.auth.user" class="w-full absolute bottom-0 left-0 h-24 bg-black opacity-50 blur-lg z-50">
                     </div>
-                    <div :class="[$page.props.auth.user ? '' : 'absolute bottom-0 left-0 text-white z-60']"  class="w-full py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
+                    <div :class="[$page.props.auth.user ? 'text-white' : 'absolute bottom-0 left-0 text-white z-60']"  class="w-full py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
                         <div class="self-center">Made by </div>
                         <a class="self-center px-2" href="https://www.elliot-deganai.com/">
                             <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
-                            <img v-else :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-6 md:h-10 " alt="" />
+                            <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
                         </a>
                         <div class="self-center">Web Factory</div>
                     </div>
@@ -54,6 +54,22 @@
                 </div>
             </div>
         </div>
+
+        <div v-if="delete_modal && model" @click="$store.commit('UNSET_DELETE_MODAL')" class="z-70 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
+        <div v-if="delete_modal && model" class="z-70 absolute w-full h-full top-0 left-0 flex flex-wrap justify-center content-center">
+            <div class="w-1/4 h-56 p-8 bg-gray-200 rounded-md">
+                <div class="font-bold text-2xl">Confirm</div>
+                <div class="py-4">You will delete the {{type}} {{model.name}}, Are you sure ?</div>
+                <div class="flex flex-wrap justify-around">
+                    <button class="" @click="$store.dispatch('unset_model')">Cancel</button>
+                    <div class="">
+                        <Link @click="$store.dispatch('unset_model')" as="button" data-message="Are you sure ?" class="btn-delete" method="delete" :href="route(delete_route, model.id)" :preserve-state="false">
+                            Submit
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -65,6 +81,7 @@ import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import DocValue from '../Pages/Home/Help/DocumentationValue.vue'
 import Palm from '../Pages/Help/Icon/Palm.vue'
+import Gift from '../Pages/Help/Icon/Gift.vue'
 import store from '../Store/index'
 import Vuex from "vuex";
 import Modal from './Help/Modal.vue'
@@ -74,7 +91,7 @@ import Navbar from './Navbar.vue'
 import NavMobile from './NavMobile.vue'
 
 export default {
-    components: {Link, BreezeDropdown, BreezeDropdownLink, BreezeNavLink, BreezeResponsiveNavLink, BreezeApplicationLogo, DocValue, Modal, Cart, Palm, Loading, Navbar, NavMobile},
+    components: {Link, Gift, BreezeDropdown, BreezeDropdownLink, BreezeNavLink, BreezeResponsiveNavLink, BreezeApplicationLogo, DocValue, Modal, Cart, Palm, Loading, Navbar, NavMobile},
     store: store,
     //layout: BreezeGuestLayout,
     props: {
@@ -145,7 +162,7 @@ export default {
     },
     computed:{
         ...Vuex.mapState([
-            "cart", "product"
+            "cart", "product", "delete_modal", "model", "delete_route", "type"
         ]),
         getScroll() {
             return this.scrollPosition;

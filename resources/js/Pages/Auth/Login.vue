@@ -28,6 +28,7 @@ const submit = () => {
 <template>
     <BreezeGuestLayout class="relative text-white">
         <div :style="'background-image: url(/storage/home/login.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg"></div>
+        <div class="w-full h-full opacity-20  blur-lg absolute top-0 left-0 bg-black"></div>
         <div class="px-8 lg:px-32 relative overflow-hidden ">
 <!--             <div class="pt-32 w-full h-full absolute top-0 left-0">
                 <div class="w-full h-full flex flex-wrap">

@@ -1,5 +1,5 @@
 <template>
-    <nav :class="[((scrollPosition === null && $page.url !== '/resume') || (scrollPosition < 0.1 && $page.url !== '/resume')) ? 'text-white border-b' : 'bg-amber-50 text-amber-900']" class=" fixed top-0 w-full border-gray-200 z-60">
+    <nav :class="[((scrollPosition === null && $page.url !== '/resume') || (scrollPosition < 0.1 && $page.url !== '/resume')) ? 'text-white border-b' : 'bg-red-900 border-b text-white']" class=" fixed top-0 w-full border-gray-200 z-60">
         <div class=" mx-auto px-4 sm:px-6 lg:px-16">
             <div class="flex justify-between h-16">
                 <div class="flex ">
@@ -7,15 +7,15 @@
                         <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
                     </div>
                     <Link :href="route('home')" class="shrink-0 flex items-center">
-                        <div class="h-16">
-                            <img :src="'../storage/home/level35.png'" alt="" class="h-full" />
+                        <div class="h-16 px-2 py-3">
+                            <img :src="'../storage/home/claus-2.png'" alt="" class="h-full" />
                         </div>
-                        <div class="text-lg lg:text-2xl font-bold">Level 35</div>
+                        <div class="text-lg lg:text-2xl font-bold">Secret Santa</div>
                     </Link>
                 </div>
                 <div v-if="$page.props.pages.length > 0" class="base:flex lg:flex xl:flex flex-wrap justify-around hidden sm:hidden " >
-                    <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
-                        <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient)" :href="route(page.url_name)" :class="[page.id === $page.props.getpage.id ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
+                    <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
+                        <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor)" :href="route(page.url_name)" :class="[$page.props.getpage ? page.id === $page.props.getpage.id : false ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
                     </div>
                 </div>
                 <div v-if="$page.props.is_ecommerce == 1" class="py-2 px-3 shrink-0 flex items-center" >
@@ -40,7 +40,7 @@
                             </template>
 
                             <template #content>
-                                <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('admin')" as="button">
+                                <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" :href="route('admin')" as="button">
                                     Admin
                                 </BreezeDropdownLink>
                                 <BreezeDropdownLink :href="route('logout')" method="post" as="button">
@@ -50,16 +50,8 @@
                         </BreezeDropdown>
                     </div>
                 </div>
+                <Link v-else :href="route('login')" class="shrink-0 flex items-center">Login</Link>
             </div>
-        </div>
-        <div>
-            <transition name="nav">
-                <div class="relative overflow-hidden" v-if="getScroll >= 0.1 && $page.props.getpage.url_name === 'boarding'">
-                    <div class="py-3 bg-amber-900 text-white w-full text-center flex flex-wrap justify-center">
-                        <a href="#rsvp" class="w-full scale">Répondre au RSVP</a>
-                    </div>
-                </div>
-            </transition>
         </div>
     </nav>
 

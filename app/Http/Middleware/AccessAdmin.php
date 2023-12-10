@@ -18,7 +18,7 @@ class AccessAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isDev() ||Auth::user()->isEditor())){
+        if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isDev())){
             return $next($request);
         }
         return redirect(RouteServiceProvider::HOME);

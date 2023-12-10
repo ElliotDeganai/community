@@ -1,118 +1,46 @@
 <template>
-    <div class="relative">
-        <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="pt-32 w-full h-full">
+    <div class="relative text-white">
+        <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="pt-32 px-32 w-full h-full">
             <div class="w-full py-8 lg:py-24 z-10">
                 <div class="title-home">Résumé</div>
             </div>
             <div>
-                <div class="flex flex-wrap px-2 lg:px-32">
-                    <div class="w-1/3 relative">
-                        <div class="font-bold py-2 px-1 text-white bg-green-700 text-base lg:text-xl w-full text-center truncate">Viendront</div>
-                        <div class="px-2 lg:px-8 absolute top-0 right-0 py-2">
-                            <Couple class="text-white" :getSize="4" />
-                        </div>
-                    </div>
-                    <div class="w-1/3">
-                        <div class="font-bold py-2 px-1 text-white bg-gray-900 text-base lg:text-xl w-full text-center truncate">N'ont pas répondu</div>
-                        <div>
-                        </div>
-                    </div>
-                    <div class="w-1/3">
-                        <div class="font-bold py-2 px-1 text-white bg-red-700 text-base lg:text-xl w-full text-center truncate">Ne Viendront Pas</div>
-                        <div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-wrap px-2 lg:px-32">
-                    <div class="w-1/3 px-2">
-                        <div class="relative">
-                            <div class="text-sm lg:text-base relative w-full text-center py-2" :key="user.id" v-for="user in coming">
-                                {{user.name}}
-                                <div class="px-1 lg:px-8 absolute top-0 right-0 py-2">
-                                    <span v-if="user.has_company && user.is_accompanied" class="text-green-700 font-bold" >
-                                        <Couple class="" :getSize="4" />
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-1/3 px-2">
-                        <div>
-                            <div class="text-sm lg:text-base w-full text-center py-2" :key="user.id" v-for="user in noAnswers">
-                                {{user.name}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-1/3 px-2">
-                        <div>
-                            <div class="text-sm lg:text-base w-full text-center py-2" :key="user.id" v-for="user in notComing">
-                                {{user.name}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-4 lg:py-8">
-                    <div class="w-full py-8 lg:py-24 z-10">
-                        <div class="title-home">Teams</div>
-                    </div>
-                    <div class="flex flex-wrap px-2 lg:px-32">
-                        <div class="w-1/3 relative">
-                            <div class="font-bold py-2 px-1 text-white bg-green-700 text-base lg:text-xl w-full text-center truncate">Team Paris</div>
-                        </div>
-                        <div class="w-1/3">
-                            <div class="font-bold py-2 px-1 text-white bg-gray-900 text-base lg:text-xl w-full text-center truncate">Team Lux</div>
-                            <div>
-                            </div>
-                        </div>
-                        <div class="w-1/3">
-                            <div class="font-bold py-2 px-1 text-white bg-red-700 text-base lg:text-xl w-full text-center truncate">Team Suisse</div>
-                            <div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap px-2 lg:px-32">
-                        <div class="w-1/3 px-2">
-                            <div class="relative">
-                                <div class="text-sm lg:text-base relative w-full text-center py-2" :key="user.id" v-for="user in team_paris">
-                                    {{user.name}}
-                                    <div class="px-1 lg:px-8 absolute top-0 right-0 py-2">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-1/3 px-2">
-                            <div>
-                                <div class="text-sm lg:text-base w-full text-center py-2" :key="user.id" v-for="user in team_lux">
-                                    {{user.name}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-1/3 px-2">
-                            <div>
-                                <div class="text-sm lg:text-base w-full text-center py-2" :key="user.id" v-for="user in team_swiss">
-                                    {{user.name}}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-8 px-2 lg:px-32">
+                <div>
                     <div>
-                        <div class="title-home">Récapitulatif</div>
-                        <div class="py-8">
-                            <div class="flex border">
-                                <div class="bg-sky-200 px-3 py-2 lg:w-1/5 truncate">Nombre d'invités présents</div>
-                                <div class="px-3 py-2">{{coming.length}}</div>
-                            </div>
-                            <div class="flex border">
-                                <div class="bg-sky-200 px-3 py-2 lg:w-1/5 truncate">Nombre de moitié présentes</div>
-                                <div class="px-3 py-2">{{coming.filter(u => u.is_accompanied).length}}</div>
-                            </div>
-                            <div class="flex border">
-                                <div class="bg-sky-900 text-white px-3 py-2 lg:w-1/5 truncate">Nombre total de personnes présentes</div>
-                                <div class="px-3 py-2">{{coming.length + coming.filter(u => u.is_accompanied).length}}</div>
-                            </div>
+                        <div>
+                            <div class="title-home">{{campaign.name}}</div>
                         </div>
+                        <div class="py-8">
+                            <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName("Budget")}} €</div>
+                            <div class="py-4">Description : {{campaign.body}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="launched" class="py-8">
+                    <div class="header-config-client">Voici le nouveau tirage au sort</div>
+                    <div class="py-4">
+                        <div class="py-2" :key="user.id" v-for="user in users">
+                            {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="header-config-client">Voici le tirage au sort actuel</div>
+                    <div class="py-4">
+                        <div class="py-2" :key="user.id" v-for="user in users">
+                            <span class="font-bold">{{user.name}}</span> offre un cadeau à <span class="font-bold" v-if="user.user_id">{{getUser(user.user_id).name}}</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="py-8">
+                    <div>
+                        <button @click.prevent="startCampaign()" class="px-3 py-2 bg-white text-red-900 font-bold">Commencer la campagne</button>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <button @click.prevent="submit()" class="px-3 py-2 bg-white text-red-900 font-bold">Valider</button>
                     </div>
                 </div>
             </div>
@@ -124,29 +52,112 @@ import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import helpers from '../../../helpers'
 import DocValue from './../Help/DocumentationValue.vue'
 import Couple from '../Help/Icon/Couple.vue'
+import { useForm } from "@inertiajs/inertia-vue3";
 export default {
     components:  {BreezeGuestLayout, DocValue, Couple},
     layout: BreezeGuestLayout,
     props: {
-        getusers: Array,
+        getcampaigns: Array,
         getsection: Object,
+        getusers: Array
     },
     data() {
         return{
-            //page: this.$page.props.pages.filter(page => page.title == 'Faq')[0],
-            //  sections: this.$page.props.pages.filter(page => page.title == 'Faq')[0].page_sections
-            allUsers: this.getusers.filter(u => u.roles[0].name === 'client')
+            campaign: this.getCampaignSection().category.posts[0],
+            users: this.getusers,
+            page: this.$page.props.pages.filter(page => page.title == 'Resume')[0],
+            sections: this.$page.props.pages.filter(page => page.title == 'Resume')[0].page_sections,
+            updateMode: false,
+            launched: false,
+            form : useForm({
+                users: this.getusers
+            }),
         }
     },
     methods: {
+        getCampaignSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Resume')[0], 'Campagne');
+        },
+        getValueByFieldName(field_name) {
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
+        },
+        startCampaign() {
+            let user_count = this.users.length-1;
+            let pioche = [];
+            let final = [];
+            this.users.forEach(user => {
+                pioche.push(user);
+            });
+            pioche = this.shuffleBis(pioche);
+            while (this.compareArray(pioche, this.users)) {
+                pioche = this.shuffleBis(pioche);
+            }
+
+            for (let index = 0; index < this.users.length; index++) {
+                const element = this.users[index];
+                element.new_user = pioche[index].id;
+            }
+            this.launched = true;
+
+
+        },
+        shuffle (array)  {
+            let start_array = array;
+            let temp = array.sort(() => Math.random() - 0.5);
+            let self = this;
+            while (this.compareArray(temp, start_array)) {
+                let temp = array.sort(() => Math.random() - 0.5);
+            }
+            return temp;
+
+        },
+        compareArray(a1, a2){
+            for (let index = 0; index < a1.length; index++) {
+                if (a1[index] === a2[index]) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        shuffleBis(array){
+          for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        },
+        submit() {
+            let self = this;
+            this.form.put(route("users.campaign", this.form),  {
+                onSuccess: (form) => {
+                    self.updateMode = false;
+                },
+                preserveScroll: true
+            });
+        },
+        cancel() {
+            this.updateMode = false;
+        },
+        changeAnswers() {
+            this.updateMode = !this.updateMode;
+        },
+        setUpdateMode() {
+            this.updateMode = !this.updateMode;
+        },
+        getUser(id) {
+            return this.users.filter(u => u.id === id)[0];
+        }
     },
     computed: {
-        coming() { return this.allUsers.filter(u => u.is_partying && u.has_answered)},
-        notComing() { return this.allUsers.filter(u => !u.is_partying && u.has_answered)},
-        noAnswers() { return this.allUsers.filter(u => !u.has_answered)},
-        team_lux() { return this.allUsers.filter(u => u.team == 'lux')},
-        team_paris() { return this.allUsers.filter(u => u.team == 'paris')},
-        team_swiss() { return this.allUsers.filter(u => u.team == 'swiss')},
+        gameStarted() {
+            let started = false;
+            this.users.forEach(u => {
+                if (u.user_id !== null) {
+                    started = true;
+                }
+            });
+            return started;
+        },
     },
     created() {
     },

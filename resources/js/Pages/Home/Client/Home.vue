@@ -1,112 +1,71 @@
 <template>
-    <div class="" >
+    <div class="text-white" >
         <div class="relative z-50">
             <div>
-                <div class="h-screen w-full">
-                    <div class="w-full h-full relative">
-                        <img v-if="$page.props.auth.user" class="w-full h-full object-cover" :src="$helpers.getImageUrl(getCoverSection().category.posts[0])" />
-                        <video class="w-full h-full object-cover" v-else autoplay muted loop>
+                <div :class="[$page.props.auth.user ? '' : 'h-screen']" class=" w-full">
+                    <div v-if="!$page.props.auth.user" class="w-full h-full relative">
+                        <video class="w-full h-full object-cover" autoplay muted loop>
                             <source src="/storage/video/intro-2.mp4" type="video/mp4">
                             <source src="/storage/video/intro-2.mp4" type="video/ogg">
                             Your browser does not support the video tag.
                         </video>
                         <div v-if="!$page.props.auth.user" class="absolute top-0 left-0 w-full h-full text-white">
                             <div class="w-full h-full flex flex-wrap justify-center content-center">
-                                <Link :href="route('login')" class="shrink-0 flex items-center font-bold text-lg lg:text-2xl text-stone-800 rounded-full px-3 py-2 bg-white/75">Connecte-toi</Link>
-                            </div>
-                        </div>
-                        <div v-if="$page.props.auth.user" class="flex flex-wrap content-center justify-center w-full h-48 absolute bottom-0 py-16">
-                            <Down @click="scrollToRsvp()" class="cursor-pointer opacity-75 loader" :getSize="16" :getColor="'text-white'" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="relative px-0 lg:px-32 xl:px-32" v-if="$page.props.auth.user">
-            <div ref="summary" class="px-8 lg:px-32 xl:px-32 py-8 lg:py-16">
-                <div class="title-home">{{getSummarySection().category.posts[0].name}}</div>
-                <div class="summary-home" :key="post.id" v-for="post in getSummarySection().category.posts">
-                    <div class="">
-                        <div class="w-full" :key="field.id" v-for="field in getSummarySection().page_fields">
-                            <div class="py-8" v-if="$helpers.getFieldDocValueObject(field, post) !== ''">
-                                <div class="w-full">
-                                    <DocValue :getdoc="$helpers.getFieldDocValueObject(field, post)" />
-                                </div>
+                                <Link :href="route('login')" class="shrink-0 flex items-center font-bold text-lg lg:text-4xl text-stone-800 rounded-full px-6 py-4 bg-white/75">Connecte-toi</Link>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div ref="explanations" class="">
-                        <video class="w-full h-56 lg:h-90 object-cover" controls>
-                            <source class="w-full h-full" src="/storage/video/Level35.mp4" type="video/mp4">
-                            <source class="w-full h-full" src="/storage/video/Level35.mp4" type="video/ogg">
-                            Your browser does not support the video tag.
-                        </video>
-                </div>
-            </div>
-        </div>
-        <div class="relative" v-if="$page.props.auth.user">
-            <div ref="targetRef" class="px-4 lg:px-32 py-8">
-                <div class="px-4 lg:px-16 border border-amber-200 rounded-lg py-8">
-                    <div>
-                        <div class="title-home">{{getValueByFieldName("Title")}}</div>
-                    </div>
-                    <div v-if="$page.props.status.message" class="p-2 lg:p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
-                    <div class="py-8 summary-home">
-                        <div v-if="$page.props.auth.user.has_answered && !updateMode">
-                            <div v-html="replaceUser(createDiv(getValueByFieldName('Answer - Description')))">
-                            </div>
-                            <div>
-                                <div class="py-4">
-                                    <label class="label-fields">
-                                        {{getValueByFieldName("Question - Coming")}} <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_partying == 0">{{getValueByFieldName("Option - No")}}</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>{{getValueByFieldName("Option - Yes")}}</span>
-                                    </label>
-                                </div>
-                                <div v-if="$page.props.auth.user.has_company" class="py-4">
-                                    <label class="label-fields">
-                                        {{getValueByFieldName("Question - Plus 1")}} <span class="px-2 rounded-full bg-amber-900 text-white" v-if="$page.props.auth.user.is_accompanied == 0">{{getValueByFieldName("Option - No")}}</span> <span class="px-2 rounded-full bg-amber-900 text-white" v-else>{{getValueByFieldName("Option - Yes")}}</span>
-                                    </label>
-                                </div>
-                                <div class="">
-                                    <button @click.prevent="changeAnswers()" class="btn-submit-fields">{{getValueByFieldName("Button - Change answers")}}</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else>
-                            <form @submit.prevent="submit">
-
-                                <div v-html="replaceUser(createDiv(getValueByFieldName('Question - Description')))">
-                                </div>
+                    <div v-else class="pt-8 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32">
+                       <div>
+                            <div class="pt-16" >
                                 <div>
-                                    <div></div>
-                                    <div class="py-4">
-                                        <label class="label-fields"  for="is_partying">{{getValueByFieldName("Question - Coming")}}</label>
-                                        <div class="py-2">
-                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="0" /> {{getValueByFieldName("Option - No")}}
-                                            <input type="radio" class=" form-fields" id="is_partying" name="is_partying" v-model="form.is_partying" value="1" /> {{getValueByFieldName("Option - Yes")}}
-                                            <!-- <div class="error-msg" v-if="errors.is_partying">{{ errors.is_partying }}</div> -->
+                                    <div>
+                                        <div class="title-home">{{campaign.name}}</div>
+                                    </div>
+                                    <div class="py-8">
+                                        <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName_campaign("Budget")}} €</div>
+                                        <div class="py-4">Description : {{campaign.body}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                       </div>
+
+                       <div v-if="$page.props.auth.user.user">
+                            <div class="header-config-client">Mon tiré au sort : <span class="px-3 rounded-full bg-white text-red-900">{{$page.props.auth.user.user.name}}</span></div>
+                            <!-- <div>Mon tiré au sort: <span class="px-3 rounded-full bg-white text-red-900">{{$page.props.auth.user.user.name}}</span></div> -->
+                            <div class="py-4">
+                                <div v-if="list.length > 0" class="py-4">Voici sa liste : </div>
+                                <div v-if="list.length > 0">
+                                    <div class="w-full border-white border-t-4 first:border-0" :key="gift.id" v-for="gift in list">
+                                        <div>
+                                            <div class="flex flex-wrap content-center h-full pt-8">
+                                                <div v-if="($page.props.auth.isDev || $page.props.auth.isAdmin) || gift.user_id === $page.props.auth.user.user.id" class="h-16 flex flex-wrap content-center">
+                                                    <div class="flex flex-wrap rounded-full bg-white text-red-900 py-2 px-3">
+                                                        <Gift :getSize="6" />
+                                                        <span class="px-3 font-bold">{{gift.name}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="py-8">{{gift.body}}</div>
+                                            <div class="">
+                                                <div class="w-full">
+                                                    <div class="w-full" :key="field.id" v-for="field in getCadeauSection().page_fields">
+                                                        <div class="py-2 md:py-4 lg:py-4 flex" v-if="$helpers.getFieldDocValueObject(field, gift) !== ''">
+                                                            <div class="">
+                                                                <DocValue class="" :getdoc="$helpers.getFieldDocValueObject(field, gift)" :getobject="gift" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="py-4" v-if="form.user.has_company">
-
-
-                                    <div v-html="replaceUser(createDiv(getValueByFieldName('Question - Plus 1 - Description')))">
-                                    </div>
-                                    <div class="py-4">
-                                        <label class="label-fields"  for="is_accompanied">{{getValueByFieldName("Question - Plus 1")}}</label>
-                                        <div class="py-2">
-                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="0" /> {{getValueByFieldName("Option - No")}}
-                                            <input type="radio" class=" form-fields" id="is_accompanied" name="is_accompanied" v-model="form.is_accompanied" value="1" /> {{getValueByFieldName("Option - Yes")}}
-                                            <!-- <div class="error-msg" v-if="errors.is_accompanied">{{ errors.is_accompanied }}</div> -->
-                                        </div>
-                                    </div>
+                                <div class="py-8" v-else>
+                                    <div class="rounded-md py-8 px-3 bg-white text-red-900">Ton tiré au sort n'a pas encore ajouté de cadeaux dans sa liste. Contactes le discrètement pour lui demander d'ajouter des idées !</div>
                                 </div>
-                                <div class=" flex flex-wrap justify-around w-full">
-                                    <button class="btn-submit-fields" type="submit">{{getValueByFieldName("Button - Validate")}}</button>
-                                    <button @click.prevent="cancel()" class="btn-submit-fields">{{getValueByFieldName("Button - Cancel")}}</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,6 +86,7 @@ import Speak from './Help/Speak.vue'
 import { useForm } from "@inertiajs/inertia-vue3";
 import { Link } from '@inertiajs/inertia-vue3';
 import Down from '../../Help/Icon/Down.vue'
+import Gift from '../../Help/Icon/Gift.vue'
 import Loading from '../Client/Help/Loading.vue'
 export default {
 /*     setup(props) {
@@ -136,13 +96,16 @@ export default {
         return { form };
     }, */
     props: ['getposts', 'getcategories', 'getintent'],
-    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down, Loading},
+    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down, Loading, Gift},
     layout: BreezeGuestLayout,
     data() {
         return {
             page: this.$page.props.pages.filter(page => page.title == 'Home')[0],
             sections: this.$page.props.pages.filter(page => page.title == 'Home')[0].page_sections,
-            rsvp: this.getRsvpSection().category.posts[0],
+            campaign: this.getCampaignSection().category.posts[0],
+            list: this.$page.props.auth.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.user.id) : [] ,
+            mylist: this.$page.props.auth.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.id) : [],
+            users: this.getusers,
             model: this.$page.props.auth.user,
             updateMode: false,
             form : useForm({
@@ -190,8 +153,17 @@ export default {
                 this.addCartItemQuantity(product_in_cart[0]);
             }
         },
-        getCoverSection(){
-            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Cover');
+        getCampaignSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Campagne');
+        },
+        getCadeauSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Cadeau');
+        },
+        getValueByFieldName_campaign(field_name) {
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
+        },
+        getValueByFieldName_cadeau(field_name, post) {
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCadeauSection(), field_name) , post).docValue;
         },
         getSummarySection(){
             return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Summary');
@@ -234,9 +206,6 @@ export default {
             } else {
                 return null;
             }
-        },
-        getValueByFieldName(field_name) {
-            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getRsvpSection(), field_name) , this.rsvp).docValue;
         },
     },
     computed: {

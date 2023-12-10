@@ -19,8 +19,9 @@ class isRestricted
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if ($request->url() === config('url').'/resume'){
-                if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isDev() ||Auth::user()->isEditor())) {
+            //dd($request->url(), config('app.url'));
+            if ($request->url() === config('app.url').'/resume'){
+                if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->isDev())) {
                     return $next($request);
                 }else {
                     return redirect(RouteServiceProvider::HOME);

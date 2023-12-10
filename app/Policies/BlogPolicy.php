@@ -12,9 +12,17 @@ class BlogPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isDev() || $user->isAdmin() || $user->isEditor()) {
-            return true;
-        }
+    }
+
+    /**
+     * Determine whether the user can view all models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function viewAll(User $user)
+    {
+        return $user->isDev() || $user->isAdmin();
     }
 
     /**
@@ -49,6 +57,7 @@ class BlogPolicy
     public function create(User $user)
     {
         //return $user->hasRole('editor') !== null;
+        return $user->isDev() || $user->isAdmin() || $user->isEditor();
     }
 
     /**
@@ -61,6 +70,7 @@ class BlogPolicy
     public function update(User $user, Post $post)
     {
         //return $user->id == $post->user_id || $user->hasRole('admin') !== null;
+        return $user->isDev() || $user->isAdmin() || $user->isEditor();
     }
 
     /**
@@ -73,6 +83,7 @@ class BlogPolicy
     public function delete(User $user, Post $post)
     {
         //return $user->id == $post->user_id && $user->hasRole('editor') !== null;
+        return $user->isDev() || $user->isAdmin() || $user->isEditor();
     }
 
     /**
@@ -97,6 +108,7 @@ class BlogPolicy
     public function forceDelete(User $user, Post $post)
     {
         //return $user->id == $post->user_id && $user->hasRole('editor') !== null;
+        return $user->isDev() || $user->isAdmin() || $user->isEditor();
     }
 
     public function managePosts(User $user, Post $post)

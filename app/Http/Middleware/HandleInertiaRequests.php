@@ -48,7 +48,7 @@ class HandleInertiaRequests extends Middleware
         return array_merge(parent::share($request), [
             'is_ecommerce' => env('IS_ECOMMERCE'),
             'auth' => [
-                'user' => Auth::user() ? User::where('id', $userId)->with('roles')->first() : null,
+                'user' => Auth::user() ? User::where('id', $userId)->with('roles', 'user')->first() : null,
                 'isDev' => Auth::user() ? User::find(Auth::user()->id)->isDev() : null,
                 'isAdmin' => Auth::user() ? User::find(Auth::user()->id)->isAdmin() : null,
                 'isEditor' => Auth::user() ? User::find(Auth::user()->id)->isEditor() : null,

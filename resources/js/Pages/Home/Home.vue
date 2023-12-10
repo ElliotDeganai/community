@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full h-full opacity-95 absolute top-0 left-0 bg-white"></div>
+            <!-- <div class="w-full h-full opacity-95 absolute top-0 left-0 bg-white"></div> -->
         </div>
         <div class="pt-32 z-10 relative">
             <div class="px-6 py-4 w-full font-bold text-5xl uppercase text-center">

@@ -26,29 +26,29 @@ class UserTableSeeder extends Seeder
             'name' => 'Developper',
             'email' => 'dev@laracms.fr',
             'password' => bcrypt('5N5wUjLS1u76W$4'),
-            'team' => 'paris'
+            ///'team' => 'paris'
         ]);
 
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@laracms.fr',
             'password' => bcrypt('s8@MX53919YkXS6'),
-            'team' => 'paris'
+            //'team' => 'paris'
         ]);
 
         $editor = User::create([
             'name' => 'Editor',
             'email' => 'editor@laracms.fr',
             'password' => bcrypt('@N^69ah&WdRL9vO'),
-            'team' => 'paris'
+            //'team' => 'paris'
         ]);
 
         $client1 = User::create([
             'name' => 'Client',
             'email' => 'client@laracms.fr',
             'password' => bcrypt('16JanV1992.1'),
-            'team' => 'paris'
-        ]);
+            //'team' => 'paris'
+        ]);/*
 
         $client2 = User::create([
             'name' => 'Elliot',
@@ -132,12 +132,12 @@ class UserTableSeeder extends Seeder
             'email' => 'Benjamin.telga@gmail.com',
             'password' => bcrypt('wWMf2qFc610Q4!p'),
             'team' => 'lux'
-        ]);
+        ]); */
         $dev->roles()->attach($devRole);
         $admin->roles()->attach($adminRole);
         $editor->roles()->attach($editorRole);
         $client1->roles()->attach($clientRole);
-        $client2->roles()->attach($clientRole);
+/*         $client2->roles()->attach($clientRole);
         $client3->roles()->attach($clientRole);
         $client4->roles()->attach($clientRole);
         $client5->roles()->attach($clientRole);
@@ -148,6 +148,6 @@ class UserTableSeeder extends Seeder
         $client10->roles()->attach($clientRole);
         $client11->roles()->attach($clientRole);
         $client12->roles()->attach($clientRole);
-        $client13->roles()->attach($clientRole);
+        $client13->roles()->attach($clientRole); */
     }
 }

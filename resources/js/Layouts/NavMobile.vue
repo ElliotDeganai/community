@@ -1,20 +1,20 @@
 <template>
-    <div class="bg-amber-50 text-amber-900 h-full">
+    <div class="bg-red-900 text-white h-full">
             <div class="flex flex-wrap px-4">
                 <div class="base:hidden lg:hidden xl:hidden">
                     <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
                 </div>
-                <Link :href="route('home')" class="shrink-0 flex items-center">
-                    <div class="h-16">
-                        <img :src="'../storage/home/level35.png'" alt="" class="h-full" />
+                <Link :href="route('home')" class="shrink-0 ">
+                    <div class="h-16 px-3">
+                        <img :src="'../storage/home/claus-2.png'" alt="" class="h-full" />
                     </div>
-                    <div class="text-lg lg:text-2xl font-bold">Level 35</div>
+                    <div class="text-lg lg:text-2xl font-bold">Secret Santa</div>
                 </Link>
             </div>
 
             <div v-if="$page.props.pages.length > 0" class=" block base:hidden lg:hidden xl:hidden flex-wrap justify-around" >
-                <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
-                    <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient)" :href="route(page.url_name)" :class="[page.id === $page.props.getpage.id ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
+                <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
+                    <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor)" :href="route(page.url_name)" :class="[page.id === $page.props.getpage.id ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
                 </div>
             </div>
     </div>

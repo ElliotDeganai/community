@@ -69,7 +69,7 @@ foreach ($pages as $page) {
     Route::get($page->url, function() use ($page) {
         return Inertia::render('Home/Client/'.$page->template, [
             'getpage' => $page,
-            'getusers' => User::with('roles')->get(),
+            'getusers' => User::with('roles', 'user')->get(),
         ]);
     })->middleware('restricted')->name($page->url_name);
 }
@@ -91,6 +91,13 @@ Route::get('/admin', function() {
                             ->paginate(3)
     ]);
 })->middleware('admin')->name('admin');
+
+
+Route::put('/admin/users/campaign', [UsersController::class, 'startCampaign'])->middleware('admin')->name('users.campaign');
+
+Route::get('/posts/create/gift', [BlogController::class, 'create_gift'])->name('posts.create_gift');
+Route::get('/posts/edit/gift/{postId}', [BlogController::class, 'edit_gift'])->name('posts.edit_gift');
+
 
 Route::resource('/admin/fields', PageFieldController::class);
 Route::resource('/admin/pages', PagesController::class, ['except' => ['pages.show']]);

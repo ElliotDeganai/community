@@ -40,11 +40,7 @@ class User extends Authenticatable
         'address',
         'zip_code',
         'password',
-        'is_partying',
-        'has_company',
-        'has_answered',
-        'is_accompanied',
-        'flight_taken',
+        'user_id'
     ];
 
     /**
@@ -84,6 +80,10 @@ class User extends Authenticatable
 
     public function posts() {
         return $this->hasMany('App\Models\Post');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\Models\User');
     }
 
     public function orders() {
