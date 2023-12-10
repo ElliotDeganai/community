@@ -1,6 +1,6 @@
 <template>
-    <div class="px-32 text-white">
-        <div class="py-32">
+    <div class="pt-8 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32 text-white">
+        <div class="py-16 lg:py-32">
             <div class="text-xl font-bold w-full">
                 <div class="text-center w-full uppercase">Ajouter une nouvelle idée</div>
             </div>
