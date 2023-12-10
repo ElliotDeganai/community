@@ -50,7 +50,6 @@
                         </BreezeDropdown>
                     </div>
                 </div>
-                <Link v-else :href="route('login')" class="shrink-0 flex items-center">Login</Link>
             </div>
         </div>
     </nav>

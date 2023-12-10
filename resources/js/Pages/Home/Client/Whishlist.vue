@@ -34,9 +34,6 @@
                                                     <div class="px-3">
                                                         <button v-if="($page.props.auth.isDev || $page.props.auth.isAdmin) || gift.user_id === $page.props.auth.user.id" class="btn-delete" @click="this.$store.dispatch('set_model', {model: gift, route: 'resource', type: 'resource'})"><Trash :getSize="6" /></button>
                                                     </div>
-<!--                                                     <div v-if="($page.props.auth.isDev || $page.props.auth.isAdmin) || gift.user_id === $page.props.auth.user.id" class="px-3 py-3">
-                                                        <Link class="btn-add block" :href="route('posts.edit_gift', gift.id)"><Edit :getSize="6" /></Link>
-                                                    </div> -->
                                                 </div>
                                                 <div>{{gift.body}}</div>
                                                 <div>

@@ -19,7 +19,7 @@
                 <div v-if="launched" class="py-8">
                     <div class="header-config-client">Voici le nouveau tirage au sort</div>
                     <div class="py-4">
-                        <div class="py-2" :key="user.id" v-for="user in users">
+                        <div class="py-2" :key="user.id" v-for="user in getEditors">
                             {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                 <div>
                     <div class="header-config-client">Voici le tirage au sort actuel</div>
                     <div class="py-4">
-                        <div class="py-2" :key="user.id" v-for="user in users">
+                        <div class="py-2" :key="user.id" v-for="user in getEditors">
                             <span class="font-bold">{{user.name}}</span> offre un cadeau à <span class="font-bold" v-if="user.user_id">{{getUser(user.user_id).name}}</span>
                         </div>
                     </div>
@@ -65,6 +65,7 @@ export default {
         return{
             campaign: this.getCampaignSection().category.posts[0],
             users: this.getusers,
+            editors: this.getusers.filter(u => u.roles),
             page: this.$page.props.pages.filter(page => page.title == 'Resume')[0],
             sections: this.$page.props.pages.filter(page => page.title == 'Resume')[0].page_sections,
             updateMode: false,
@@ -82,10 +83,10 @@ export default {
             return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
         },
         startCampaign() {
-            let user_count = this.users.length-1;
+            let user_count = this.getEditors.length-1;
             let pioche = [];
             let final = [];
-            this.users.forEach(user => {
+            this.getEditors.forEach(user => {
                 pioche.push(user);
             });
             pioche = this.shuffleBis(pioche);
@@ -93,8 +94,8 @@ export default {
                 pioche = this.shuffleBis(pioche);
             }
 
-            for (let index = 0; index < this.users.length; index++) {
-                const element = this.users[index];
+            for (let index = 0; index < this.getEditors.length; index++) {
+                const element = this.users.filter(u => u.id === this.getEditors[index].id)[0];
                 element.new_user = pioche[index].id;
             }
             this.launched = true;
@@ -157,6 +158,15 @@ export default {
                 }
             });
             return started;
+        },
+        getEditors() {
+            let editors = [];
+            this.getusers.forEach(user => {
+                if (user.roles.filter(r => r.name === 'editor').length !== 0) {
+                    editors.push(user)
+                }
+            });
+            return editors;
         },
     },
     created() {

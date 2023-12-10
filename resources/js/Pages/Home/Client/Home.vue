@@ -11,7 +11,9 @@
                         </video>
                         <div v-if="!$page.props.auth.user" class="absolute top-0 left-0 w-full h-full text-white">
                             <div class="w-full h-full flex flex-wrap justify-center content-center">
-                                <Link :href="route('login')" class="shrink-0 flex items-center font-bold text-lg lg:text-4xl text-stone-800 rounded-full px-6 py-4 bg-white/75">Connecte-toi</Link>
+                                <Link :href="route('login')" class="shrink-0 flex-wrap justify-center content-center lg:w-96 flex items-center font-bold text-lg text-center lg:text-4xl text-stone-800 rounded-full px-6 py-4 bg-white/80">
+                                    <span>Connecte toi !</span>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -47,12 +49,17 @@
                                                 </div>
                                             </div>
                                             <div class="py-8">{{gift.body}}</div>
-                                            <div class="">
+                                            <div>
                                                 <div class="w-full">
                                                     <div class="w-full" :key="field.id" v-for="field in getCadeauSection().page_fields">
                                                         <div class="py-2 md:py-4 lg:py-4 flex" v-if="$helpers.getFieldDocValueObject(field, gift) !== ''">
-                                                            <div class="">
+                                                            <div v-if="field.name !== 'Image'" class="">
                                                                 <DocValue class="" :getdoc="$helpers.getFieldDocValueObject(field, gift)" :getobject="gift" />
+                                                            </div>
+                                                            <div v-else>
+                                                                <div class="h-48 md:h-64 lg:h-78 w-full" v-if="$helpers.getFieldDocValueObject(field, gift).medias.length > 0">
+                                                                    <img class="w-full h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

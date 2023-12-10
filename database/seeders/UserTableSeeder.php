@@ -37,16 +37,23 @@ class UserTableSeeder extends Seeder
         ]);
 
         $editor = User::create([
-            'name' => 'Editor',
-            'email' => 'editor@laracms.fr',
-            'password' => bcrypt('@N^69ah&WdRL9vO'),
+            'name' => 'Elliot',
+            'email' => 'edeganai@gmail.com',
+            'password' => bcrypt('password'),
             //'team' => 'paris'
         ]);
 
         $client1 = User::create([
+            'name' => 'Soifia',
+            'email' => 'atikisoifia@gmail.com',
+            'password' => bcrypt('password'),
+            //'team' => 'paris'
+        ]);
+
+        $client2 = User::create([
             'name' => 'Client',
             'email' => 'client@laracms.fr',
-            'password' => bcrypt('16JanV1992.1'),
+            'password' => bcrypt('password'),
             //'team' => 'paris'
         ]);/*
 
@@ -136,7 +143,8 @@ class UserTableSeeder extends Seeder
         $dev->roles()->attach($devRole);
         $admin->roles()->attach($adminRole);
         $editor->roles()->attach($editorRole);
-        $client1->roles()->attach($clientRole);
+        $client1->roles()->attach($editorRole);
+        $client2->roles()->attach($editorRole);
 /*         $client2->roles()->attach($clientRole);
         $client3->roles()->attach($clientRole);
         $client4->roles()->attach($clientRole);

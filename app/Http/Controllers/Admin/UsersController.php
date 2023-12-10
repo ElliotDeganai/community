@@ -115,8 +115,11 @@ class UsersController extends Controller
         for ($i=0; $i < count($request->users); $i++) {
             //dd($request->roles[$i]);
             $user = User::find($request->users[$i]['id']);
-            $user->user_id = $request->users[$i]['new_user'];
-            $user->save();
+
+            if (isset($request->users[$i]['new_user'])) {
+                $user->user_id = $request->users[$i]['new_user'];
+                $user->save();
+            }
         }
         //$user->roles()->sync($request->roles);
         return redirect()->route('resume')->with('status', "Chèr(e) $user->name, tes réponses ont bien été enregistrées !");
