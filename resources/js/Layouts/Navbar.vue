@@ -54,7 +54,7 @@
         </div>
         <div>
             <transition name="nav">
-                <div class="relative overflow-hidden" v-if="$page.props.getpage ? $page.props.getpage.url_name !== 'wishlist' && $page.props.auth.user : false">
+                <div class="relative overflow-hidden lg:hidden" v-if="$page.props.getpage ? $page.props.getpage.url_name !== 'wishlist' && $page.props.auth.user : false">
                     <div v-if="$page.props.pages.filter(p => p.url_name === 'wishlist')[0]" class="py-3 bg-white text-red-900 w-full text-center flex flex-wrap justify-center">
                         <Link :href="route($page.props.pages.filter(p => p.url_name === 'wishlist')[0].url_name)" class="shrink-0 uppercase flex items-center font-bold">Ma wishlist</Link>
                     </div>
