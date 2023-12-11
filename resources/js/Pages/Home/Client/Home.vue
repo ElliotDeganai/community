@@ -58,7 +58,7 @@
                                                             </div>
                                                             <div class="w-full" v-else>
                                                                 <div class="h-48 md:h-64 lg:h-78 w-full" v-if="$helpers.getFieldDocValueObject(field, gift).medias.length > 0">
-                                                                    <img v-if="$helpers.getFieldDocValueObject(field, gift).medias[0]" class="w-full h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
+                                                                    <img v-if="$helpers.getFieldDocValueObject(field, gift).medias[0]" class="w-full lg:max-w-xl h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
                                                                 </div>
                                                             </div>
                                                         </div>
