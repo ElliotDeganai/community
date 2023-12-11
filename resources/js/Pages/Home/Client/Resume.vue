@@ -1,6 +1,6 @@
 <template>
     <div class="relative text-white">
-        <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="pt-32 px-32 w-full h-full">
+        <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="pt-16 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32 w-full h-full">
             <div class="w-full py-8 lg:py-24 z-10">
                 <div class="title-home">Résumé</div>
             </div>
@@ -10,15 +10,15 @@
                         <div>
                             <div class="title-home">{{campaign.name}}</div>
                         </div>
-                        <div class="py-8">
+                        <div class="py-4 lg:py-8">
                             <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName("Budget")}} €</div>
                             <div class="py-4">Description : {{campaign.body}}</div>
                         </div>
                     </div>
                 </div>
-                <div v-if="launched" class="py-8">
+                <div v-if="launched" class="py-4 lg:py-8">
                     <div class="header-config-client">Voici le nouveau tirage au sort</div>
-                    <div class="py-4">
+                    <div class="py-2 lg:py-4">
                         <div class="py-2" :key="user.id" v-for="user in getEditors">
                             {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>
                         </div>
@@ -33,7 +33,7 @@
                     </div>
 
                 </div>
-                <div class="py-8">
+                <div class="py-4 lg:py-8">
                     <div>
                         <button @click.prevent="startCampaign()" class="px-3 py-2 bg-white text-red-900 font-bold">Commencer la campagne</button>
                     </div>
