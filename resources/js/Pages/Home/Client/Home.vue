@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="pt-8 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32">
+                    <div v-else class="pt-16 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32">
                        <div>
                             <div class="pt-16" >
                                 <div>
@@ -58,7 +58,7 @@
                                                             </div>
                                                             <div v-else>
                                                                 <div class="h-48 md:h-64 lg:h-78 w-full" v-if="$helpers.getFieldDocValueObject(field, gift).medias.length > 0">
-                                                                    <img class="w-full h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
+                                                                    <img v-if="$helpers.getFieldDocValueObject(field, gift).medias[0]" class="w-full h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -110,7 +110,7 @@ export default {
             page: this.$page.props.pages.filter(page => page.title == 'Home')[0],
             sections: this.$page.props.pages.filter(page => page.title == 'Home')[0].page_sections,
             campaign: this.getCampaignSection().category.posts[0],
-            list: this.$page.props.auth.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.user.id) : [] ,
+            list: this.$page.props.auth.user && this.$page.props.auth.user.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.user.id) : [] ,
             mylist: this.$page.props.auth.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.id) : [],
             users: this.getusers,
             model: this.$page.props.auth.user,

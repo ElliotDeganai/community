@@ -13,7 +13,7 @@
                     </div>
                 </div>
                 <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 48">
-                    <div class="w-full p-1 lg:p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm opacity-20">
+                    <div class="w-full p-1 lg:p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm opacity-10">
                         <Gift :getSize="10" />
                     </div>
                 </div>
@@ -56,15 +56,15 @@
         </div>
 
         <div v-if="delete_modal && model" @click="$store.commit('UNSET_DELETE_MODAL')" class="z-70 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
-        <div v-if="delete_modal && model" class="z-70 absolute w-full h-full top-0 left-0 flex flex-wrap justify-center content-center">
-            <div class="w-1/4 h-56 p-8 bg-gray-200 rounded-md">
-                <div class="font-bold text-2xl">Confirm</div>
-                <div class="py-4">You will delete the {{type}} {{model.name}}, Are you sure ?</div>
+        <div v-if="delete_modal && model" class="z-70 absolute w-full h-full top-0 left-0 flex flex-wrap justify-center content-center p-2 md:p-0">
+            <div class="w-full md:w-1/2 lg:w-1/4 h-56 p-4 md:p-8 bg-white text-red-900 rounded-md">
+                <div class="font-bold text-2xl">Confirmes-tu la suppression ?</div>
+                <div class="py-4">Veux-tu vraiment supprimer {{model.name}} ?</div>
                 <div class="flex flex-wrap justify-around">
-                    <button class="" @click="$store.dispatch('unset_model')">Cancel</button>
+                    <button class="" @click="$store.dispatch('unset_model')">Annuler</button>
                     <div class="">
                         <Link @click="$store.dispatch('unset_model')" as="button" data-message="Are you sure ?" class="btn-delete" method="delete" :href="route(delete_route, model.id)" :preserve-state="false">
-                            Submit
+                            Valider
                         </Link>
                     </div>
                 </div>
