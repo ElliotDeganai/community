@@ -22,7 +22,7 @@
                                 <div class="py-4">
                                     <div class="header-config-client">Ma liste</div>
                                     <div class="py-4">
-                                        <div class="w-full border-white border-t-4 first:border-0" :key="gift.id" v-for="gift in mylist">
+                                        <div class="w-full border-white border-t-4 first:border-0  py-4 lg:py-8" :key="gift.id" v-for="gift in mylist">
                                             <div>
                                                 <div class="flex flex-wrap content-center h-full py-8">
                                                     <div v-if="($page.props.auth.isDev || $page.props.auth.isAdmin) || gift.user_id === $page.props.auth.user.id" class="h-16 flex flex-wrap content-center">
@@ -39,13 +39,13 @@
                                                 <div>
                                                     <div class="w-full">
                                                         <div class="w-full" :key="field.id" v-for="field in getCadeauSection().page_fields">
-                                                            <div class="py-2 md:py-4 lg:py-4 flex" v-if="$helpers.getFieldDocValueObject(field, gift) !== ''">
+                                                            <div class="py-2 md:py-4 lg:py-4 flex w-full" v-if="$helpers.getFieldDocValueObject(field, gift) !== ''">
                                                                 <div v-if="field.name !== 'Image'" class="">
                                                                     <DocValue class="" :getdoc="$helpers.getFieldDocValueObject(field, gift)" :getobject="gift" />
                                                                 </div>
-                                                                <div v-else>
+                                                                <div class="w-full" v-else>
                                                                     <div class="h-48 md:h-64 lg:h-78 w-full" v-if="$helpers.getFieldDocValueObject(field, gift).medias.length > 0">
-                                                                        <img class="w-full h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
+                                                                        <img class="w-full lg:max-w-xl h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
                                                                     </div>
                                                                 </div>
                                                             </div>

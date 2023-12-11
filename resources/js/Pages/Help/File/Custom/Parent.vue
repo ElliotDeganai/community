@@ -15,9 +15,9 @@
                 </div>
             </div>
         </div>
-        <div v-if="object.images.length > 0" class="flex flex-wrap py-8">
+        <div v-if="object.images.length > 0" class="flex flex-wrap py-4 md:py-8">
             <div class="w-full font-bold">Selected image:</div>
-            <div class="w-1/4 h-56 p-4 relative" :key="index" v-for="(file, index) in this.object.images">
+            <div class="w-full md:w-1/3 lg:w-1/4 h-56 p-2 md:p-4 relative" :key="index" v-for="(file, index) in this.object.images">
                 <div @mouseleave="resetHover()" @mouseover="setHover(file.previewBase64)" class="w-full relative h-full">
                     <img class="w-full object-contain h-full" :src="file.previewBase64" :alt="file.name">
                     <div @click.prevent="removeFile(file)" v-if="hover === file.previewBase64" class="flex flex-wrap">

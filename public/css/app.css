@@ -2659,6 +2659,27 @@ body{
     width: 48rem;
   }
 
+  .lg\:w-1\/2 {
+    width: 50%;
+  }
+
+  .lg\:w-1\/5 {
+    width: 20%;
+  }
+
+  .lg\:w-min {
+    width: -moz-min-content;
+    width: min-content;
+  }
+
+  .lg\:max-w-lg {
+    max-width: 32rem;
+  }
+
+  .lg\:max-w-xl {
+    max-width: 36rem;
+  }
+
   .lg\:p-10 {
     padding: 2.5rem;
   }

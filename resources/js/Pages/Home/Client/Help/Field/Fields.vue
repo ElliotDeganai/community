@@ -8,7 +8,7 @@
                 <div class="py-4">
                     <label class="label-fields-client" for="title">Nom*</label>
                     <div class="py-2">
-                        <input @blur.prevent="setSlug()" type="text" class="form-fields" id="name" name="name" v-model="model.name" />
+                        <input @blur.prevent="setSlug()" type="text" class="w-full lg:w-1/3 form-fields" id="name" name="name" v-model="model.name" />
                         <div class="error-msg" v-if="errors.name">{{ errors.name }}</div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="py-4">
                     <label class="label-fields-client" for="body">Description</label>
                     <div class="py-2">
-                        <textarea class="w-1/2 form-fields" id="body" name="body" v-model="model.body">
+                        <textarea class="w-full lg:w-1/2 form-fields" id="body" name="body" v-model="model.body">
                         </textarea>
                         <div class="error-msg" v-if="errors.body">{{ errors.body }}</div>
                     </div>
@@ -80,14 +80,14 @@
                         <div v-if="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0]" class="py-4">
                             <input type="text"
                                 v-if="attribute.type === 'text'"
-                                class="w-2/3 form-fields"
+                                class="w-full lg:w-2/3 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_text"
                             />
                             <input type="text"
                                 v-if="attribute.type === 'link'"
-                                class="w-2/3 form-fields"
+                                class="w-full lg:w-2/3 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_link"
@@ -113,28 +113,28 @@
                             </rich-text>
                             <input type="number"
                                 v-if="attribute.type === 'numeric'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_number"
                             />
                             <input type="number"
                                 v-if="attribute.type === 'price'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_price"
                             />
                             <input type="date"
                                 v-if="attribute.type === 'date'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_date"
                             />
                             <input type="datetime-local"
                                 v-if="attribute.type === 'date_time'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_date_time"
