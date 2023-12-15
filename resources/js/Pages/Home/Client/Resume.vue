@@ -91,7 +91,8 @@ export default {
                 pioche.push(user);
             });
             pioche = this.shuffleBis(pioche);
-            while (this.compareArray(pioche, this.users)) {
+            //console.log(pioche)
+            while (this.compareArray(pioche, this.getEditors)) {
                 pioche = this.shuffleBis(pioche);
             }
 
@@ -125,8 +126,8 @@ export default {
             for (let index = 0; index < array.length; index++) {
                 const giver = array[index];
                 const receiver = array.filter(u => u.id === giver.new_user)[0];
-                console.log(giver, 'giver');
-                console.log(receiver, 'receiver');
+                //console.log(giver, 'giver');
+                //console.log(receiver, 'receiver');
                 if (giver.new_user === giver.id) {
                     isLogic = false;
                     return isLogic;
@@ -140,7 +141,7 @@ export default {
         },
         compareArray(a1, a2){
             for (let index = 0; index < a1.length; index++) {
-                if (a1[index] === a2[index]) {
+                if (a1[index].id === a2[index].id) {
                     return true;
                 }
             }
