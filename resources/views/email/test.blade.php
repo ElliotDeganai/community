@@ -9,16 +9,9 @@
         <!-- Fonts -->
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ mix('css/app.css') }}">
         <link rel="icon" href="/storage/base/ED_2_Noir_Sans_fond_no_space.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
-
-        <!-- Scripts -->
-        {{-- <script src="https://js.stripe.com/v3"></script> --}}
-        {{-- <script src="https://www.paypal.com/sdk/js?client-id=AULhHrRiQcike52hiLTXebHidwX2chUjKVxiF-U6tFL7eU4bGF5aUi5s53ENxz48YbTsZzwp5i7ZOVdY"></script> --}}
-        @routes
-        <script src="{{ mix('js/app.js') }}" defer></script>
-        @inertiaHead
 
         <!-- Styles -->
         <style>
