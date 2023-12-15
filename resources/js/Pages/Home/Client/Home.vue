@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 <div class="py-8" v-else>
-                                    <div class="rounded-md py-8 px-3 bg-white text-red-900">Ton tiré au sort n'a pas encore ajouté de cadeaux dans sa liste. Contactes le discrètement pour lui demander d'ajouter des idées !</div>
+                                    <div class="rounded-md py-8 px-3 bg-white text-red-900">Ton tiré au sort n'a pas encore ajouté de cadeaux dans sa liste !</div>
                                 </div>
                             </div>
                         </div>
