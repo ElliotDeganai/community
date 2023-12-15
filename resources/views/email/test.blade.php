@@ -7,6 +7,9 @@
         <title>Hello {{ $user->name }}</title>
 
         <!-- Fonts -->
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="icon" href="/storage/base/ED_2_Noir_Sans_fond_no_space.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- Styles -->
