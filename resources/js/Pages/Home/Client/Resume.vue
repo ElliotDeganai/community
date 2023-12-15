@@ -86,6 +86,7 @@ export default {
             let user_count = this.getEditors.length-1;
             let pioche = [];
             let final = [];
+            let self = this;
             this.getEditors.forEach(user => {
                 pioche.push(user);
             });
@@ -98,7 +99,13 @@ export default {
                 const element = this.users.filter(u => u.id === this.getEditors[index].id)[0];
                 element.new_user = pioche[index].id;
             }
-            this.launched = true;
+
+            //console.log(this.isCampaignLogic(this.getEditors))
+            if (this.isCampaignLogic(this.getEditors)) {
+                this.launched = true;
+            } else {
+                self.startCampaign();
+            }
 
 
         },
@@ -111,6 +118,25 @@ export default {
             }
             return temp;
 
+        },
+        isCampaignLogic(array) {
+            let isLogic = true;
+
+            for (let index = 0; index < array.length; index++) {
+                const giver = array[index];
+                const receiver = array.filter(u => u.id === giver.new_user)[0];
+                console.log(giver, 'giver');
+                console.log(receiver, 'receiver');
+                if (giver.new_user === giver.id) {
+                    isLogic = false;
+                    return isLogic;
+                }
+                if (giver.new_user === receiver.id && receiver.new_user === giver.id) {
+                    isLogic = false;
+                    return isLogic;
+                }
+                return isLogic;
+            }
         },
         compareArray(a1, a2){
             for (let index = 0; index < a1.length; index++) {
