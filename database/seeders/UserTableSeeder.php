@@ -25,87 +25,80 @@ class UserTableSeeder extends Seeder
         $dev = User::create([
             'name' => 'Developper',
             'email' => 'dev@laracms.fr',
-            'password' => bcrypt('5N5wUjLS1u76W$4'),
+            'password' => bcrypt('16JanV1992.1'),
             ///'team' => 'paris'
         ]);
 
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@laracms.fr',
-            'password' => bcrypt('s8@MX53919YkXS6'),
+            'password' => bcrypt('16JanV1992.1'),
             //'team' => 'paris'
         ]);
 
         $editor = User::create([
             'name' => 'Elliot',
             'email' => 'edeganai@gmail.com',
-            'password' => bcrypt('password'),
-            //'team' => 'paris'
+            'password' => bcrypt("R&DGC%qYx<z{3md'5-ejUQ"),
+            //'team' => 'paris'0
         ]);
 
         $client1 = User::create([
             'name' => 'Soifia',
             'email' => 'atikisoifia@gmail.com',
-            'password' => bcrypt('password'),
+            'password' => bcrypt('j_~n>FrP5S%s"M9xT)-8H?'),
             //'team' => 'paris'
         ]);
 
         $client2 = User::create([
-            'name' => 'Client',
-            'email' => 'client@laracms.fr',
-            'password' => bcrypt('password'),
+            'name' => 'Edwige',
+            'email' => 'edwigedeganai@hotmail.com',
+            'password' => bcrypt("T8_f2'k←/R#Z4h*wz{`6D"),
             //'team' => 'paris'
-        ]);/*
-
-        $client2 = User::create([
-            'name' => 'Elliot',
-            'email' => 'edeganai@gmail.com',
-            'password' => bcrypt('Hw5R7XQ7!5c8r#p'),
-            'team' => 'lux'
         ]);
 
         $client3 = User::create([
-            'name' => 'Soifia',
-            'email' => 'atikisoifia@gmail.com',
-            'password' => bcrypt('QHB1t!%54CD8mku'),
-            'team' => 'swiss'
+            'name' => 'Escola',
+            'email' => 'escolad@hotmail.fr',
+            'password' => bcrypt("h~%J>N<UB3&*j'sVu{^5Q]")
         ]);
 
         $client4 = User::create([
-            'name' => 'Luc',
-            'email' => 'Veu.lucie@yahoo.com',
-            'password' => bcrypt('kR2L43!B%HP^ge^'),
-            'team' => 'paris'
+            'name' => 'Eric',
+            'email' => 'ericdeganai@gmail.com',
+            'password' => bcrypt('b,xW(raFd.]{Ncn*B2;}yS')
         ]);
 
         $client5 = User::create([
-            'name' => 'Papa Polka',
-            'email' => 'aurelienbkc@gmail.com',
-            'password' => bcrypt('@O*Jav2q86ec7Jh'),
-            'team' => 'lux'
+            'name' => 'Evrard',
+            'email' => 'evrard-deganai@orange.fr',
+            'password' => bcrypt('Tn3AVG&;>c6:[p/v.hk_4`')
         ]);
 
         $client6 = User::create([
-            'name' => 'Julie meu amor',
-            'email' => 'Juliebenhamou1987@gmail.com',
-            'password' => bcrypt('!%3YY%6iD%e8Z&8'),
-            'team' => 'lux'
+            'name' => 'Karine',
+            'email' => 'feikofil@hotmail.fr',
+            'password' => bcrypt('GKW,fH-q7?"{sEvD_3ac$[')
         ]);
 
         $client7 = User::create([
-            'name' => 'Julia',
-            'email' => 'jparanhos0@gmail.com',
-            'password' => bcrypt('73P759T2lTvm^El'),
-            'team' => 'swiss'
+            'name' => 'Cécilia',
+            'email' => 'cecilia-ouato@live.fr',
+            'password' => bcrypt('cq;@}&:SaQv7~5]2fDu%yG')
         ]);
 
         $client8 = User::create([
-            'name' => 'Debora',
-            'email' => 'deboracarvalhopinto@gmail.com',
-            'password' => bcrypt('*2FqX7ak06Q6r##'),
-            'team' => 'swiss'
+            'name' => 'Jennifer',
+            'email' => 'ouato-jennifer@live.fr',
+            'password' => bcrypt('N%A8(uPY.fWEZjF*)sx[`g')
         ]);
 
+        $client9 = User::create([
+            'name' => 'Patrick',
+            'email' => 'Axel.ouato@gmail.com',
+            'password' => bcrypt("L'~Ga./:PBcK^bQ+%sr7fC")
+        ]);
+/*
         $client9 = User::create([
             'name' => 'Han M',
             'email' => 'henri.meiche@gmail.com',
@@ -145,15 +138,15 @@ class UserTableSeeder extends Seeder
         $editor->roles()->attach($editorRole);
         $client1->roles()->attach($editorRole);
         $client2->roles()->attach($editorRole);
-/*         $client2->roles()->attach($clientRole);
-        $client3->roles()->attach($clientRole);
-        $client4->roles()->attach($clientRole);
-        $client5->roles()->attach($clientRole);
-        $client6->roles()->attach($clientRole);
-        $client7->roles()->attach($clientRole);
-        $client8->roles()->attach($clientRole);
-        $client9->roles()->attach($clientRole);
-        $client10->roles()->attach($clientRole);
+         $client2->roles()->attach($editorRole);
+        $client3->roles()->attach($editorRole);
+        $client4->roles()->attach($editorRole);
+        $client5->roles()->attach($editorRole);
+        $client6->roles()->attach($editorRole);
+        $client7->roles()->attach($editorRole);
+        $client8->roles()->attach($editorRole);
+        $client9->roles()->attach($editorRole);
+/*         $client10->roles()->attach($clientRole);
         $client11->roles()->attach($clientRole);
         $client12->roles()->attach($clientRole);
         $client13->roles()->attach($clientRole); */
