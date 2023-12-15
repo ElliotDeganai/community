@@ -13,6 +13,11 @@
                         <div class="py-4 lg:py-8">
                             <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName("Budget")}} €</div>
                             <div class="py-4">Description : {{campaign.body}}</div>
+                            <div>
+                                <Link :href="route('test.email')" class="shrink-0 flex items-center bg-white text-red-900 px-3 py-2">
+                                    Test email
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -53,8 +58,10 @@ import helpers from '../../../helpers'
 import DocValue from './../Help/DocumentationValue.vue'
 import Couple from '../Help/Icon/Couple.vue'
 import { useForm } from "@inertiajs/inertia-vue3";
+
+import { Link } from '@inertiajs/inertia-vue3';
 export default {
-    components:  {BreezeGuestLayout, DocValue, Couple},
+    components:  {BreezeGuestLayout, DocValue, Couple, Link},
     layout: BreezeGuestLayout,
     props: {
         getcampaigns: Array,

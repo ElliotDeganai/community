@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\EmailController;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Post;
@@ -92,7 +93,7 @@ Route::get('/admin', function() {
     ]);
 })->middleware('admin')->name('admin');
 
-
+Route::get('/test-email', [EmailController::class, 'test'])->name('test.email');
 Route::put('/admin/users/campaign', [UsersController::class, 'startCampaign'])->middleware('admin')->name('users.campaign');
 
 Route::get('/posts/create/gift', [BlogController::class, 'create_gift'])->name('posts.create_gift');
@@ -123,6 +124,12 @@ Route::get('/free', [HomeController::class, 'free'])->name('free');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq'); */
 //
+
+Route::get('/mailable', function () {
+    $user = App\Models\User::find(3);
+
+    return new App\Mail\TestTemplate($user);
+});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
