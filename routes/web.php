@@ -128,7 +128,7 @@ Route::get('/faq', [HomeController::class, 'faq'])->name('faq'); */
 Route::get('/mailable', function () {
     $user = App\Models\User::find(3);
 
-    return new App\Mail\TestTemplate($user);
+    return new App\Mail\TestEmail2($user);
 });
 
 Route::get('/dashboard', function () {

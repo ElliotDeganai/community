@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+/* Add this line to the top if you do not have this: */
+const tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -16,7 +18,11 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [require('tailwindcss'), require('autoprefixer')])
     .alias({
         '@': 'resources/js',
-    });
+    })
+    /* Add the next three lines: */
+    .postCss('resources/css/mail.css', 'public/css', [
+        tailwindcss('tailwind-mail.config.js')
+    ]);
 
 if (mix.inProduction()) {
     mix.version();

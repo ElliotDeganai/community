@@ -10,6 +10,6 @@ class Base extends Component
     public function render(): View
     {
          // Update the name of your view.
-        return view('email.test');
+        return view('email.base');
     }
 }
