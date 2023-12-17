@@ -1,6 +1,6 @@
 @component('mail::layout')
 {{-- Header --}}
-@slot('header2')
+@slot('header')
 @component('mail::header2', ['url' => config('app.url')])
 {{ config('app.name') }}
 @endcomponent

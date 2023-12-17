@@ -11,7 +11,7 @@ body *:not(html):not(style):not(br):not(tr):not(code) {
 body {
     -webkit-text-size-adjust: none;
     background-color: #ffffff;
-    color: #718096;
+    color: #7F1D1D;
     height: 100%;
     line-height: 1.4;
     margin: 0;
@@ -80,7 +80,7 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
+    background-color: #FECACA;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -103,7 +103,7 @@ img {
 }
 
 .header a {
-    color: #3d4852;
+    color: #7F1D1D;
     font-size: 19px;
     font-weight: bold;
     text-decoration: none;
@@ -123,9 +123,9 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
-    border-bottom: 1px solid #edf2f7;
-    border-top: 1px solid #edf2f7;
+    background-color: #FECACA;
+    border-bottom: 1px solid #FECACA;
+    border-top: 1px solid #FECACA;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -142,7 +142,7 @@ img {
     box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015);
     margin: 0 auto;
     padding: 0;
-    width: 570px;
+    width: 80%;
 }
 
 /* Subcopy */
@@ -170,13 +170,13 @@ img {
 }
 
 .footer p {
-    color: #b0adc5;
+    color: #7F1D1D;
     font-size: 12px;
     text-align: center;
 }
 
 .footer a {
-    color: #b0adc5;
+    color: #7F1D1D;
     text-decoration: underline;
 }
 
