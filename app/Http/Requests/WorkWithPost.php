@@ -40,6 +40,7 @@ class WorkWithPost extends FormRequest
             'doc_values.*.value_carousel' => 'nullable|boolean',
             'doc_values.*.value_audio' => 'nullable|boolean',
             'doc_values.*.value_list' => 'nullable',
+            'doc_values.*.value_link' => 'nullable|url',
             'doc_values.*.images.*' => 'sometimes|image|max:2048',
             'doc_values.*.audio.*' => 'sometimes|file|max:2048',
             'doc_values.*.gallery.*' => 'sometimes|image|max:2048',

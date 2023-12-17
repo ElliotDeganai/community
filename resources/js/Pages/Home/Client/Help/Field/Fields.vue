@@ -179,9 +179,12 @@
                                     />
                                 </div>
                             </div>
-                            <div class="py-4">
+                            <div class="pt-4">
                                 <div class="error-msg w-full" v-if="errors['doc_values.'+index+'.value_text'] !== undefined && errors['doc_values.'+index+'.value_text'] !== null">
                                     <p>{{errors['doc_values.'+index+'.value_text']}}</p>
+                                </div>
+                                <div class="error-msg w-full" v-if="errors['doc_values.'+index+'.value_link'] !== undefined && errors['doc_values.'+index+'.value_link'] !== null">
+                                    <p>Le format du lien est incorrect</p>
                                 </div>
                                 <div class="error-msg w-full" v-if="errors['doc_values.'+index+'.value_html'] !== undefined && errors['doc_values.'+index+'.value_html'] !== null">
                                     <p>{{errors['doc_values.'+index+'.value_html']}}</p>
@@ -199,7 +202,7 @@
                                     <p>{{errors['doc_values.'+index+'.value_date_time']}}</p>
                                 </div>
                                 <div class="error-msg w-full" v-if="errors['doc_values.'+index+'.images.0'] !== undefined && errors['doc_values.'+index+'.images.0'] !== null">
-                                    <p>There is some issues with the image</p>
+                                    <p>L'image n'a pas pu être chargée. Essaie une autre image. La taille de l'image ne doit pas dépasser 2MB.</p>
                                 </div>
                                 <div class="error-msg w-full" v-if="errors['doc_values.'+index+'.gallery.0'] !== undefined && errors['doc_values.'+index+'.gallery.0'] !== null">
                                     <p>There is some issues with your gallery images</p>
