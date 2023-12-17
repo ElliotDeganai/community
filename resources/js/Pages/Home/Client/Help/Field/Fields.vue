@@ -6,7 +6,7 @@
                     Ajouter une idée
                 </div> -->
                 <div class="py-4">
-                    <label class="label-fields-client" for="title">Nom*</label>
+                    <label class="label-fields-client" for="title">Ton voeu*</label>
                     <div class="py-2">
                         <input @blur.prevent="setSlug()" type="text" class="w-full lg:w-1/3 form-fields" id="name" name="name" v-model="model.name" />
                         <div class="error-msg" v-if="errors.name">{{ errors.name }}</div>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="py-4">
-                    <label class="label-fields-client" for="body">Description</label>
+                    <label class="label-fields-client" for="body">Description détaillée de ton voeu</label>
                     <div class="py-2">
                         <textarea class="w-full lg:w-1/2 form-fields" id="body" name="body" v-model="model.body">
                         </textarea>

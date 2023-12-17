@@ -2,10 +2,18 @@
     <div class="pt-8 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32 text-white">
         <div class="py-16 lg:py-32">
             <div class="text-xl font-bold w-full">
-                <div class="text-center w-full uppercase">Mettre à jour une idée</div>
+                <div class="text-center w-full uppercase">Mettre à jour un voeu</div>
             </div>
         </div>
-        <div>Donnes au moins un nom à ton idée. Les autres champs ne sont pas obligatoires.</div>
+        <div class="font-bold md:text-lg">Seul le champs "Ton voeu" est obligatoire.</div>
+        <div class="py-2 text-xs md:text-base">
+            <div>Ci-dessous, tu trouveras une explication de chaque champ non obligatoire:</div>
+            <ul class="list-disc pl-2 md:pl-4">
+                <li>Le champ "Description détaillée de ton voeu" complète le nom inscrit dans le champ "Ton voeu" et te permet de décrire avec plus de détaille ton voeu.</li>
+                <li>Le champ "Image" te permet d'ajouter une image qui permettra d'illustra ton voeu.</li>
+                <li>Le champ "Lien" te permet d'ajouter le lien direct vers la page internet où on peut trouver ton voeu.</li>
+            </ul>
+        </div>
         <div>
             <div>
                 <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>

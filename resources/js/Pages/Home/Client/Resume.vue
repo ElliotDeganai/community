@@ -202,6 +202,12 @@ export default {
             });
             return editors;
         },
+        isEditor() {
+            if (this.$page.props.auth.user.roles.filter(r => r.name === 'editor').length > 0) {
+                return true;
+            }
+            return false;
+        },
     },
     created() {
     },

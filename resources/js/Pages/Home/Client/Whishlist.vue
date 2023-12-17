@@ -60,7 +60,7 @@
                                 <div>
                                     <div class="py-4">
                                         <Link :href="route('posts.create_gift')" class="text-lg font-bold bg-white px-3 py-2 rounded-md text-red-900">
-                                            Ajouter une idée
+                                            Ajouter un voeu
                                         </Link>
                                     </div>
                                 </div>

@@ -2,10 +2,18 @@
     <div class="pt-8 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32 text-white">
         <div class="py-16 lg:py-32">
             <div class="text-xl font-bold w-full">
-                <div class="text-center w-full uppercase">Ajouter une nouvelle idée</div>
+                <div class="text-center w-full uppercase">Ajouter un voeu</div>
             </div>
         </div>
-        <div>Donnes au moins un nom à ton idée. Les autres champs ne sont pas obligatoires.</div>
+        <div class="font-bold md:text-lg">Seul le champs "Ton voeu" est obligatoire.</div>
+        <div class="py-2 text-xs md:text-base">
+            <div>Ci-dessous, tu trouveras une explication de chaque champ non obligatoire:</div>
+            <ul class="list-disc pl-2 md:pl-4">
+                <li>Le champ "Description détaillée de ton voeu" complète le nom inscrit dans le champ "Ton voeu" et te permet de décrire avec plus de détaille ton voeu.</li>
+                <li>Le champ "Image" te permet d'ajouter une image qui permettra d'illustra ton voeu.</li>
+                <li>Le champ "Lien" te permet d'ajouter le lien direct vers la page internet où on peut trouver ton voeu.</li>
+            </ul>
+        </div>
 <!--         <div v-if="type && getcategories[0]" class="py-8">
             <Link :href="route('posts.edit', getcategories[0].id )" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                 Edit the {{getcategories[0].name}} template
