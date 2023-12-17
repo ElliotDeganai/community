@@ -22,7 +22,7 @@ const helpers = {
         return section.page_fields.filter(field => field.name === field_name)[0];
     },
     getValue(doc_value) {
-        if (doc_value.value_text !== null && doc_value !== undefined) {
+        if (doc_value !== undefined && doc_value.value_text !== null) {
             return {
                 docValue: doc_value.value_text,
                 type: 'text'
