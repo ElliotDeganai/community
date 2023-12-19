@@ -19,6 +19,11 @@
                        </div>
                        <div>
                             <div>
+                                <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
+                            </div>
+                       </div>
+                       <div>
+                            <div>
                                 <div class="py-4">
                                     <div class="header-config-client">Ma liste</div>
                                     <div class="py-4">

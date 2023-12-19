@@ -225,7 +225,7 @@ class BlogController extends Controller
                     'getusers' => User::with('roles', 'user')->get()
                 ]); */
 
-                return redirect()->route($page->url_name)->with('status', 'The post has been created !');
+                return redirect()->route($page->url_name)->with('status', 'Un nouveau voeu a été ajouté !');
         }else {
             return redirect()->route('posts.index')->with('status', 'The post has been created !');
         }

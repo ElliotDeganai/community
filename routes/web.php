@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessageNotification;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DocumentationController;
@@ -144,6 +145,15 @@ if (env('IS_ECOMMERCE') == 1) {
     Route::get('payment/success', ['PayPalController', 'success'])->name('payment.success');
 
 }
+
+Route::get('event', function() {
+      event(new MessageNotification('Send from server to Pusher!'));
+    });
+
+    Route::get('/listen', function() {
+        event(new MessageNotification('Send from server to Pusher!'));
+        return Inertia::render('Home/Client/ListenPusher');
+    })->name('listen-pusher');
 
 
 
