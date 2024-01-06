@@ -30,7 +30,7 @@ export default {
             });
     },
     mounted() {
-        console.log(Echo);
+        //console.log(Echo);
         Echo.channel('notification')
             .listen('MessageNotification', (e) => {
                 console.log(e.message);
