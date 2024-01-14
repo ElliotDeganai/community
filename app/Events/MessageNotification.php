@@ -34,6 +34,13 @@ class MessageNotification implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('notification');
+        //return new Channel('notification');
+        return ['public'];
+    }
+
+    public function broadcastAs()
+    {
+        //return new Channel('notification');
+        return 'chat';
     }
 }

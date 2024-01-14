@@ -32,10 +32,7 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: process.env.MIX_ABLY_PUBLIC_KEY,
-    wsHost: 'realtime-pusher.ably.io',
+    key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-    wsPort: 443,
-    disableStats: true,
-    encrypted: true,
+    forceTLS: true
 });

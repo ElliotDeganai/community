@@ -179,7 +179,6 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.updateScroll);
         this.loadingSite();
-        console.log(this.$page.url)
     },
 }
 </script>

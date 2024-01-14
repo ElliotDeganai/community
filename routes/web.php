@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Stripe\StripeController;
 
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\PusherController;
 use App\Models\User;
 
 /*
@@ -151,9 +152,15 @@ Route::get('event', function() {
     });
 
     Route::get('/listen', function() {
+        $test = new MessageNotification('Send from server to Pusher!');
+        //dd($test);
         event(new MessageNotification('Send from server to Pusher!'));
         return Inertia::render('Home/Client/ListenPusher');
     })->name('listen-pusher');
+
+    Route::get('/pusher', [PusherController::class, 'index'])->name('pusher');
+    Route::post('/broadcast', [PusherController::class, 'broadcast'])->name('broadcast');
+    Route::post('/receive', [PusherController::class, 'receive'])->name('receive');
 
 
 

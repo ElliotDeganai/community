@@ -25,31 +25,38 @@ class UserTableSeeder extends Seeder
         $dev = User::create([
             'name' => 'Developper',
             'email' => 'dev@laracms.fr',
-            'password' => bcrypt('16JanV1992.1'),
+            'password' => bcrypt('password'),
             ///'team' => 'paris'
         ]);
 
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@laracms.fr',
-            'password' => bcrypt('16JanV1992.1'),
+            'password' => bcrypt('password'),
             //'team' => 'paris'
         ]);
 
         $editor = User::create([
-            'name' => 'Elliot',
-            'email' => 'edeganai@gmail.com',
-            'password' => bcrypt("R&DGC%qYx<z{3md'5-ejUQ"),
-            //'team' => 'paris'0
-        ]);
-
-        $client1 = User::create([
-            'name' => 'Soifia',
-            'email' => 'atikisoifia@gmail.com',
-            'password' => bcrypt('j_~n>FrP5S%s"M9xT)-8H?'),
+            'name' => 'Editor',
+            'email' => 'editor@laracms.fr',
+            'password' => bcrypt('password'),
             //'team' => 'paris'
         ]);
 
+        $elliot = User::create([
+            'name' => 'Elliot',
+            'email' => 'edeganai@gmail.com',
+            'password' => bcrypt("password"),
+            //'team' => 'paris'0
+        ]);
+
+        $soifia = User::create([
+            'name' => 'Soifia',
+            'email' => 'atikisoifia@gmail.com',
+            'password' => bcrypt('password'),
+            //'team' => 'paris'
+        ]);
+/*
         $client2 = User::create([
             'name' => 'Edwige',
             'email' => 'edwigedeganai@hotmail.com',
@@ -97,7 +104,7 @@ class UserTableSeeder extends Seeder
             'name' => 'Patrick',
             'email' => 'Axel.ouato@gmail.com',
             'password' => bcrypt("L'~Ga./:PBcK^bQ+%sr7fC")
-        ]);
+        ]); */
 /*
         $client9 = User::create([
             'name' => 'Han M',
@@ -136,16 +143,16 @@ class UserTableSeeder extends Seeder
         $dev->roles()->attach($devRole);
         $admin->roles()->attach($adminRole);
         $editor->roles()->attach($editorRole);
-        $client1->roles()->attach($editorRole);
-        $client2->roles()->attach($editorRole);
-         $client2->roles()->attach($editorRole);
+        $elliot->roles()->attach($clientRole);
+        $soifia->roles()->attach($clientRole);
+/*          $client2->roles()->attach($editorRole);
         $client3->roles()->attach($editorRole);
         $client4->roles()->attach($editorRole);
         $client5->roles()->attach($editorRole);
         $client6->roles()->attach($editorRole);
         $client7->roles()->attach($editorRole);
         $client8->roles()->attach($editorRole);
-        $client9->roles()->attach($editorRole);
+        $client9->roles()->attach($editorRole); */
 /*         $client10->roles()->attach($clientRole);
         $client11->roles()->attach($clientRole);
         $client12->roles()->attach($clientRole);

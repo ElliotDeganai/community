@@ -62,6 +62,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function messages() {
+        return $this->hasMany('App\Models\Message');
+    }
+
+    public function conversations() {
+        return $this->belongsToMany('App\Models\Conversation');
+    }
+
     public function pages() {
         return $this->hasMany('App\Models\Page');
     }

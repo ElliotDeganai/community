@@ -1,7 +1,10 @@
 
 <template>
     <div>
-        pusher test
+        <div>pusher test</div>
+        <div>
+            <button></button>
+        </div>
     </div>
 </template>
 <script>
@@ -20,6 +23,12 @@ export default {
         }
     },
     methods: {
+        submit() {
+            let self = this;
+            this.form.post(route("broadcast", {message: self.message}), {
+                forceFormData: true,
+            });
+        }
     },
     computed: {
     },

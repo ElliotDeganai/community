@@ -1171,6 +1171,9 @@ body{
 .w-4\/5 {
   width: 80%;
 }
+.w-56 {
+  width: 14rem;
+}
 .w-70 {
   width: 22rem;
 }
@@ -1889,6 +1892,10 @@ body{
 .text-red-900 {
   --tw-text-opacity: 1;
   color: rgb(127 29 29 / var(--tw-text-opacity));
+}
+.text-slate-900 {
+  --tw-text-opacity: 1;
+  color: rgb(15 23 42 / var(--tw-text-opacity));
 }
 .text-red-700 {
   --tw-text-opacity: 1;

@@ -60,12 +60,12 @@ const submit = () => {
                 <form class="w-full lg:w-1/3" @submit.prevent="submit">
                     <div>
                         <BreezeLabel class="text-white" for="email" value="Email" />
-                        <BreezeInput id="email" type="email" class="mt-1 block w-full" placeholder="email@hotmail.com" v-model="form.email" required autofocus autocomplete="username" />
+                        <BreezeInput id="email" type="email" class="mt-1 block w-full text-slate-900" placeholder="email@hotmail.com" v-model="form.email" required autofocus autocomplete="username" />
                     </div>
 
                     <div class="mt-4">
                         <BreezeLabel class="text-white" for="password" value="Password" />
-                        <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
+                        <BreezeInput id="password" type="password" class="mt-1 block w-full text-slate-900" v-model="form.password" required autocomplete="current-password" />
                     </div>
                     <div>
                         <div class="text-red-700" v-if="form.errors.email">{{ form.errors.email }}</div>
