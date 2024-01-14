@@ -77,11 +77,11 @@ export default {
       gapisScript.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js')
       document.head.appendChild(gapisScript); */
       this.form.content = null;
-      console.log(Echo.channel('public'));
+/*       console.log(Echo.channel('public'));
         Echo.channel('public')
             .listen('PusherBroadcast', (e) => {
                 console.log(e.message);
-            });
+            }); */
     },
 }
 </script>
