@@ -66,6 +66,7 @@ export default {
     created() {
         window.Echo.private('App.Models.User.'+this.$page.props.auth.user.id).notification((notification) => {
             console.log(notification);
+            this.getmessages.push(notification.message);
          })
     },
     mounted() {

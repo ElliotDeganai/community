@@ -60,7 +60,6 @@ class PusherController extends Controller
                 $user->notify(new TestNotification($message));
             }
         }
-
         return redirect()->route('pusher')->with('new message');
     }
 
