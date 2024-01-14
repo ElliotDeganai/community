@@ -64,6 +64,9 @@ export default {
         }
     },
     created() {
+        window.Echo.private('App.Models.User.'+this.$page.props.auth.user.id).notification((notification) => {
+            console.log(notification);
+         })
     },
     mounted() {
 /*       let pusherScript = document.createElement('script')
