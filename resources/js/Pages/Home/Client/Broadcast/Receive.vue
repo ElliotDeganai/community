@@ -3,8 +3,9 @@
         <div>
             <img alt="Logo chargement" class="object-contain w-56 h-56" :src="'/storage/base/ED 2 Blanc Sans fond.png'" />
         </div>
-        <div>
-            <p :key="message.id" v-for="message in messages">{{message.content}}</p>
+        <div class="w-1/3">
+            <small></small>
+            <p :class="[this.$page.props.auth.user.id === message.user_id ? 'text-left':'text-right']" class="" :key="message.id" v-for="message in messages">{{message.content}}</p>
         </div>
     </div>
 </template>

@@ -110,7 +110,7 @@ export default {
             page: this.$page.props.pages.filter(page => page.title == 'Wishlist')[0],
             sections: this.$page.props.pages.filter(page => page.title == 'Wishlist')[0].page_sections,
             campaign: this.getCampaignSection().category.posts[0],
-            list: this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.user.id),
+            list: this.$page.props.auth.user.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.user.id) : [],
             mylist: this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.id),
             users: this.getusers,
             model: this.$page.props.auth.user,
