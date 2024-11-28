@@ -56,21 +56,21 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password'),
             //'team' => 'paris'
         ]);
-/*
+
         $client2 = User::create([
             'name' => 'Edwige',
             'email' => 'edwigedeganai@hotmail.com',
-            'password' => bcrypt("T8_f2'k←/R#Z4h*wz{`6D"),
+            'password' => bcrypt("password"),
             //'team' => 'paris'
         ]);
 
         $client3 = User::create([
             'name' => 'Escola',
             'email' => 'escolad@hotmail.fr',
-            'password' => bcrypt("h~%J>N<UB3&*j'sVu{^5Q]")
+            'password' => bcrypt("password")
         ]);
 
-        $client4 = User::create([
+        /*$client4 = User::create([
             'name' => 'Eric',
             'email' => 'ericdeganai@gmail.com',
             'password' => bcrypt('b,xW(raFd.]{Ncn*B2;}yS')
@@ -143,11 +143,11 @@ class UserTableSeeder extends Seeder
         $dev->roles()->attach($devRole);
         $admin->roles()->attach($adminRole);
         $editor->roles()->attach($editorRole);
-        $elliot->roles()->attach($clientRole);
-        $soifia->roles()->attach($clientRole);
-/*          $client2->roles()->attach($editorRole);
+        $elliot->roles()->attach($editorRole);
+        $soifia->roles()->attach($editorRole);
+          $client2->roles()->attach($editorRole);
         $client3->roles()->attach($editorRole);
-        $client4->roles()->attach($editorRole);
+        /*$client4->roles()->attach($editorRole);
         $client5->roles()->attach($editorRole);
         $client6->roles()->attach($editorRole);
         $client7->roles()->attach($editorRole);
