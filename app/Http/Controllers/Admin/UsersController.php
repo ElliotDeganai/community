@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\StartCampaign;
+use App\Models\Post;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class UsersController extends Controller
@@ -112,13 +116,26 @@ class UsersController extends Controller
     public function startCampaign(Request $request)
     {
         //dd('start campaign', $request->users);
+        $campaign = Post::find($request->campaign['id']);
+        //dd($campaign);
         for ($i=0; $i < count($request->users); $i++) {
             //dd($request->roles[$i]);
             $user = User::find($request->users[$i]['id']);
+            //dd($user->isEditor(), $user);
+            if ($user->isEditor()) {
+                    # code...
 
-            if (isset($request->users[$i]['new_user'])) {
-                $user->user_id = $request->users[$i]['new_user'];
-                $user->save();
+
+                if (isset($request->users[$i]['new_user'])) {
+                    $user->user_id = $request->users[$i]['new_user'];
+                    $user->save();
+                }
+
+                if (isset($request->users[$i]['password'])) {
+                    $user->password = Hash::make($request->users[$i]['password']);
+                    $user->save();
+                }
+                Mail::to($user)->send(new StartCampaign($user, $request->users[$i]['password'], $campaign));
             }
         }
         //$user->roles()->sync($request->roles);

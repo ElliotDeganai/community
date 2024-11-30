@@ -57,7 +57,7 @@ class UserTableSeeder extends Seeder
             //'team' => 'paris'
         ]);
 
-        $client2 = User::create([
+        /*$client2 = User::create([
             'name' => 'Edwige',
             'email' => 'edwigedeganai@hotmail.com',
             'password' => bcrypt("password"),
@@ -70,7 +70,7 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt("password")
         ]);
 
-        /*$client4 = User::create([
+        $client4 = User::create([
             'name' => 'Eric',
             'email' => 'ericdeganai@gmail.com',
             'password' => bcrypt('b,xW(raFd.]{Ncn*B2;}yS')
@@ -143,8 +143,8 @@ class UserTableSeeder extends Seeder
         $dev->roles()->attach($devRole);
         $admin->roles()->attach($adminRole);
         $editor->roles()->attach($editorRole);
-        $elliot->roles()->attach($clientRole);
-        $soifia->roles()->attach($clientRole);
+        $elliot->roles()->attach($editorRole);
+        $soifia->roles()->attach($editorRole);
           $client2->roles()->attach($editorRole);
         $client3->roles()->attach($editorRole);
         /*$client4->roles()->attach($editorRole);

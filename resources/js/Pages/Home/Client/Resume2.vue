@@ -18,9 +18,9 @@
                 </div>
                 <div v-if="launched" class="py-4 lg:py-8">
                     <div class="header-config-client">Voici le nouveau tirage au sort</div>
-                    <div class="py-2 lg:py-4">
-                        <div class="py-2" :key="user.id" v-for="user in getEditors">
-                            {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>
+                    <div class="py-2 lg:py-4 flex flex-wrap w-full">
+                        <div class="py-2 w-full" :key="user.id" v-for="user in getEditors">
+                            {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>, Mot de passe : {{user.password}}
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,8 @@ export default {
             updateMode: false,
             launched: false,
             form : useForm({
-                users: this.getusers
+                users: this.getusers,
+                campaign: this.getCampaignSection().category.posts[0]
             }),
         }
     },
@@ -90,7 +91,11 @@ export default {
             let pioche = [];
             let final = [];
             let self = this;
+            this.getusers.forEach(user => {
+                user.password = this.generatePassword();
+            });
             this.getEditors.forEach(user => {
+                //user.password = this.generatePassword();
                 pioche.push(user);
             });
             pioche = this.shuffleBis(pioche);
@@ -177,6 +182,18 @@ export default {
         },
         getUser(id) {
             return this.users.filter(u => u.id === id)[0];
+        },
+        generatePassword() {
+            var length = 8,
+            charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+            retVal = "";
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * n));
+            }
+            return retVal;
+        },
+        assignPassword(user, password) {
+
         }
     },
     computed: {
