@@ -13,11 +13,6 @@
                         <div class="py-4 lg:py-8">
                             <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName("Budget")}} €</div>
                             <div class="py-4">Description : {{campaign.body}}</div>
-                            <div>
-                                <Link :href="route('test.email')" class="shrink-0 flex items-center bg-white text-red-900 px-3 py-2">
-                                    Test email
-                                </Link>
-                            </div>
                         </div>
                     </div>
                 </div>

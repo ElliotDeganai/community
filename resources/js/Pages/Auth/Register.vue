@@ -95,7 +95,7 @@ const CheckRole = (role) => {
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-end mt-4">
+                    <div class="flex flex-wrap justify-between w-full mt-4">
                         <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
                             Already registered?
                         </Link>

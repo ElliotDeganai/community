@@ -10,7 +10,7 @@
             <div>Ci-dessous, tu trouveras une explication de chaque champ non obligatoire:</div>
             <ul class="list-disc pl-2 md:pl-4">
                 <li>Le champ "Description détaillée de ton voeu" complète le nom inscrit dans le champ "Ton voeu" et te permet de décrire avec plus de détaille ton voeu.</li>
-                <li>Le champ "Image" te permet d'ajouter une image qui permettra d'illustra ton voeu.</li>
+                <li>Le champ "Image" te permet d'ajouter une image qui permettra d'illustrer ton voeu.</li>
                 <li>Le champ "Lien" te permet d'ajouter le lien direct vers la page internet où on peut trouver ton voeu.</li>
             </ul>
         </div>
@@ -77,6 +77,9 @@ export default {
         if(this.type){
             this.form.category_id = this.getcategories[0];
         }
+    },
+    mounted() {
+        console.log(this.$page.props);
     },
 }
 </script>

@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
@@ -93,7 +95,7 @@ class HandleInertiaRequests extends Middleware
             ], */
             'status' => [
                 'message' => session('status'),
-            ],
+            ]
         ]);
     }
 }

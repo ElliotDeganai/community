@@ -2,9 +2,6 @@
     <div class="">
         <div>
             <div class="">
-<!--                 <div class="header-config-client">
-                    Ajouter une idée
-                </div> -->
                 <div class="py-4">
                     <label class="label-fields-client" for="title">Ton voeu*</label>
                     <div class="py-2">
@@ -92,19 +89,6 @@
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_link"
                             />
-<!--                             <div v-if="attribute.type === 'list'">
-                                <div>
-                                    <div :key="option.id" v-for="option in attribute.doc_options">
-                                        <label class="label-fields" :for="'doc_'+option.id">{{ option.option }}</label>
-                                        <input type="text"
-                                            class="w-2/3 form-fields"
-                                            :id="'doc_'+attribute.id+'_'+option.id"
-                                            :name="'doc_'+attribute.id+'_'+option.id"
-                                            v-model="model.doc_values.filter(doc => doc.option_id === option.id )[0].value_list"
-                                        />
-                                    </div>
-                                </div>
-                            </div> -->
                             <rich-text v-if="attribute.type === 'html'"
                                 class="w-full h-64"
                                 :id="'doc_'+attribute.id"

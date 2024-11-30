@@ -224,7 +224,7 @@ export default {
             iteration_start: this.getiteration,
             iteration_option: this.getiterationoption,
             iteration_start_option: this.getiterationoption,
-            docTypes: ['text', 'html', 'numeric', 'date', 'date_time', 'gallery','image','carousel', 'audio', 'link'],
+            docTypes: ['text', 'html', 'numeric', 'date', 'date_time', 'gallery','image','carousel', 'audio', 'link', 'boolean'],
             categories: this.getcategories,
             childCategories: this.getchildcategories
         }

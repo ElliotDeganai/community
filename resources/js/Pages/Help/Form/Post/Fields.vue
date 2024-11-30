@@ -125,6 +125,10 @@
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_html">
                             </rich-text>
+                            <div class="w-1/5" v-if="attribute.type === 'boolean'">
+                                <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="0" /> False
+                                <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="1" /> True
+                            </div>
                             <input type="number"
                                 v-if="attribute.type === 'numeric'"
                                 class="w-1/5 form-fields"
@@ -301,6 +305,7 @@ export default {
                     value_price:null,
                     value_list: null,
                     value_link: null,
+                    value_boolean: null,
                     value_gallery:null,
                     value_image:null,
                     value_carousel:null,

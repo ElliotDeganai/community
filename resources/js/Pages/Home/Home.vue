@@ -1,6 +1,6 @@
 <template>
     <div class="relative h-full min-h-screen ">
-        <div class="pt-32 w-full h-full absolute top-0 left-0">
+        <div class="w-full h-full absolute top-0 left-0">
             <div class="w-full h-full flex flex-wrap">
                 <div class="w-1/4" :key="i" v-for="i in 24">
                     <div class="w-full py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
@@ -10,7 +10,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="w-full h-full opacity-95 absolute top-0 left-0 bg-white"></div> -->
+            <div class="w-full h-full opacity-95 absolute top-0 left-0 bg-white"></div>
         </div>
         <div class="pt-32 z-10 relative">
             <div class="px-6 py-4 w-full font-bold text-5xl uppercase text-center">
@@ -38,7 +38,7 @@
     </div>
 </template>
 <script>
-import Layout from '../../Layouts/Guest.vue';
+import Layout from '../../Layouts/Default.vue';
 import { Link } from '@inertiajs/inertia-vue3';
 export default {
     layout: Layout,

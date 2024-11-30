@@ -1659,6 +1659,14 @@ body{
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
 .px-32 {
   padding-left: 8rem;
   padding-right: 8rem;
@@ -1670,14 +1678,6 @@ body{
 .py-24 {
   padding-top: 6rem;
   padding-bottom: 6rem;
-}
-.py-16 {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-.px-24 {
-  padding-left: 6rem;
-  padding-right: 6rem;
 }
 .py-0\.5 {
   padding-top: 0.125rem;
@@ -1714,11 +1714,11 @@ body{
 .pb-1 {
   padding-bottom: 0.25rem;
 }
-.pb-8 {
-  padding-bottom: 2rem;
-}
 .pt-32 {
   padding-top: 8rem;
+}
+.pb-8 {
+  padding-bottom: 2rem;
 }
 .pb-16 {
   padding-bottom: 4rem;
@@ -1984,14 +1984,14 @@ body{
 .opacity-50 {
   opacity: 0.5;
 }
+.opacity-95 {
+  opacity: 0.95;
+}
 .opacity-25 {
   opacity: 0.25;
 }
 .opacity-20 {
   opacity: 0.2;
-}
-.opacity-95 {
-  opacity: 0.95;
 }
 .opacity-40 {
   opacity: 0.4;

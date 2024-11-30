@@ -24,6 +24,7 @@ class WorkWithPost extends FormRequest
      */
     public function rules()
     {
+        //dd('test');
         return [
             'name' => 'required|string',
             'body' => 'nullable|string',

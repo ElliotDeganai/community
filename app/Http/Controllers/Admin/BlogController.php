@@ -280,7 +280,7 @@ class BlogController extends Controller
                                 ->load('docValues')
                                 ->load('docValues.medias')
                                 ->load('category')
-                                ->load('post')
+                                ->load('post.docValues')
                                 ->load('category.documentations'),
                                 //->load('category.documentations.docOptions'),
             'getcategories' => Category::where('type', 'custom')->with('documentations')->get(),
