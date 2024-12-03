@@ -54,7 +54,7 @@ Route::get('/', function () {
 }); */
 
  //Auth::routes();
-$categories = Category::all();
+/* $categories = Category::all();
 
 foreach ($categories as $category) {
     Route::get('/'.$category->name.'/{postId}', [HomeController::class, 'post'])->name('item_'.$category->name);
@@ -65,7 +65,7 @@ $pages = Page::all()->load('pageSections')
             'pageSections.category',
             'pageSections.category.documentations',
             'pageSections.pageFields.documentation'
-            );
+            ); */
 
 foreach ($pages as $page) {
     $page->load('pageSections.category.posts.docValues');
