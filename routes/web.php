@@ -65,7 +65,7 @@ $pages = Page::all()->load('pageSections')
             'pageSections.category',
             'pageSections.category.documentations',
             'pageSections.pageFields.documentation'
-            ); */
+            );
 
 foreach ($pages as $page) {
     $page->load('pageSections.category.posts.docValues');
@@ -75,7 +75,7 @@ foreach ($pages as $page) {
             'getusers' => User::with('roles', 'user')->get(),
         ]);
     })->middleware('restricted')->name($page->url_name);
-}
+}*/
 
 
 Route::get('/admin', function() {
