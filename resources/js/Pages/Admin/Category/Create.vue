@@ -33,6 +33,7 @@ import Layout from '../../../Layouts/Authenticated.vue';
 import Fields from '../../Help/Form/Category/Fields.vue'
 import { reactive } from 'vue'
 import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 export default {
     setup () {
         const form = reactive({
@@ -45,6 +46,7 @@ export default {
         })
 
         function submit() {
+            //Inertia.post('/admin/categories', form);
             Inertia.post('/admin/categories', form);
         }
 
