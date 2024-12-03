@@ -53,7 +53,7 @@ Route::get('/', function () {
     ]);
 }); */
 
-/*  //Auth::routes();
+ //Auth::routes();
 $categories = Category::all();
 
 foreach ($categories as $category) {
@@ -75,7 +75,7 @@ foreach ($pages as $page) {
             'getusers' => User::with('roles', 'user')->get(),
         ]);
     })->middleware('restricted')->name($page->url_name);
-} */
+}
 
 
 Route::get('/admin', function() {
