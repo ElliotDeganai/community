@@ -74,7 +74,7 @@ foreach ($pages as $page) {
             'getpage' => $page,
             'getusers' => User::with('roles', 'user')->get(),
         ]);
-    })->middleware('restricted')->name($page->url_name);
+    })->name($page->url_name);
 }
 
 
@@ -102,7 +102,7 @@ Route::get('/posts/create/gift', [BlogController::class, 'create_gift'])->name('
 Route::get('/posts/edit/gift/{postId}', [BlogController::class, 'edit_gift'])->name('posts.edit_gift');
 
 
-Route::resource('/admin/fields', PageFieldController::class);
+//Route::resource('/admin/fields', PageFieldController::class);
 Route::resource('/admin/pages', PagesController::class, ['except' => ['pages.show']]);
 Route::resource('/admin/users', UsersController::class);
 Route::resource('/admin/posts', BlogController::class);

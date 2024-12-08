@@ -87,6 +87,8 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
+        //$validated = $request->validated();
+        //dd($validated);
         if (Auth::user()->cant('create', Category::class)) {
             return redirect()->route('categories.index')->with('status', "You cannot create categories !");
         }

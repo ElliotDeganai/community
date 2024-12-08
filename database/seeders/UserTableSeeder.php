@@ -145,9 +145,9 @@ class UserTableSeeder extends Seeder
         $editor->roles()->attach($editorRole);
         $elliot->roles()->attach($editorRole);
         $soifia->roles()->attach($editorRole);
-          $client2->roles()->attach($editorRole);
+          /*$client2->roles()->attach($editorRole);
         $client3->roles()->attach($editorRole);
-        /*$client4->roles()->attach($editorRole);
+        $client4->roles()->attach($editorRole);
         $client5->roles()->attach($editorRole);
         $client6->roles()->attach($editorRole);
         $client7->roles()->attach($editorRole);

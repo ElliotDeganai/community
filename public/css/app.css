@@ -1096,6 +1096,9 @@ body{
 .min-h-screen {
   min-height: 100vh;
 }
+.min-h-full {
+  min-height: 100%;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -1276,6 +1279,9 @@ body{
 }
 .justify-around {
   justify-content: space-around;
+}
+.justify-items-center {
+  justify-items: center;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;

@@ -1096,6 +1096,9 @@ body{
 .min-h-screen {
   min-height: 100vh;
 }
+.min-h-full {
+  min-height: 100%;
+}
 .w-5 {
   width: 1.25rem;
 }
@@ -1276,6 +1279,9 @@ body{
 }
 .justify-around {
   justify-content: space-around;
+}
+.justify-items-center {
+  justify-items: center;
 }
 .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -2492,6 +2498,11 @@ body{
     padding: 1rem;
   }
 
+  .md\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -2507,11 +2518,6 @@ body{
     padding-right: 1rem;
   }
 
-  .md\:px-16 {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-
   .md\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -2522,16 +2528,16 @@ body{
     padding-bottom: 6rem;
   }
 
+  .md\:pt-16 {
+    padding-top: 4rem;
+  }
+
   .md\:pr-4 {
     padding-right: 1rem;
   }
 
   .md\:pl-4 {
     padding-left: 1rem;
-  }
-
-  .md\:pt-16 {
-    padding-top: 4rem;
   }
 
   .md\:text-sm {
@@ -2672,16 +2678,16 @@ body{
     padding-bottom: 6rem;
   }
 
+  .lg\:pt-32 {
+    padding-top: 8rem;
+  }
+
   .lg\:pr-8 {
     padding-right: 2rem;
   }
 
   .lg\:pl-8 {
     padding-left: 2rem;
-  }
-
-  .lg\:pt-32 {
-    padding-top: 8rem;
   }
 
   .lg\:text-2xl {

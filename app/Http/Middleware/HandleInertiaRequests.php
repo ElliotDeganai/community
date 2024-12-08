@@ -46,9 +46,13 @@ class HandleInertiaRequests extends Middleware
         }else{
             $userId = null;
         }
-        //dd($userId);
+        //Session::put('message', '5%');
+        //dd(Session::get('message.status'));
+        //dd(session()->all());
+
         return array_merge(parent::share($request), [
             'is_ecommerce' => env('IS_ECOMMERCE'),
+            'test' => 'test',
             'pusher_key' => env('PUSHER_APP_KEY'),
             'pusher_id' => env('PUSHER_APP_ID'),
             'auth' => [

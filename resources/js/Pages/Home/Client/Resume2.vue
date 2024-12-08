@@ -87,6 +87,7 @@ export default {
             return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
         },
         startCampaign() {
+            console.log('test');
             let user_count = this.getEditors.length-1;
             let pioche = [];
             let final = [];

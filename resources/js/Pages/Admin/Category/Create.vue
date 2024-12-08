@@ -32,11 +32,13 @@
 import Layout from '../../../Layouts/Authenticated.vue';
 import Fields from '../../Help/Form/Category/Fields.vue'
 import { reactive } from 'vue'
+
+import { useForm } from "@inertiajs/inertia-vue3";
 import { Inertia } from '@inertiajs/inertia'
-import { router } from '@inertiajs/vue3'
+//import { router } from '@inertiajs/vue3'
 export default {
     setup () {
-        const form = reactive({
+        const form = useForm({
             name: null,
             type: null,
             is_product: false,

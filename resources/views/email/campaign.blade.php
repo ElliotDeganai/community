@@ -3,7 +3,7 @@ Salut {{ $user->name }},
 
 Le secret santa  {{ $campaign->name }} vient d'etre lancé !
 
-Pour renseigner tes vœux, tu dois aller sur le site web : <a href="{{ config('app.url') }}">{{ config('app.url') }}</a><div><img src="{{asset('/storage/base/ED_2_Noir_Sans_fond_no_space.png')}}"</div>
+Pour renseigner tes vœux, tu dois aller sur le site web : <a href="{{ config('app.url') }}">{{ config('app.url') }}</a><div>
 
 Voici les identifiants qui te permettront de te connecter :
 

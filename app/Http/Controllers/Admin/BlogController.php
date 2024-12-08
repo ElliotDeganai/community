@@ -456,7 +456,7 @@ class BlogController extends Controller
         $post->delete();
         //$deleted = DocValue::where('post_id', $post->id)->delete();
         if (Auth::user()->isEditor()) {
-            return redirect()->route($page->url_name)->with('status', 'The post has been created !');
+            return redirect()->route($page->url_name)->with('status', 'Le cadeau a bien été supprimé !');
         }else {
             return redirect()->route('posts.index')->with('status', "The post has been deleted !");
         }
