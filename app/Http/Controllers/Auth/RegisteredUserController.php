@@ -65,7 +65,7 @@ class RegisteredUserController extends Controller
         }
 
         event(new Registered($user));
-        Mail::to($user->email)->send(new TestEmail2($user, $request->password));
+        //Mail::to($user->email)->send(new TestEmail2($user, $request->password));
 
 
         //Auth::login($user);
