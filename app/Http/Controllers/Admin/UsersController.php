@@ -95,7 +95,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        dd('start campaign', $request);
+        //dd('start campaign', $request);
         if (Auth::user()->isClient()) {
             //dd($request);
             $user->fill($request->only(['is_partying', 'is_accompanied', 'has_company', 'has_answered', 'flight_taken']));
