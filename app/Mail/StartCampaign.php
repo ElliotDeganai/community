@@ -35,6 +35,9 @@ class StartCampaign extends Mailable
      */
     public function build()
     {
-        return $this->from('secret-santa@elliot-deganai.net', $this->campaign->name)->subject('Le Secret Santa Deganai 2024 commence !!!')->markdown('email.campaign');
+        return $this->from('secret-santa@elliot-deganai.net', $this->campaign->name)
+        ->cc('edeganai@gmail.com')
+        ->subject('Le Secret Santa Deganai 2024 commence !!!')
+        ->markdown('email.campaign');
     }
 }
