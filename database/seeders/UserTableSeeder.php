@@ -45,7 +45,7 @@ class UserTableSeeder extends Seeder
 
         $elliot = User::create([
             'name' => 'Elliot',
-            'email' => 'edeganai@gmail.com',
+            'email' => 'elliot.deganai@taleo-consulting.com',
             'password' => bcrypt("password"),
             //'team' => 'paris'0
         ]);
