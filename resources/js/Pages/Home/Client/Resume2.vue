@@ -16,6 +16,9 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="$page.props.status.message !== null" class="py-8">
+                    <div v-if="$page.props.status.message" class="p-4 rounded-md bg-white text-red-900 bold">{{$page.props.status.message}}</div>
+                </div>
                 <div v-if="launched" class="py-4 lg:py-8">
                     <div class="header-config-client">Voici le nouveau tirage au sort</div>
                     <div class="py-2 lg:py-4 flex flex-wrap w-full">
