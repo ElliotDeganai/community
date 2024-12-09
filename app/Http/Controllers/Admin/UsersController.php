@@ -124,13 +124,10 @@ class UsersController extends Controller
             //dd($user->isEditor(), $user);
             if ($user->isEditor()) {
                     # code...
-
-
                 if (isset($request->users[$i]['new_user'])) {
                     $user->user_id = $request->users[$i]['new_user'];
                     $user->save();
                 }
-
                 if (isset($request->users[$i]['password'])) {
                     $user->password = Hash::make($request->users[$i]['password']);
                     $user->save();
@@ -139,7 +136,7 @@ class UsersController extends Controller
             }
         }
         //$user->roles()->sync($request->roles);
-        return redirect()->route('resume')->with('status', "Chèr(e) $user->name, tes réponses ont bien été enregistrées !");
+        return redirect()->route('resume')->with('status', "La campagne a bien été lancée !");
     }
 
     /**
