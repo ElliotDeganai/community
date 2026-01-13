@@ -1,40 +1,40 @@
 <template>
-    <div class="px-32">
-        <div class="py-32">
-            <div v-if="category" class="text-xl font-bold w-full">
+    <div class="px-2 md:px-16 lg:px-32">
+        <div class="py-16 md:py-32">
+            <div v-if="category" class="text-base lg:text-xl font-bold w-full">
                 <div class="text-center w-full uppercase">List of {{category.name}} type resources</div>
             </div>
-            <div v-else class="text-xl font-bold w-full">
+            <div v-else class="text-base lg:text-xl font-bold w-full">
                 <div class="text-center w-full uppercase">Resources</div>
             </div>
         </div>
-        <div>This is the resource admin page. From here, you can see the list of all your resources and their associated documentation values</div>
+        <div class="text-xs md:text-base">This is the resource admin page. From here, you can see the list of all your resources and their associated documentation values</div>
         <div>
             <div>
                 <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
 
                 <div v-if="category" class="py-8">
-                    <Link :href="route('posts.create_type', type)" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
+                    <Link :href="route('posts.create_type', type)" class="text-sm lg:text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                         Add a new {{category.name}} type resource
                     </Link>
                 </div>
                 <div v-else class="py-8">
-                    <Link :href="route('posts.create')" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
+                    <Link :href="route('posts.create')" class="text-sm lg:text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                         Add a new resource
                     </Link>
                 </div>
-                <div v-if="posts.length !== 0" class="w-full">
+                <div v-if="posts.length !== 0" class="w-full text-xs md:text-sm lg:text-base">
                     <div class="w-full">
                         <div class="w-full font-bold flex flex-wrap py-4 border-b-2 border-gray-800">
                             <div class="w-1/12">
                             </div>
-                            <div class="text-left w-1/8">Name</div>
-                            <div class="text-left w-1/8">Author</div>
-                            <div class="text-left w-1/8">Template</div>
-                            <div class="text-left w-1/8">Published</div>
-                            <div class="text-left w-1/8">Published at</div>
-                            <div class="text-left w-1/8">Body</div>
-                            <div class="text-left w-1/8">Slug</div>
+                            <div class="text-left w-1/5 md:w-1/8 truncate">Name</div>
+                            <div class="text-left w-1/5 md:w-1/8 truncate">Author</div>
+                            <div class="text-left w-1/5 md:w-1/8 truncate">Template</div>
+                            <div class="text-left w-1/8 hidden md:block truncate">Published</div>
+                            <div class="text-left w-1/5 md:w-1/8 truncate">Published at</div>
+                            <div class="text-left w-1/8 hidden md:block truncate">Body</div>
+                            <div class="text-left w-1/8 hidden md:block truncate">Slug</div>
                         </div>
                     </div>
                     <div class="w-full">
@@ -47,22 +47,22 @@
                                         </svg>
                                     </button>
                                 </div>
-                                <div class="text-left w-1/8 py-2">
+                                <div class="text-left w-1/5 md:w-1/8 py-2">
                                     <Link :href="route('posts.show', post.id)" class="">
                                         {{post.name}}
                                     </Link>
                                 </div>
-                                <div class="text-left w-1/8 py-2">{{post.user.name}}</div>
-                                <div class="text-left w-1/8 py-2">
-                                    <Link :href="route('categories.show', post.category.id)" class="px-3 py-2 bg-stone-800 rounded-full text-white font-bold">
+                                <div class="text-left w-1/5 md:w-1/8 py-2 truncate">{{post.user.name}}</div>
+                                <div class="text-left w-1/5 md:w-1/8 py-2 truncate">
+                                    <Link :href="route('categories.show', post.category.id)" class="px-3 py-2 bg-stone-800 rounded-full truncate text-white font-bold">
                                         {{post.category.name}}
                                     </Link>
                                 </div>
-                                <div class="text-left w-1/8 py-2" v-if="post.published !== 0">true</div>
-                                <div class="text-left w-1/8 py-2" v-else>false</div>
-                                <div class="text-left w-1/8 py-2">{{post.published_at}}</div>
-                                <div class="text-left w-1/8 py-2">{{post.body}}</div>
-                                <div class="text-left w-1/8 py-2">{{post.slug}}</div>
+                                <div class="text-left w-1/8 py-2 hidden md:block" v-if="post.published !== 0">true</div>
+                                <div class="text-left w-1/8 py-2 hidden md:block" v-else>false</div>
+                                <div class="text-left w-1/5 md:w-1/8 py-2 truncate">{{post.published_at}}</div>
+                                <div class="text-left w-1/8 py-2 hidden md:block truncate">{{post.body}}</div>
+                                <div class="text-left w-1/8 py-2 hidden md:block truncate">{{post.slug}}</div>
                                 <button v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="btn-delete" @click="this.$store.dispatch('set_model', {model: post, route: 'resource', type: 'resource'})">Delete</button>
 <!--                                 <div>
                                     <Link as="button" data-message="Are you sure ?" class="btn-delete" method="delete" :href="route('posts.destroy', post.id)" :preserve-state="false">
@@ -72,15 +72,15 @@
                             </div>
                             <div class="w-full" v-if="detail !== null">
                                 <div v-if="detail.id === post.id" class="w-full bg-stone-100">
-                                    <div class="uppercase font-bold text-lg py-2 w-full text-white bg-gray-900 text-center">Documentation</div>
-                                    <div class="w-full">
+                                    <div class="uppercase font-bold text-sm md:text-lg py-2 w-full text-white bg-gray-900 text-center">Documentation</div>
+                                    <div class="w-full text-xs md:text-base">
                                         <div class="w-full flex flex-wrap py-2 font-bold">
                                             <div class="text-left w-1/12"></div>
                                             <div class="text-left w-1/8">Documentation</div>
                                             <div class="text-left w-1/4">Value</div>
                                         </div>
                                     </div>
-                                    <div class="w-full">
+                                    <div class="w-full text-xs md:text-base">
                                         <div class="w-full flex flex-wrap py-2" :key="value.id" v-for="value in post.doc_values">
                                             <div class="text-left w-1/12 py-1"></div>
                                             <div class="text-left w-1/8 py-1">{{value.documentation.name}}</div>

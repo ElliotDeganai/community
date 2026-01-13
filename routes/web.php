@@ -57,7 +57,7 @@ Route::get('/', function () {
 }); */
 
  //Auth::routes();
-/* $categories = Category::all();
+$categories = Category::all();
 
 foreach ($categories as $category) {
     Route::get('/'.$category->name.'/{postId}', [HomeController::class, 'post'])->name('item_'.$category->name);
@@ -78,7 +78,7 @@ foreach ($pages as $page) {
             'getusers' => User::with('roles', 'user')->with('posts')->withCount('posts')->get(),
         ]);
     })->name($page->url_name);
-} */
+}
 
 
 Route::get('/admin', function() {

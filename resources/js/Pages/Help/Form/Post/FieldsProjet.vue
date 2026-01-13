@@ -22,7 +22,7 @@
                 <div class="py-4">
                     <label class="label-fields" for="body">Description courte</label>
                     <div class="py-2">
-                        <textarea class="w-1/2 form-fields" id="body" name="body" v-model="model.body">
+                        <textarea class="w-full lg:w-1/2 form-fields" id="body" name="body" v-model="model.body">
                         </textarea>
                         <div class="error-msg" v-if="errors.body">{{ errors.body }}</div>
                     </div>
@@ -87,21 +87,21 @@
                 </div>
                 <div class="py-8" v-if="model.category_id !== null">
                     <div class="error-msg" v-if="errors.doc_values">
-                        <div :key="index" v-for="(error, index) in errors.doc_values">Your form has some issues</div>
+                        <div class="text-sm md:text-base" :key="index" v-for="(error, index) in errors.doc_values">Your form has some issues</div>
                     </div>
                     <div class="w-full" :key="attribute.id" v-for="(attribute, index) in model.category_id.documentations">
                         <label class="label-fields" :for="'doc_'+attribute.id">{{ attribute.name }}</label>
                         <div v-if="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0]" class="py-4">
                             <input type="text"
                                 v-if="attribute.type === 'text'"
-                                class="w-2/3 form-fields"
+                                class="w-full lg:w-2/3 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_text"
                             />
                             <input type="text"
                                 v-if="attribute.type === 'link'"
-                                class="w-2/3 form-fields"
+                                class="w-full lg:w-2/3 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_link"
@@ -131,34 +131,34 @@
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_html">
                             </rich-text-2>
-                            <div class="w-1/5" v-if="attribute.type === 'boolean'">
+                            <div class="w-full lg:w-1/5" v-if="attribute.type === 'boolean'">
                                 <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="0" /> False
                                 <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="1" /> True
                             </div>
                             <input type="number"
                                 v-if="attribute.type === 'numeric'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_number"
                             />
                             <input type="number"
                                 v-if="attribute.type === 'price'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_price"
                             />
                             <input type="date"
                                 v-if="attribute.type === 'date'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_date"
                             />
                             <input type="datetime-local"
                                 v-if="attribute.type === 'date_time'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_date_time"

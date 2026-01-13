@@ -51,6 +51,7 @@ class HandleInertiaRequests extends Middleware
         //dd(session()->all());
 
         return array_merge(parent::share($request), [
+            'app_name' => env('APP_NAME'),
             'is_ecommerce' => env('IS_ECOMMERCE'),
             'calendar' => env('CALENDAR'),
             'calendar_slot_time' => env('CALENDAR_SLOT_TIME'),

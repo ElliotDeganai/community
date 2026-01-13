@@ -10,14 +10,39 @@ import { Link } from '@inertiajs/vue3'
 import { mapState } from 'vuex';
 import {computed} from "vue";
 import {useStore} from "vuex";
+import Menu from '../Pages/Help/Icon/Menu.vue'
+import NavMobile from './NavMobile.vue'
 
 const store = useStore();
 const modal = computed(() => store.state.delete_modal);
 const delete_model = computed(() => store.state.model);
 const delete_route = computed(() => store.state.delete_route);
 const delete_type = computed(() => store.state.type);
+let mobileNav = ref(false);          // état du menu mobile (ouvert/fermé)
+let textClass = ref('');
 
 const showingNavigationDropdown = ref(false);
+
+// Méthode pour émettre l'événement toggleLateral
+const toggleLateral = () => {
+    console.log(mobileNav.value)
+    //emit('toggleLateral');
+    changeMobileNav();
+};
+
+const changeMobileNav = () => {
+    console.log(mobileNav.value);
+    mobileNav.value = !mobileNav.value;
+
+    if (mobileNav) {
+        textClass.value = 'h-screen overflow-hidden';
+    } else {
+        textClass.value = '';
+    }
+};
+
+// Définis les emits (obligatoire en <script setup>)
+const emit = defineEmits(['toggleLateral']);
 
 </script>
 
@@ -26,21 +51,24 @@ const showingNavigationDropdown = ref(false);
         <div class="min-h-screen relative">
             <nav class="bg-white border-b  z-50 border-gray-200 fixed top-0 w-full">
                 <!-- Primary Navigation Menu -->
-                <div class=" mx-auto px-4 sm:px-6 lg:px-16">
+                <div class=" md:mx-auto px-1 sm:px-6 lg:px-16">
                     <div class="flex justify-between h-16">
                         <div class="flex flex-wrap">
                             <!-- Logo -->
+                            <div  class="lg:hidden">
+                                <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
+                            </div>
                             <Link :href="route('admin')" class="shrink-0 flex items-center">
-                                <div class="h-16">
+                                <div class="h-8 md:h-16">
                                     <!-- <BreezeApplicationLogo class="block h-9 w-auto" /> -->
                                     <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" alt="" class="h-full" />
                                 </div>
-                                <div class="text-2xl font-bold">CMS</div>
+                                <div class="text-xs md:text-2xl font-bold">{{$page.props.app_name}}</div>
                             </Link>
                             <!-- Navigation Links -->
-                            <div class="hidden sm:flex sm:items-center sm:ml-6">
+                            <div class="lg:flex items-center md:ml-6 hidden">
                                 <!-- Settings Dropdown -->
-                                <div class="ml-3 relative flex">
+                                <div class="md:ml-3 relative flex">
                                     <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex py-2  rounded-md">
@@ -142,16 +170,16 @@ const showingNavigationDropdown = ref(false);
 
                                     <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 items-center">Manage Users</Link>
 
-                                    <div class="px-8 py-2">
-                                        <Link :href="route('home')" class="shrink-0 flex items-center px-3 py-2 bg-slate-900 rounded-md font-bold text-white">See Website</Link>
+                                    <div class="px-2 md:px-8 py-2">
+                                        <Link :href="route('home')" class="text-xs md:text-base shrink-0 flex items-center px-1 md:px-3 py-1 md:py-2 bg-slate-900 rounded-md font-bold text-white">See Website</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <div class="flex items-center md:ml-6">
                             <!-- Settings Dropdown -->
-                            <div class="ml-3 relative">
+                            <div class="md:ml-3 relative">
                                 <BreezeDropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -220,6 +248,19 @@ const showingNavigationDropdown = ref(false);
                     </a>
                     <div class="self-center">Web Factory</div>
 
+            </div>
+
+            <div class="relative w-full h-full base:hidden lg:hidden xl:hidden z-70 top-0 left-0">
+                <transition name="nav-mobile">
+                    <div v-if="mobileNav" @toggleLateral="changeMobileNav" @click="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-full h-full bg-black opacity-75 top-0 left-0">
+                    </div>
+                </transition>
+
+                <transition name="nav-mobile">
+                    <div v-if="mobileNav" class="z-70 lg:hidden xl:hidden fixed w-3/5 h-full top-0">
+                        <NavMobile class="" />
+                    </div>
+                </transition>
             </div>
         </div>
         <div v-if="modal && delete_model" @click="$store.commit('UNSET_DELETE_MODAL')" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>

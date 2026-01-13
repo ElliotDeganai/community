@@ -8,11 +8,11 @@
                             <img v-if="page.medias.length > 0" class="w-full h-full object-cover" :src="$helpers.getObjectImage(page)" />
                             <div v-if="page.medias.length > 0" class="w-full h-full absolute top-0 left-0 bg-black opacity-50"></div>
                             <div v-if="page.header_title || page.header_subtitle" :class="[page.medias.length > 0 ? 'text-white' : '']" class="w-full h-full absolute top-0 left-0 flex flex-wrap justify-center content-center">
-                                <div v-if="page.header_title" class="font-bold text-6xl w-full text-center">{{page.header_title}}</div>
-                                <div v-if="page.header_subtitle" class="font-bold text-xl">{{page.header_subtitle}}</div>
+                                <div v-if="page.header_title" class="font-bold text-4xl lg:text-6xl w-full text-center">{{page.header_title}}</div>
+                                <div v-if="page.header_subtitle" class="font-bold lg:text-xl text-center">{{page.header_subtitle}}</div>
                                 <div class="w-full text-center py-8" v-if="!$page.props.auth.user"><Link :href="route('login')" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">Se connecter pour ajouter un projet</Link></div>
                                 <div class="w-full text-center py-8" v-else>
-                                    <Link :href="route('posts.create_type', 'Projet')" class="text-lg font-bold bg-sky-800 px-3 py-2 rounded-md text-white">
+                                    <Link :href="route('posts.create_type', 'Projet')" class="text-base lg:text-lg font-bold bg-sky-800 px-3 py-2 rounded-md text-white">
                                         Ajouter un nouveau projet
                                     </Link>
                                 </div>
@@ -23,23 +23,23 @@
             </div>
             <div v-if="$page.props.auth.user" class="">
                 <div v-if="getProjetSection()" class="">
-                    <div class="px-24 py-16">
+                    <div class="px-4 md:px-8 xl:px-24 py-16">
                         <div class="text-4xl pb-4 w-full text-center font-bold">Projets</div>
                         <div class="w-full flex flex-wrap justify-center py-16">
-                            <div :key="projet.id" v-for="projet in getProjects" class="px-12 py-4 w-1/3">
+                            <div :key="projet.id" v-for="projet in getProjects" class="px-4 xl:px-12 py-4 md:w-1/2 lg:w-1/3">
                                 <Link :href="route('item_Projet', projet.id )" class="">
-                                    <div class="projet-card h-full overflow-hidden relative">
+                                    <div class="projet-card overflow-hidden relative">
                                         <div class="h-48 md:h-48 lg:h-48 w-full">
                                             <img v-if="$helpers.getProductImage(projet) !== null" class="w-full lg:max-w-xl h-full object-cover" :src="$helpers.getProductImage(projet)" />
                                         </div>
-                                        <div class="p-16 ">
-                                            <div class="font-bold text-2xl pb-8 w-full">{{projet.name}}</div>
-                                            <div class="text-xl py-4 min-h-16">{{projet.body}}</div>
-                                            <div class=" text-slate-500">Publié par {{projet.user.name}}</div>
-                                            <div><div class="">Deadline: {{getValueByFieldName_projet('Deadline', projet)}}</div></div>
+                                        <div class="p-4 xl:p-16 ">
+                                            <div class="font-bold text-lg lg:text-2xl pb-8 w-full">{{projet.name}}</div>
+                                            <div class="text-base lg:text-xl py-4 min-h-16">{{projet.body}}</div>
+                                            <div class="text-xs lg:text-base text-slate-500">Publié par {{projet.user.name}}</div>
+                                            <div><div class="text-xs lg:text-base">Deadline: {{getValueByFieldName_projet('Deadline', projet)}}</div></div>
                                         </div>
 
-                                        <div class="w-full text-white font-bold px-3 py-2 bg-sky-900 bottom-0 flex flex-wrap justify-center"><Link :href="route('posts.edit', projet.id)" class="">Mettre à jour</Link></div>
+                                        <div class="w-full text-xs lg:text-base text-white font-bold px-3 py-2 bg-sky-900 bottom-0 flex flex-wrap justify-center"><Link :href="route('posts.edit', projet.id)" class="">Mettre à jour</Link></div>
 <!--                                         <div class="w-full" :key="field.id" v-for="field in getProjetSection().page_fields">
                                             <div class="py-2 md:py-4 lg:py-4 flex w-full" v-if="$helpers.getFieldDocValueObject(field, projet) !== ''">
                                                 <div v-if="field.name !== 'Image'" class="overflow-hidden">

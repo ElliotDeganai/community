@@ -1,12 +1,12 @@
 <template>
-    <div class="px-32">
-        <div class="py-32">
-            <div class="text-xl font-bold w-full">
+    <div class="px-2 md:px-16 lg:px-32">
+        <div class="py-16 md:py-16 lg:py-32">
+            <div class="text-lg md:text-xl font-bold w-full">
                 <div class="text-center w-full uppercase">Dashboard</div>
             </div>
         </div>
         <div>
-            <div>This is your admin page, from here your can manage all the resources on your website !</div>
+            <div class="text-xs md:text-base">This is your admin page, from here your can manage all the resources on your website !</div>
             <div class="py-8">
                 <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="py-8" id="categories">
                     <div class="header-config">

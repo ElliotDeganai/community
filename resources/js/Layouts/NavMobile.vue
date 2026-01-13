@@ -1,20 +1,129 @@
 <template>
-    <div class="bg-red-900 text-white h-full">
-            <div class="flex flex-wrap px-4">
+    <div class="bg-sky-900 text-white h-full">
+            <div class="flex flex-wrap items-center px-1 md:px-4 py-8">
                 <div class="base:hidden lg:hidden xl:hidden">
                     <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
                 </div>
-                <Link :href="route('home')" class="shrink-0 ">
-                    <div class="h-16 px-3">
-                        <img :src="'../storage/home/claus-2.png'" alt="" class="h-full" />
+                <Link :href="route('home')" class="shrink-0 flex items-center">
+                    <div class="h-8 px-1">
+                        <img :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-full" alt="" />
                     </div>
-                    <div class="text-lg lg:text-2xl font-bold">Secret Santa</div>
+                    <div class="text-xs md:text-lg lg:text-2xl font-bold">{{$page.props.app_name}}</div>
                 </Link>
+            </div>
+            <div class="px-2 md:px-8 py-2">
+                <Link :href="route('home')" class="text-xs md:text-base text-center shrink-0 px-1 md:px-3 py-1 md:py-2 bg-white rounded-md font-bold text-sky-900">See Website</Link>
             </div>
 
             <div v-if="$page.props.pages.length > 0" class=" block base:hidden lg:hidden xl:hidden flex-wrap justify-around" >
                 <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
                     <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor)" :href="route(page.url_name)" :class="[page.id === $page.props.getpage.id ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
+                </div>
+            </div>
+            <div class="flex items-center md:ml-6">
+                <!-- Settings Dropdown -->
+                <div class="md:ml-3 relative flex">
+                    <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="right" width="48">
+                        <template #trigger>
+                            <span class="inline-flex py-2  rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    Pages
+
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </template>
+
+                        <template #content>
+                            <BreezeDropdownLink :href="route('pages.index')" method="get" as="button">
+                                Page List
+                            </BreezeDropdownLink>
+
+                            <BreezeDropdownLink v-if="$page.props.auth.isDev" :href="route('pages.create')" method="get" as="button">
+                                New Page
+                            </BreezeDropdownLink>
+                        </template>
+                    </BreezeDropdown>
+                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
+                        <template #trigger>
+                            <span class="inline-flex py-2 rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    Templates
+
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </template>
+
+                        <template #content>
+                            <BreezeDropdownLink :href="route('categories.index')" method="get" as="button">
+                                Template List
+                            </BreezeDropdownLink>
+
+                            <BreezeDropdownLink :href="route('categories.create')" method="get" as="button">
+                                New template
+                            </BreezeDropdownLink>
+                        </template>
+                    </BreezeDropdown>
+                    <BreezeDropdown class="mx-2" v-if="!$page.props.auth.isClient" align="left" width="48">
+                        <template #trigger>
+                            <span class="inline-flex py-2  rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    Resources
+
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </template>
+
+                        <template #content>
+                            <BreezeDropdownLink :href="route('posts.index')" method="get" as="button">
+                                Resources List
+                            </BreezeDropdownLink>
+
+                            <BreezeDropdownLink :href="route('posts.create')" method="get" as="button">
+                                New Resource
+                            </BreezeDropdownLink>
+                        </template>
+                    </BreezeDropdown>
+                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
+                        <template #trigger>
+                            <span class="inline-flex py-2  rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    Settings
+
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </span>
+                        </template>
+
+                        <template #content>
+                            <BreezeDropdownLink :href="route('posts.index_type', 'Text')" method="get" as="button">
+                                Free Text
+                            </BreezeDropdownLink>
+                            <BreezeDropdownLink :href="route('posts.index_type', 'Contact Forms')" method="get" as="button">
+                                Contact Form
+                            </BreezeDropdownLink>
+                            <BreezeDropdownLink :href="route('posts.index_type', 'FAQs')" method="get" as="button">
+                                FAQ
+                            </BreezeDropdownLink>
+
+                            <BreezeDropdownLink :href="route('posts.index_type', 'Footers')" method="get" as="button">
+                                Footer
+                            </BreezeDropdownLink>
+                        </template>
+                    </BreezeDropdown>
+
+                    <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 items-center">Manage Users</Link>
+
                 </div>
             </div>
     </div>

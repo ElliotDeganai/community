@@ -4,7 +4,7 @@
             <div v-if="object.medias.length > 0">
                 <div class="w-full font-bold">Current image:</div>
                 <div class="flex flex-wrap py-8">
-                    <div class="w-1/4 h-56 p-4 border border-gray-200 relative" :key="media.id" v-for="media in this.object.medias">
+                    <div class="w-full md:w-1/3 lg:w-1/4 h-56 p-2 md:p-4 border border-gray-200 relative" :key="media.id" v-for="media in this.object.medias">
                         <div class="w-full relative h-full">
                             <img class="w-full object-contain h-full" :src="media.original_url" :alt="media.name">
                             <Link as="button" data-message="Are you sure ?" class="btn-delete z-10 cursor-pointer absolute top-0 left-0" method="delete" :href="route('medias.destroy', media.id)" :preserve-state="false">
@@ -18,7 +18,7 @@
         <div v-if="object[type].length > 0">
             <div class="w-full font-bold">Selected images:</div>
             <div class="flex flex-wrap py-8">
-                <div class="w-1/4 h-56 p-4 relative" :key="index" v-for="(file, index) in this.object[type]">
+                <div class="w-full md:w-1/3 lg:w-1/4 h-56 p-2 md:p-4 relative" :key="index" v-for="(file, index) in this.object[type]">
                     <div @mouseleave="resetHover()" @mouseover="setHover(file.previewBase64)" class="w-full relative h-full">
                         <img class="w-full object-contain h-full" :src="file.previewBase64" :alt="file.name">
                         <div @click.prevent="removeFile(file)" v-if="hover === file.previewBase64" class="flex flex-wrap">

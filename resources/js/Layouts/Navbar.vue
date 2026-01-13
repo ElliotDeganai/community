@@ -3,7 +3,7 @@
         <div class=" mx-auto px-4 sm:px-6 lg:px-16">
             <div class="flex justify-between h-16">
                 <div class="flex ">
-                    <div class="base:hidden lg:hidden xl:hidden">
+                    <div  class="base:hidden md:hidden xl:hidden">
                         <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
                     </div>
                     <Link :href="route('home')" class="shrink-0 flex items-center">
@@ -11,7 +11,7 @@
                             <img v-if="(scrollPosition === null && current_page.route !== 'calendar' && current_page.route !== 'calendar' && current_page.route !== 'item_Projet') || (scrollPosition < 0.1 && current_page.route !== 'calendar' && current_page.route !== 'calendar.index' && current_page.route !== 'item_Projet')" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-full" alt="" />
                             <img v-else :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
                         </div>
-                        <div class="text-lg lg:text-2xl font-bold">DevCommunity</div>
+                        <div class="text-xs md:text-lg lg:text-2xl font-bold">{{$page.props.app_name}}</div>
                     </Link>
                 </div>
                 <div v-if="$page.props.pages.length > 0 && $page.props.auth.user" class="base:flex lg:flex xl:flex flex-wrap justify-around hidden sm:hidden " >
@@ -31,7 +31,7 @@
                     </Link>
                 </div>
 
-                <div v-if="$page.props.auth.user" class="sm:flex sm:items-center sm:ml-6">
+                <div v-if="$page.props.auth.user" class="flex items-center sm:ml-6">
                     <div class="lg:ml-3 relative">
                         <BreezeDropdown align="right" width="48">
                             <template #trigger>
@@ -59,9 +59,9 @@
                         </BreezeDropdown>
                     </div>
                 </div>
-                <div  class="sm:flex sm:items-center sm:ml-6" v-else>
+                <div  class="flex items-center ml-6" v-else>
                     <div class="lg:ml-3 relative">
-                        <Link :href="route('login')" class="shrink-0 uppercase flex items-center font-bold">Connexion</Link>
+                        <Link :href="route('login')" class="text-sm md:text-base shrink-0 uppercase flex items-center font-bold">Connexion</Link>
                     </div>
                 </div>
             </div>

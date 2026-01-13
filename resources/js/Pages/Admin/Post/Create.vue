@@ -1,6 +1,6 @@
 <template>
-    <div class="px-32">
-        <div class="py-32">
+    <div class="px-4 md:px-32">
+        <div class="py-16 md:py-32">
             <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="text-xl font-bold w-full">
                 <div v-if="type" class="text-center w-full uppercase">Create a new {{getcategories[0].name}} resources</div>
                 <div v-else class="text-center w-full uppercase">Create a resource</div>
@@ -9,9 +9,9 @@
                 <div class="text-center w-full uppercase">Créer un nouveau projet</div>
             </div>
         </div>
-        <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor">From this page you can create your resources and their associated documentation values</div>
-        <div v-if="type && getcategories[0] && ($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor)" class="py-8">
-            <Link :href="route('posts.edit', getcategories[0].id )" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
+        <div  class="text-xs md:text-base" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor">From this page you can create your resources and their associated documentation values</div>
+        <div v-if="type && getcategories[0] && ($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor)" class="py-8 text-xs md:text-lg">
+            <Link :href="route('posts.edit', getcategories[0].id )" class="font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                 Edit the {{getcategories[0].name}} template
             </Link>
         </div>

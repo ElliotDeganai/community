@@ -43,7 +43,7 @@
                             <div class="self-center">Web Factory</div>
                         </div>
                         <div  class="w-full  text-white">
-                            <div class="border-t py-8 w-full text-center">© 2020 ED Web Factory. Tous droits réservés.</div>
+                            <div class="border-t text-sm lg:text-base py-8 w-full text-center">© 2020 ED Web Factory. Tous droits réservés.</div>
                         </div>
                     </div>
                     <div v-if="product" @click="unset_product_modal()" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
@@ -57,7 +57,7 @@
                     </transition>
 
                     <transition name="nav-mobile">
-                        <div v-if="mobileNav" @toggleLateral="changeMobileNav" @click="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-3/5 h-full top-0">
+                        <div v-if="mobileNav"  class="z-70 lg:hidden xl:hidden fixed w-3/5 h-full top-0">
                             <NavMobile class="" />
                         </div>
                     </transition>
@@ -84,7 +84,7 @@
 
         <div v-if="model && image_modal" @click="$store.commit('UNSET_IMAGE_MODAL')" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
         <div v-if="model && image_modal" @click="$store.commit('UNSET_IMAGE_MODAL')" class="z-60 absolute w-full h-full top-0 left-0 flex flex-wrap justify-center content-center">
-            <div class="w-1/2 h-1/2 ">
+            <div class="w-full md:w-1/2 h-1/2 ">
                 <img  class="w-full lg:w-full h-full object-contain" :src="model" />
             </div>
         </div>

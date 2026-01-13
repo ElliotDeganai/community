@@ -1,11 +1,14 @@
 <template>
-    <div class="px-32">
-        <div class="py-32">
-            <div class="text-xl font-bold w-full">
+    <div class="px-4 md:px-32">
+        <div class="py-16 md:py-32">
+            <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="text-xl font-bold w-full">
                 <div class="text-center w-full uppercase">Edit a resource</div>
             </div>
+            <div v-else class="text-xl font-bold w-full">
+                <div class="text-center w-full uppercase">Mettre à jour un projet</div>
+            </div>
         </div>
-        <div>From here, you can edit your resources and their associated documentation values</div>
+        <div class="text-xs md:text-base">From here, you can edit your resources and their associated documentation values</div>
         <div>
             <div>
                 <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>

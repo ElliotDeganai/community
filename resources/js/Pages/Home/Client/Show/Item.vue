@@ -3,51 +3,51 @@
         <div class="">
             <div v-if="$page.props.auth.user" class="">
                 <div>
-                    <div class="px-32 py-24">
+                    <div class="px-4 md:px-16 xl:px-32 py-24">
                         <div class="border rounded-lg overflow-hidden">
                             <div class="bg-sky-900 text-white py-4">
-                                <div><div class="font-bold text-4xl pb-8 w-full text-center">{{projet.name}}</div></div>
-                                <div><div class="font-bold text-lg w-full text-center">{{formatDate(projet.created_at)}}</div></div>
+                                <div><div class="font-bold text-xl lg:text-4xl pb-8 w-full text-center">{{projet.name}}</div></div>
+                                <div><div class="font-bold text-base lg:text-lg w-full text-center">{{formatDate(projet.created_at)}}</div></div>
                             </div>
                             <div class=" p-8">
                                 <div class="py-8">
                                     <div class="flex flex-wrap">
-                                        <div class="w-1/4 pr-4">
-                                            <div class="bg-slate-200 rounded-lg p-8 ">
-                                                <div>Deadline</div>
-                                                <div class="font-bold text-2xl pb-8 w-full">{{formatDate(getValueByFieldName_projet('Deadline', projet))}}</div>
+                                        <div class="w-1/2 md:w-1/3 xl:w-1/4 pr-4">
+                                            <div class="bg-slate-200 rounded-lg p-2 md:p-4 xl:p-8 ">
+                                                <div class="text-xs md:text-base">Deadline</div>
+                                                <div class="font-bold text-base md:text-lg xl:text-2xl pb-2 md:pb-8 w-full">{{formatDate(getValueByFieldName_projet('Deadline', projet))}}</div>
                                             </div>
                                         </div>
-                                        <div class="w-1/4 px-2">
-                                            <div class="p-8 bg-slate-200 rounded-lg">
-                                                <div>Client</div>
-                                                <div class="font-bold text-2xl pb-8 w-full">{{projet.user.name}}</div>
+                                        <div class="w-1/2 md:w-1/3 xl:w-1/4 px-2">
+                                            <div class="p-2 md:p-4 xl:p-8 bg-slate-200 rounded-lg">
+                                                <div class="text-xs md:text-base">Client</div>
+                                                <div class="font-bold text-base md:text-lg xl:text-2xl pb-2 md:pb-8 w-full truncate">{{projet.user.name}}</div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="h-48 md:h-48 lg:h-72 w-full py-8 flex flex-wrap justify-center">
+                                    <div class="h-48 md:h-56 lg:h-72 w-full py-4 md:py-8 flex flex-wrap justify-center">
                                         <img @click.prevent="this.$store.dispatch('set_image_modal', {image: $helpers.getProductImage(projet)})" v-if="$helpers.getProductImage(projet) !== null" class="w-full lg:w-full h-full object-contain cursor-pointer" :src="$helpers.getProductImage(projet)" />
                                     </div>
                                 </div>
-                                <div class="py-8">
-                                    <div class="text-xl font-bold pb-4">Description du projet:</div>
-                                    <div v-html="getValueByFieldName_projet('Description', projet)" class=""></div>
+                                <div class="py-2 md:py-8">
+                                    <div class="text-base md:text-xl font-bold pb-4">Description du projet:</div>
+                                    <div v-html="getValueByFieldName_projet('Description', projet)" class="text-xs md:text-base"></div>
                                 </div>
 
 
-                                <div v-if="$helpers.getGalleryImages(projet.doc_values.filter(dv => dv.documentation.type == 'gallery')[0])" class="py-8">
-                                    <div class="text-xl font-bold pb-4">Maquette</div>
-                                    <div class="w-full py-8 flex flex-wrap justify-center">
-                                        <div :key="img" v-for="img in $helpers.getGalleryImages(projet.doc_values.filter(dv => dv.documentation.type == 'gallery')[0])" class="w-1/4 p-4">
+                                <div v-if="$helpers.getGalleryImages(projet.doc_values.filter(dv => dv.documentation.type == 'gallery')[0])" class="py-2 md:py-8">
+                                    <div class="text-base md:text-xl font-bold pb-4">Maquette</div>
+                                    <div class="w-full py-4 md:py-8 flex flex-wrap justify-center">
+                                        <div :key="img" v-for="img in $helpers.getGalleryImages(projet.doc_values.filter(dv => dv.documentation.type == 'gallery')[0])" class="w-1/2 md:w-1/3 xl:w-1/4 p-4">
                                             <img @click.prevent="this.$store.dispatch('set_image_modal', {image: img})" v-if="img !== null" class="w-full lg:w-full h-full object-contain cursor-pointer" :src="img" />
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="flex flex-wrap">
-                                    <div class="pr-8"><Link :href="route('home')" class="text-white font-bold px-3 py-2 bg-sky-900">Retourner à la liste</Link></div>
-                                    <div><Link :href="route('posts.edit', projet.id)" class="text-white font-bold px-3 py-2 bg-sky-900">Mettre à jour</Link></div>
+                                <div class="md:flex md:flex-wrap">
+                                    <div class="md:pr-8"><Link :href="route('home')" class="text-white font-bold px-3 py-2 bg-sky-900">Retourner à la liste</Link></div>
+                                    <div class="py-8 md:py-0"><Link :href="route('posts.edit', projet.id)" class="text-white font-bold px-3 py-2 bg-sky-900">Mettre à jour</Link></div>
                                 </div>
                             </div>
                         </div>

@@ -744,6 +744,8 @@ select {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   line-height: 1.25;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
@@ -753,6 +755,13 @@ select {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+@media (min-width: 1024px) {
+
+  .form-fields {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 .form-fields-long {
   width: 100%;
@@ -769,6 +778,8 @@ select {
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   line-height: 1.25;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
@@ -779,21 +790,46 @@ select {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
+@media (min-width: 1024px) {
+
+  .form-fields-long {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
 .label-fields {
   display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.025em;
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
 }
+@media (min-width: 1024px) {
+
+  .label-fields {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
 .label-fields-client {
   display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.025em;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+@media (min-width: 1024px) {
+
+  .label-fields-client {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 .btn-submit-fields {
   display: flex;
@@ -806,6 +842,8 @@ select {
   padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
@@ -816,6 +854,13 @@ select {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
+@media (min-width: 1024px) {
+
+  .btn-submit-fields {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
 .btn-delete {
   border-radius: 0.375rem;
   --tw-bg-opacity: 1;
@@ -824,9 +869,18 @@ select {
   padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity, 1));
+}
+@media (min-width: 1024px) {
+
+  .btn-delete {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 .btn-add {
   border-radius: 0.375rem;
@@ -836,9 +890,18 @@ select {
   padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+@media (min-width: 1024px) {
+
+  .btn-add {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 .header-config {
   width: 100%;
@@ -880,8 +943,17 @@ select {
   padding-right: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity, 1));
+}
+@media (min-width: 1024px) {
+
+  .error-msg {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 .rich-text-style-button {
   border-radius: 0.5rem;
@@ -1022,6 +1094,10 @@ ol, menu {
   margin-top: auto;
   margin-bottom: auto;
 }
+.mx-8 {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
 .-ml-px {
   margin-left: -1px;
 }
@@ -1060,6 +1136,9 @@ ol, menu {
 }
 .ml-4 {
   margin-left: 1rem;
+}
+.ml-6 {
+  margin-left: 1.5rem;
 }
 .ml-8 {
   margin-left: 2rem;
@@ -2151,6 +2230,10 @@ ol, menu {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
 }
+.text-sky-900 {
+  --tw-text-opacity: 1;
+  color: rgb(12 74 110 / var(--tw-text-opacity, 1));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -2609,8 +2692,21 @@ ol, menu {
 
 @media (min-width: 768px) {
 
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .md\:mb-0 {
     margin-bottom: 0px;
+  }
+
+  .md\:ml-3 {
+    margin-left: 0.75rem;
+  }
+
+  .md\:ml-6 {
+    margin-left: 1.5rem;
   }
 
   .md\:block {
@@ -2677,8 +2773,16 @@ ol, menu {
     width: 2rem;
   }
 
+  .md\:w-1\/8 {
+    width: 12.5%;
+  }
+
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:flex-wrap {
+    flex-wrap: wrap;
   }
 
   .md\:rounded-2xl {
@@ -2710,9 +2814,29 @@ ol, menu {
     padding-right: 4rem;
   }
 
+  .md\:px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .md\:px-32 {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
   .md\:px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .md\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .md\:py-0 {
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .md\:py-2 {
@@ -2725,6 +2849,11 @@ ol, menu {
     padding-bottom: 6rem;
   }
 
+  .md\:py-32 {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -2735,12 +2864,25 @@ ol, menu {
     padding-bottom: 2rem;
   }
 
+  .md\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .md\:pb-8 {
+    padding-bottom: 2rem;
+  }
+
   .md\:pl-4 {
     padding-left: 1rem;
   }
 
   .md\:pr-4 {
     padding-right: 1rem;
+  }
+
+  .md\:pr-8 {
+    padding-right: 2rem;
   }
 
   .md\:pt-16 {
@@ -2765,6 +2907,11 @@ ol, menu {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .md\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -2916,9 +3063,29 @@ ol, menu {
     line-height: 2.25rem;
   }
 
+  .lg\:text-4xl {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .lg\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
   .lg\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .lg\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
@@ -2940,8 +3107,40 @@ ol, menu {
     width: 50%;
   }
 
+  .xl\:w-1\/4 {
+    width: 25%;
+  }
+
   .xl\:w-12 {
     width: 3rem;
+  }
+
+  .xl\:p-16 {
+    padding: 4rem;
+  }
+
+  .xl\:p-8 {
+    padding: 2rem;
+  }
+
+  .xl\:px-12 {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .xl\:px-24 {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+
+  .xl\:px-32 {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .xl\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .xl\:text-4xl {
