@@ -39,7 +39,8 @@
 </template>
 <script>
 import Audio from "./Audio.vue"
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Music from '../../Icon/Music.vue'
 export default {
     props: ["getFiles", "geterror", "getType", "getObject"],

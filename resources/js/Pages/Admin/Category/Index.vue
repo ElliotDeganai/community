@@ -54,10 +54,10 @@
                                     </div>
                                     <div v-else class="text-left w-1/7 py-2"></div>
                                     <div class="text-left w-1/7 py-2">{{formatDate(category.updated_at)}}</div>
-                                    <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="px-3 py-2">
+                                    <div v-if="$page.props.auth.isDev" class="px-3 py-2">
                                         <Link class="btn-add" :href="route('categories.edit', category.id)">Edit</Link>
                                     </div>
-                                    <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="px-3 ">
+                                    <div v-if="$page.props.auth.isDev" class="px-3 ">
                                         <button class="btn-delete" @click="this.$store.dispatch('set_model', {model: category, route: 'template', type: 'template'})">Delete</button>
                                     </div>
                                     <div class="px-3 py-2">
@@ -102,7 +102,8 @@
 </template>
 <script>
 import Layout from '../../../Layouts/Authenticated.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Pagination from '../../Help/Pagination.vue'
 import moment from 'moment';
 import store from '../../../Store/index'

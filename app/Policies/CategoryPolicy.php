@@ -12,7 +12,7 @@ class CategoryPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isDev() || $user->isAdmin()) {
+        if ($user->isDev()) {
             return true;
         }
     }

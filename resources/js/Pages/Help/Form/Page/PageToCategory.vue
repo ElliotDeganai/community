@@ -3,59 +3,87 @@
         <div>
             <div class="py-16">
                 <div class="header-config">
-                    Page details
+                    Page header
                 </div>
                 <div class="py-4">
-                    <label class="label-fields" for="title">Title</label>
+                    <label class="label-fields" for="header_title">Header Title</label>
                     <div class="py-2 w-full">
-                        <input type="text" class="form-fields" id="title" name="title" v-model="model.title" />
-                        <div class="w-full error-msg" v-if="errors.title">{{ errors.title }}</div>
+                        <input type="text" class="form-fields" id="header_title" name="header_title" v-model="model.header_title" />
+                        <div class="w-full error-msg" v-if="errors.title">{{ errors.header_title }}</div>
                     </div>
                 </div>
                 <div class="py-4">
-                    <label class="label-fields" for="content">Description</label>
-                    <div class="py-2">
-                        <textarea class="w-1/2 form-fields" id="description" name="description" v-model="model.description">
-                        </textarea>
-                        <div class="w-full error-msg" v-if="errors.description">{{ errors.description }}</div>
-                    </div>
-                </div>
-<!--                 <div class="">
-                    <label for="url">URL</label>
-                    <input type="text" class="" id="url" name="url" v-model="model.url" />
-                    <div v-if="errors.url">{{ errors.url }}</div>
-                </div> -->
-                <div class="py-4">
-                    <label class="label-fields" for="title">URL</label>
+                    <label class="label-fields" for="header_subtitle">Header SubTitle</label>
                     <div class="py-2 w-full">
-                        <input type="text" class="form-fields" id="url" name="url" v-model="model.url" />
-                        <div class="w-full error-msg" v-if="errors.url">{{ errors.url }}</div>
+                        <input type="text" class="form-fields-long" id="header_subtitle" name="header_subtitle" v-model="model.header_subtitle" />
+                        <div class="w-full error-msg" v-if="errors.subtitle">{{ errors.header_subtitle }}</div>
                     </div>
                 </div>
                 <div class="py-4">
-                    <label class="label-fields" for="url_name">URL Name</label>
-                    <div class="py-2 w-full">
-                        <input type="text" class="form-fields" id="url_name" name="url_name" v-model="model.url_name" />
-                        <div class="w-full error-msg" v-if="errors.url_name">{{ errors.url_name }}</div>
-                    </div>
+                    <label class="label-fields pb-2" for="pg-img">Page image</label>
+                    <custom-file
+                        :getFiles="getmodel.medias"
+                        :getId="'page_image'"
+                        :getType="'image'"
+                        :getObject="getmodel"
+                    />
                 </div>
-                <div class="py-4">
-                    <label class="label-fields" for="template">Template name</label>
-                    <div class="py-2 w-full">
-                        <input type="text" class="form-fields" id="template" name="template" v-model="model.template" />
-                        <div class="w-full error-msg" v-if="errors.template">{{ errors.template }}</div>
+                <div v-if="$page.props.auth.isDev">
+                    <div class="header-config">
+                        Page details
                     </div>
-                </div>
-                <div class="py-4">
-                    <label class="label-fields"  for="published">Published</label>
-                    <div class="py-2">
-                        <input type="radio" class=" form-fields" id="published" name="published" v-model="model.published" value="0" /> False
-                        <input type="radio" class=" form-fields" id="published" name="published" v-model="model.published" value="1" /> True
-                        <div class="error-msg" v-if="errors.published">{{ errors.published }}</div>
+                    <div class="py-4">
+                        <label class="label-fields" for="title">Title</label>
+                        <div class="py-2 w-full">
+                            <input type="text" class="form-fields" id="title" name="title" v-model="model.title" />
+                            <div class="w-full error-msg" v-if="errors.title">{{ errors.title }}</div>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <label class="label-fields" for="content">Description</label>
+                        <div class="py-2">
+                            <textarea class="w-1/2 form-fields" id="description" name="description" v-model="model.description">
+                            </textarea>
+                            <div class="w-full error-msg" v-if="errors.description">{{ errors.description }}</div>
+                        </div>
+                    </div>
+    <!--                 <div class="">
+                        <label for="url">URL</label>
+                        <input type="text" class="" id="url" name="url" v-model="model.url" />
+                        <div v-if="errors.url">{{ errors.url }}</div>
+                    </div> -->
+                    <div class="py-4">
+                        <label class="label-fields" for="title">URL</label>
+                        <div class="py-2 w-full">
+                            <input type="text" class="form-fields" id="url" name="url" v-model="model.url" />
+                            <div class="w-full error-msg" v-if="errors.url">{{ errors.url }}</div>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <label class="label-fields" for="url_name">URL Name</label>
+                        <div class="py-2 w-full">
+                            <input type="text" class="form-fields" id="url_name" name="url_name" v-model="model.url_name" />
+                            <div class="w-full error-msg" v-if="errors.url_name">{{ errors.url_name }}</div>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <label class="label-fields" for="template">Template name</label>
+                        <div class="py-2 w-full">
+                            <input type="text" class="form-fields" id="template" name="template" v-model="model.template" />
+                            <div class="w-full error-msg" v-if="errors.template">{{ errors.template }}</div>
+                        </div>
+                    </div>
+                    <div class="py-4">
+                        <label class="label-fields"  for="published">Published</label>
+                        <div class="py-2">
+                            <input type="radio" class=" form-fields" id="published" name="published" v-model="model.published" value="0" /> False
+                            <input type="radio" class=" form-fields" id="published" name="published" v-model="model.published" value="1" /> True
+                            <div class="error-msg" v-if="errors.published">{{ errors.published }}</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class=" text-sm py-8">
+            <div v-if="$page.props.auth.isDev" class=" text-sm py-8">
                 <div>
                     <div class="header-config">
                         Section definition
@@ -89,14 +117,14 @@
                                     <div :key="index" v-for="(field, index) in section.page_fields">
                                         <div class="flex flex-wrap w-1/2">
                                             <!-- <div class="w-1/3">{{ field.name }}</div> -->
-                                            <div class="py-4 w-1/2">
+                                            <div class="py-4 w-1/3">
                                                 <label class="label-fields" for="title">Field name</label>
                                                 <div class="py-2 w-full">
                                                     <input type="text" class="form-fields" :id="'field_name_'+index" :name="'field_name_'+index" v-model="field.name" />
                                                     <div class="w-full error-msg" v-if="errors.field">{{ errors.field.name }}</div>
                                                 </div>
                                             </div>
-                                            <div class="py-4 w-1/2">
+                                            <div class="py-4 w-1/3">
                                                 <label class="label-fields" for="title">Documentation</label>
                                                 <div class="w-full py-2">
                                                     <select v-model="field.new_documentation" class="form-fields w-full">
@@ -105,11 +133,23 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div v-if="!field.isNew" class="py-4 w-1/2">
+                                            <div class="btn-delete cursor-pointer" @click.prevent="this.$store.dispatch('set_model', {model: field, route: 'page_field', type: 'page_field'})">Delete field</div>
+                                        </div>
+                                        <div v-else class="py-4 w-1/2">
+                                            <div class="btn-delete cursor-pointer" @click.prevent="section.page_fields = section.page_fields.filter(pf => pf.id != field.id)">Remove new field</div>
+                                        </div>
                                     </div>
                                     <div class="py-4">
                                         <div @click="addField(section)" class="rounded-md flex flex-wrap justify-center px-3 py-2 text-white bg-blue-600 hover:bg-blue-400 hover:text-white hover:font-bold">Add a field</div>
                                     </div>
                                 </div>
+                            </div>
+                            <div v-if="!section.isNew" class="py-4 w-full">
+                                <div class="btn-delete cursor-pointer" @click.prevent="this.$store.dispatch('set_model', {model: section, route: 'page_section', type: 'page_section'})">Delete section</div>
+                            </div>
+                            <div v-else class="py-4 w-full">
+                                <div class="btn-delete cursor-pointer" @click.prevent="model.page_sections = model.page_sections.filter(ps => ps.id != section.id)">Remove new section</div>
                             </div>
                         </div>
                         <div class="py-4">
@@ -135,7 +175,12 @@
 </template>
 <script defer>
 import moment from 'moment'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
+import FileInput from '../../File/FileInput.vue'
+import FilesInput from '../../File/FilesInput.vue'
+import CustomFile from '../../File/Custom/Parent.vue'
+import CustomFiles from '../../File/Custom/Parents.vue'
 export default {
     props: {
         getcategories: Array,
@@ -143,7 +188,7 @@ export default {
         getmodel: Object,
         errors: Object,
     },
-    components: {Link},
+    components: {Link, CustomFile},
     data() {
         return {
             model: this.getmodel,
@@ -164,7 +209,8 @@ export default {
                 name: null,
                 description: null,
                 page_fields: [],
-                new_category: null
+                new_category: null,
+                isNew: true
             };
             this.model.page_sections.push(section);
             this.iteration++;
@@ -173,7 +219,8 @@ export default {
             let field = {
                 id: this.iteration,
                 name: null,
-                new_documentation: null
+                new_documentation: null,
+                isNew: true
             };
             section.page_fields.push(field);
             this.iteration++;

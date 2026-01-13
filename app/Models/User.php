@@ -40,7 +40,8 @@ class User extends Authenticatable
         'address',
         'zip_code',
         'password',
-        'user_id'
+        'user_id',
+        'calendar_id'
     ];
 
     /**
@@ -90,8 +91,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Post');
     }
 
+    public function appointments() {
+        return $this->belongsToMany('App\Models\Appointment');
+    }
+
     public function user() {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function calendar() {
+        return $this->hasOne('App\Models\Calendar');
     }
 
     public function orders() {
@@ -128,5 +137,9 @@ class User extends Authenticatable
 
     public function isClient() {
         return $this->hasAnyRole(['client']) !== null ? true : false;
+    }
+
+    public function isCollaborator() {
+        return $this->hasAnyRole(['collaborator']) !== null ? true : false;
     }
 }

@@ -1,77 +1,59 @@
 <template>
-    <div class="text-white" >
-        <div class="relative z-50">
-            <div>
-                <div :class="[$page.props.auth.user ? '' : 'h-screen']" class=" w-full">
-                    <div v-if="!$page.props.auth.user" class="w-full h-full relative">
-                        <video class="w-full h-full object-cover" autoplay muted loop>
-                            <source src="/storage/video/intro-2.mp4" type="video/mp4">
-                            <source src="/storage/video/intro-2.mp4" type="video/ogg">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div v-if="!$page.props.auth.user" class="absolute top-0 left-0 w-full h-full text-white">
-                            <div class="w-full h-full flex flex-wrap justify-center content-center">
-                                <Link :href="route('login')" class="shrink-0 flex-wrap justify-center content-center lg:w-96 flex items-center font-bold text-lg text-center lg:text-4xl text-stone-800 rounded-full px-6 py-4 bg-white/80">
-                                    <span>Connecte toi !</span>
-                                </Link>
+    <div class="" >
+        <div class="">
+            <div class="">
+                <div>
+                    <div v-if="page.header_title !== null">
+                        <div :class="page.medias.length > 0 ? 'h-screen' : '' " class="relative flex flex-wrap justify-center content-center">
+                            <img v-if="page.medias.length > 0" class="w-full h-full object-cover" :src="$helpers.getObjectImage(page)" />
+                            <div v-if="page.medias.length > 0" class="w-full h-full absolute top-0 left-0 bg-black opacity-50"></div>
+                            <div v-if="page.header_title || page.header_subtitle" :class="[page.medias.length > 0 ? 'text-white' : '']" class="w-full h-full absolute top-0 left-0 flex flex-wrap justify-center content-center">
+                                <div v-if="page.header_title" class="font-bold text-6xl w-full text-center">{{page.header_title}}</div>
+                                <div v-if="page.header_subtitle" class="font-bold text-xl">{{page.header_subtitle}}</div>
+                                <div class="w-full text-center py-8" v-if="!$page.props.auth.user"><Link :href="route('login')" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">Se connecter pour ajouter un projet</Link></div>
+                                <div class="w-full text-center py-8" v-else>
+                                    <Link :href="route('posts.create_type', 'Projet')" class="text-lg font-bold bg-sky-800 px-3 py-2 rounded-md text-white">
+                                        Ajouter un nouveau projet
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div v-else class="pt-16 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32">
-                       <div>
-                            <div class="pt-16" >
-                                <div>
-                                    <div>
-                                        <div class="title-home">{{campaign.name}}</div>
-                                    </div>
-                                    <div class="py-8">
-                                        <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName_campaign("Budget")}} €</div>
-                                        <div class="py-4">Description : {{campaign.body}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                       </div>
-
-                       <div v-if="$page.props.auth.user.user">
-                            <div class="header-config-client">Mon tiré au sort : <span class="px-3 rounded-full bg-white text-red-900">{{$page.props.auth.user.user.name}}</span></div>
-                            <!-- <div>Mon tiré au sort: <span class="px-3 rounded-full bg-white text-red-900">{{$page.props.auth.user.user.name}}</span></div> -->
-                            <div class="py-4">
-                                <div v-if="list.length > 0" class="py-4">Voici sa liste : </div>
-                                <div v-if="list.length > 0">
-                                    <div class="w-full border-white border-t-4 first:border-0 py-4 lg:py-8" :key="gift.id" v-for="gift in list">
-                                        <div>
-                                            <div class="flex flex-wrap content-center h-full pt-8">
-                                                <div v-if="($page.props.auth.isDev || $page.props.auth.isAdmin) || gift.user_id === $page.props.auth.user.user.id" class="h-16 flex flex-wrap content-center">
-                                                    <div class="flex flex-wrap rounded-full bg-white text-red-900 py-2 px-3">
-                                                        <Gift :getSize="6" />
-                                                        <span class="px-3 font-bold">{{gift.name}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="py-8">{{gift.body}}</div>
-                                            <div>
-                                                <div class="w-full">
-                                                    <div class="w-full" :key="field.id" v-for="field in getCadeauSection().page_fields">
-                                                        <div class="py-2 md:py-4 lg:py-4 flex w-full" v-if="$helpers.getFieldDocValueObject(field, gift) !== ''">
-                                                            <div v-if="field.name !== 'Image'" class="">
-                                                                <DocValue class="" :getdoc="$helpers.getFieldDocValueObject(field, gift)" :getobject="gift" />
-                                                            </div>
-                                                            <div class="w-full" v-else>
-                                                                <div class="h-48 md:h-64 lg:h-78 w-full" v-if="$helpers.getFieldDocValueObject(field, gift).medias.length > 0">
-                                                                    <img v-if="$helpers.getFieldDocValueObject(field, gift).medias[0]" class="w-full lg:max-w-xl h-full object-conver" :src="$helpers.getFieldDocValueObject(field, gift).medias[0].original_url" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
+                </div>
+            </div>
+            <div v-if="$page.props.auth.user" class="">
+                <div v-if="getProjetSection()" class="">
+                    <div class="px-24 py-16">
+                        <div class="text-4xl pb-4 w-full text-center font-bold">Projets</div>
+                        <div class="w-full flex flex-wrap justify-center py-16">
+                            <div :key="projet.id" v-for="projet in getProjects" class="px-12 py-4 w-1/3">
+                                <Link :href="route('item_Projet', projet.id )" class="">
+                                    <div class="projet-card h-full overflow-hidden relative">
+                                        <div class="h-48 md:h-48 lg:h-48 w-full">
+                                            <img v-if="$helpers.getProductImage(projet) !== null" class="w-full lg:max-w-xl h-full object-cover" :src="$helpers.getProductImage(projet)" />
                                         </div>
+                                        <div class="p-16 ">
+                                            <div class="font-bold text-2xl pb-8 w-full">{{projet.name}}</div>
+                                            <div class="text-xl py-4 min-h-16">{{projet.body}}</div>
+                                            <div class=" text-slate-500">Publié par {{projet.user.name}}</div>
+                                            <div><div class="">Deadline: {{getValueByFieldName_projet('Deadline', projet)}}</div></div>
+                                        </div>
+
+                                        <div class="w-full text-white font-bold px-3 py-2 bg-sky-900 bottom-0 flex flex-wrap justify-center"><Link :href="route('posts.edit', projet.id)" class="">Mettre à jour</Link></div>
+<!--                                         <div class="w-full" :key="field.id" v-for="field in getProjetSection().page_fields">
+                                            <div class="py-2 md:py-4 lg:py-4 flex w-full" v-if="$helpers.getFieldDocValueObject(field, projet) !== ''">
+                                                <div v-if="field.name !== 'Image'" class="overflow-hidden">
+                                                    <DocValue class="overflow-hidden" :getdoc="$helpers.getFieldDocValueObject(field, projet)" :getobject="projet" />
+                                                </div>
+                                                <div class="w-full" v-else>
+                                                    <div class="h-48 md:h-64 lg:h-78 w-full" v-if="$helpers.getFieldDocValueObject(field, projet).medias.length > 0">
+                                                        <img v-if="$helpers.getFieldDocValueObject(field, projet).medias[0]" class="w-full lg:max-w-xl h-full object-conver" :src="$helpers.getFieldDocValueObject(field, projet).medias[0].original_url" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
                                     </div>
-                                </div>
-                                <div class="py-8" v-else>
-                                    <div class="rounded-md py-8 px-3 bg-white text-red-900">Ton tiré au sort n'a pas encore ajouté de cadeaux dans sa liste !</div>
-                                </div>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -82,19 +64,26 @@
 </template>
 <script>
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
-import Carousel from './../Help/Carousel/Carousel.vue'
+import Carousel from '../Help/Carousel/Carousel.vue'
 import helpers from '../../../helpers'
-import DocValue from './../Help/DocumentationValue.vue'
+import DocValue from '../Help/DocumentationValue.vue'
 import Checkout from '../../Stripe/Checkout.vue'
 import store from '../../../Store/index';
 import Vuex from "vuex";
 import Products from './Help/Products.vue'
 import Speak from './Help/Speak.vue'
-import { useForm } from "@inertiajs/inertia-vue3";
-import { Link } from '@inertiajs/inertia-vue3';
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Down from '../../Help/Icon/Down.vue'
 import Gift from '../../Help/Icon/Gift.vue'
-import Loading from '../Client/Help/Loading.vue'
+import Phone from '../../Help/Icon/Phone.vue'
+import Mail from '../../Help/Icon/Mail.vue'
+import Loading from './Help/Loading.vue'
+import Calendar from '../../Help/Calendar/Calendar.vue'
+import Calendly from './Help/Calendly.vue'
+import moment from 'moment';
 export default {
 /*     setup(props) {
         const form = useForm({
@@ -103,31 +92,27 @@ export default {
         return { form };
     }, */
     props: ['getposts', 'getcategories', 'getintent'],
-    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down, Loading, Gift},
+    components:  {BreezeGuestLayout, DocValue, Carousel, Products, Speak, Link, Down, Loading, Gift, Calendar, Calendly, Phone, Mail},
     layout: BreezeGuestLayout,
     data() {
         return {
             page: this.$page.props.pages.filter(page => page.title == 'Home')[0],
             sections: this.$page.props.pages.filter(page => page.title == 'Home')[0].page_sections,
-            campaign: this.getCampaignSection().category.posts[0],
-            list: this.$page.props.auth.user && this.$page.props.auth.user.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.user.id) : [] ,
-            mylist: this.$page.props.auth.user ? this.getCadeauSection().category.posts.filter(cad => cad.user_id == this.$page.props.auth.user.id) : [],
-            users: this.getusers,
-            model: this.$page.props.auth.user,
-            updateMode: false,
+            section_projet: this.getProjetSection(),
+            //campaign: this.getCampaignSection().category.posts[0],
             form : useForm({
                 id: this.$page.props.auth.user ? this.$page.props.auth.user.id : null,
                 user: this.$page.props.auth.user ? this.$page.props.auth.user : null,
-                roles: this.$page.props.auth.user ? this.$page.props.auth.user.roles : null,
-                name: this.$page.props.auth.user ? this.$page.props.auth.user.name : null,
-                has_answered: this.$page.props.auth.user ? this.$page.props.auth.user.has_answered : null,
-                has_company: this.$page.props.auth.user ? this.$page.props.auth.user.has_company : null,
-                is_accompanied: this.$page.props.auth.user ? this.$page.props.auth.user.is_accompanied : null,
-                is_partying: this.$page.props.auth.user ? this.$page.props.auth.user.is_partying : null,
-            }),
+            })
         }
     },
     methods: {
+        formatDate(date){
+            return moment(date).format('YYYY-MM-DD');
+        },
+        getValueByFieldName(field_name) {
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
+        },
         getValue(docValue){
             return helpers.getValue(docValue);
         },
@@ -160,17 +145,14 @@ export default {
                 this.addCartItemQuantity(product_in_cart[0]);
             }
         },
-        getCampaignSection(){
-            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Campagne');
-        },
-        getCadeauSection(){
-            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Cadeau');
+        getProjetSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Projet');
         },
         getValueByFieldName_campaign(field_name) {
             return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
         },
-        getValueByFieldName_cadeau(field_name, post) {
-            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCadeauSection(), field_name) , post).docValue;
+        getValueByFieldName_projet(field_name, post) {
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getProjetSection(), field_name) , post).docValue;
         },
         getSummarySection(){
             return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Home')[0], 'Summary');
@@ -218,7 +200,14 @@ export default {
     computed: {
         ...Vuex.mapState([
             "cart"
-        ])
+        ]),
+        getProjects(){
+            if (this.$page.props.auth.isClient) {
+                return this.getProjetSection().category.posts.filter(p => p.user_id == this.$page.props.auth.user.id);
+            } else {
+                return this.getProjetSection().category.posts;
+            }
+        },
     },
     mounted() {
         this.$emit("siteReady");
@@ -229,8 +218,8 @@ export default {
             }
             this.form.roles = [];
             this.form.roles = roles;
-
         }
+        console.log(this.$page.props);
     },
 }
 </script>
@@ -246,5 +235,36 @@ export default {
   50% { transform: translateY(-30%); }
   100% { transform: translateY(0); }
 
+}
+
+
+.projet-card:hover {
+    transform: translateY(-5px);
+}
+
+
+.projet-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+
+.projets {
+    background-color: #EDE7E3;
+}
+
+
+.review-card {
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+
+.reviews {
+    background-color: #F5F5F5;
 }
 </style>

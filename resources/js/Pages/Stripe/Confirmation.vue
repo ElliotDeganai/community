@@ -30,7 +30,8 @@
 
 <script>
 
-import { Inertia } from '@inertiajs/inertia'
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 import { reactive } from 'vue'
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import CheckoutForm from './CheckoutForm.vue'

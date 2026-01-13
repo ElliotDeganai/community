@@ -22,7 +22,7 @@ class PostPolicy
      */
     public function viewAll(User $user)
     {
-        return $user->isDev() || $user->isAdmin();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator() || $user->isClient();
     }
 
     /**
@@ -56,7 +56,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return $user->isDev() || $user->isAdmin() || $user->isEditor();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator() || $user->isClient();
     }
 
     /**
@@ -68,7 +68,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->isDev() || $user->isAdmin() || $user->isEditor();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator() || $user->isClient();
     }
 
     /**
@@ -80,7 +80,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->isDev() || $user->isAdmin() || $user->isEditor();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator() || $user->isClient();
     }
 
     /**

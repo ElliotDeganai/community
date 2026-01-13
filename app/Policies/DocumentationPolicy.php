@@ -12,7 +12,7 @@ class DocumentationPolicy
 
     public function before($user, $ability)
     {
-        if ($user->isAdminOrEditor()) {
+        if ($user->isAdmin()) {
             return true;
         }
     }

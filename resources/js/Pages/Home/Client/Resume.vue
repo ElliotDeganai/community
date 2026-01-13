@@ -1,48 +1,34 @@
 <template>
-    <div class="relative text-white">
+    <div class="relative ">
         <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="pt-16 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32 w-full h-full">
-            <div class="w-full py-8 lg:py-24 z-10">
-                <div class="title-home">Résumé</div>
-            </div>
-            <div>
+            <div class="pt-16">
+                <div class="py-8">Résumé</div>
+<!--                 <div>
+                    <div class="w-full">
+                        <div>Les rendez-vous à venir :</div>
+                        <div class="flex flex-wrap py-2">
+                            <div class="w-1/6 font-bold">Titre</div>
+                            <div class="w-1/6 font-bold">Date</div>
+                            <div class="w-1/6 font-bold">Client</div>
+                            <div class="w-2/6  font-bold">Message</div>
+                        </div>
+                        <div :key="appointment.id" v-for="appointment in getFutureAppointments" class="flex flex-wrap content-center border-t py-2">
+                            <div class="w-1/6">{{appointment.name}}</div>
+                            <div class="w-1/6">{{getValueByFieldName("Date", appointment)}}</div>
+                            <div class="w-1/6">{{appointment.user.name}}</div>
+                            <div class="w-2/6 truncate">{{appointment.body}}</div>
+                            <button v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="btn-delete" @click="this.$store.dispatch('set_model', {model: appointment  , route: 'resource', type: 'resource'})">Delete</button>
+                        </div>
+                    </div>
+                </div> -->
                 <div>
-                    <div>
-                        <div>
-                            <div class="title-home">{{campaign.name}}</div>
-                        </div>
-                        <div class="py-4 lg:py-8">
-                            <div class="py-4 font-bold text-xl">Budget : {{getValueByFieldName("Budget")}} €</div>
-                            <div class="py-4">Description : {{campaign.body}}</div>
-                        </div>
-                    </div>
+                    <MyTable :getheader="['Id', 'Titre', 'Date', 'Client', 'Message']" :gettitle="'Les rendez-vous à venir'" :getvalues="getFutureAppointments" :getColLength="'1/6'" />
                 </div>
-                <div v-if="launched" class="py-4 lg:py-8">
-                    <div class="header-config-client">Voici le nouveau tirage au sort</div>
-                    <div class="py-2 lg:py-4">
-                        <div class="py-2" :key="user.id" v-for="user in getEditors">
-                            {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="header-config-client">Voici le tirage au sort actuel</div>
-                    <div class="py-4">
-                        <div class="py-2" :key="user.id" v-for="user in getEditors">
-                            <span class="font-bold">{{user.name}}</span> offre un cadeau à <span class="font-bold" v-if="user.user_id">{{getUser(user.user_id).name}}</span>
-                        </div>
-                    </div>
 
-                </div>
-                <div class="py-4 lg:py-8">
-                    <div>
-                        <button @click.prevent="startCampaign()" class="px-3 py-2 bg-white text-red-900 font-bold">Commencer la campagne</button>
-                    </div>
-                </div>
                 <div>
-                    <div>
-                        <button @click.prevent="submit()" class="px-3 py-2 bg-white text-red-900 font-bold">Valider</button>
-                    </div>
+                    <MyTable :getheader="['Id', 'Titre', 'Date', 'Client', 'Message']" :gettitle="'Les rendez-vous passés'" :getvalues="getOldAppointments" :getColLength="'1/6'" />
                 </div>
+
             </div>
         </div>
     </div>
@@ -51,12 +37,17 @@
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import helpers from '../../../helpers'
 import DocValue from './../Help/DocumentationValue.vue'
+import MyTable from './Help/MyTable.vue'
 import Couple from '../Help/Icon/Couple.vue'
-import { useForm } from "@inertiajs/inertia-vue3";
-
-import { Link } from '@inertiajs/inertia-vue3';
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
+import store from '../../../Store/index';
+import Vuex from "vuex";
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 export default {
-    components:  {BreezeGuestLayout, DocValue, Couple, Link},
+    components:  {BreezeGuestLayout, DocValue, Couple, Link, MyTable},
     layout: BreezeGuestLayout,
     props: {
         getcampaigns: Array,
@@ -65,7 +56,7 @@ export default {
     },
     data() {
         return{
-            campaign: this.getCampaignSection().category.posts[0],
+            appointments: this.getAppointmentSection().category.posts,
             users: this.getusers,
             editors: this.getusers.filter(u => u.roles),
             page: this.$page.props.pages.filter(page => page.title == 'Resume')[0],
@@ -78,12 +69,18 @@ export default {
         }
     },
     methods: {
-        getCampaignSection(){
-            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Resume')[0], 'Campagne');
+        getAppointmentSection(){
+            return this.$helpers.getSection(this.$page.props.pages.filter(page => page.title == 'Resume')[0], 'Appointment');
         },
-        getValueByFieldName(field_name) {
-            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getCampaignSection(), field_name) , this.campaign).docValue;
+        getValueByFieldName(field_name, obj_field) {
+            return this.$helpers.getFieldDocValueObject(this.$helpers.getSectionField(this.getAppointmentSection(), field_name) , obj_field).docValue;
         },
+        getValue(doc_value) {
+            return this.$helpers.getValue(doc_value);
+        },
+        ...Vuex.mapActions([
+            "saveCartItem", "addCartItemQuantity", "set_model"
+        ]),
         startCampaign() {
             let user_count = this.getEditors.length-1;
             let pioche = [];
@@ -176,7 +173,23 @@ export default {
         },
         getUser(id) {
             return this.users.filter(u => u.id === id)[0];
-        }
+        },
+        submit_delete(post) {
+            router.delete(route("posts.delete", post.id));
+        },
+        formatModelTable(modelToFormat) {
+            let formatted = {
+                id: modelToFormat.id,
+                name: modelToFormat.name,
+                date: this.getValueByFieldName("Date", modelToFormat),
+                user: modelToFormat.user.name,
+                message: modelToFormat.body
+            }
+            return formatted;
+        },
+        ...Vuex.mapActions([
+            'set_model'
+        ]),
     },
     computed: {
         gameStarted() {
@@ -203,6 +216,31 @@ export default {
             }
             return false;
         },
+        getSortedAppointments() {
+            return this.appointments.sort((a, b) => new Date(b.doc_values[0].current_value) - new Date(a.doc_values[0].current_value));
+        },
+        getOldAppointments() {
+            let arr = [];
+            let list = this.appointments.filter(apt => new Date(apt.doc_values[0].current_value) < new Date());
+            let listSort = list.sort((a, b) => new Date(a.doc_values[0].current_value) - new Date(b.doc_values[0].current_value));
+            for (let index = 0; index < listSort.length; index++) {
+                const element = listSort[index];
+                arr.push(this.formatModelTable(element));
+            }
+            return arr;
+        },
+        getFutureAppointments() {
+            let arr = [];
+            let list = this.appointments.filter(apt => new Date(apt.doc_values[0].current_value) > new Date());
+            for (let index = 0; index < list.length; index++) {
+                const element = list[index];
+                arr.push(this.formatModelTable(element));
+            }
+            return arr;
+        },
+        ...Vuex.mapState([
+            "cart"
+        ])
     },
     created() {
     },

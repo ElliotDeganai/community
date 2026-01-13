@@ -20,5 +20,12 @@ export default defineConfig({
         hmr: {
             host: 'localhost'
         }
-    }
+    },// ← Ajoute cette section pour supprimer le warning
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler', // ou 'modern' selon ta version de sass
+      },
+    },
+  },
 });

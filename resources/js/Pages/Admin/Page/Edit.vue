@@ -30,22 +30,29 @@
 import Layout from '../../../Layouts/Authenticated.vue';
 import Fields from '../../Help/Form/Page/PageToCategory.vue'
 import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
-import { useForm } from "@inertiajs/inertia-vue3";
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 export default {
     layout: Layout,
     components: {Fields},
     setup(props) {
         const form = useForm({
+            _method: 'put',
             id: props.getpage.id,
+            header_title: props.getpage.header_title,
+            header_subtitle: props.getpage.header_subtitle,
             title: props.getpage.title,
             url: props.getpage.url,
             url_name: props.getpage.url_name,
             template: props.getpage.template,
             description: props.getpage.description,
+            medias: props.getpage.medias,
             start_categories: props.getpage.categories,
             page_sections: props.getpage.page_sections,
-            categories: []
+            categories: [],
+            images: []
         });
         return { form };
     },
@@ -57,7 +64,7 @@ export default {
     },
     methods: {
         submit() {
-            this.form.put(route("pages.update", this.form));
+            this.form.post(route("pages.update", this.form.id));
         },
     },
 }

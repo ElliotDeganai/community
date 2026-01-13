@@ -5,31 +5,35 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.1",
         "ably/ably-php": "^1.1",
         "beyondcode/laravel-websockets": "^1.14",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.8",
-        "inertiajs/inertia-laravel": "^0.5.4",
+        "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^1.0",
         "laravel/cashier": "^13.17",
-        "laravel/framework": "^9.0",
-        "laravel/sanctum": "^2.8",
-        "laravel/tinker": "^2.5",
+        "laravel/framework": "^10.10",
+        "laravel/sanctum": "^3.3",
+        "laravel/tinker": "^2.8",
         "pusher/pusher-php-server": "^7.2",
-        "spatie/laravel-medialibrary": "^9.0.0",
+        "spatie/laravel-medialibrary": "^10.0.0",
         "srmklive/paypal": "^3.0",
         "symfony/http-client": "^5.4",
         "symfony/mailgun-mailer": "^5.4",
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
-        "spatie/laravel-ignition": "^1.0",
+        "spatie/laravel-ignition": "^2.0",
+        "laravel/pint": "^1.0",
         "fakerphp/faker": "^1.9.1",
-        "laravel/breeze": "1.9.4",
-        "laravel/sail": "^1.0.1",
+        "laravel/breeze": "^1.9.4",
+        "illuminate/console": "^10.17",
+        "illuminate/filesystem": "^10.17",
+        "illuminate/support": "^10.17",
+        "illuminate/validation": "^10.17",
+        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10"
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.1"
     },
     "autoload": {
         "psr-4": {
@@ -67,6 +71,6 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

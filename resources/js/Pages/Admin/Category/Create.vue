@@ -33,9 +33,10 @@ import Layout from '../../../Layouts/Authenticated.vue';
 import Fields from '../../Help/Form/Category/Fields.vue'
 import { reactive } from 'vue'
 
-import { useForm } from "@inertiajs/inertia-vue3";
-import { Inertia } from '@inertiajs/inertia'
-//import { router } from '@inertiajs/vue3'
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 export default {
     setup () {
         const form = useForm({
@@ -49,7 +50,7 @@ export default {
 
         function submit() {
             //Inertia.post('/admin/categories', form);
-            Inertia.post('/admin/categories', form);
+            router.post('/admin/categories', form);
         }
 
         return { form, submit }

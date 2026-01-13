@@ -6,10 +6,13 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DocumentationController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\PageSectionController;
+use App\Http\Controllers\PageFieldController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\EmailController;
+use App\Http\Controllers\CalendarController;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Post;
@@ -54,25 +57,25 @@ Route::get('/', function () {
 }); */
 
  //Auth::routes();
- $categories = Category::all();
+$categories = Category::all();
 
 foreach ($categories as $category) {
     Route::get('/'.$category->name.'/{postId}', [HomeController::class, 'post'])->name('item_'.$category->name);
 }
 
 $pages = Page::all()->load('pageSections')
-            ->load('pageSections.pageFields',
+            ->load('pageSections.pageFields', 'medias',
             'pageSections.category',
             'pageSections.category.documentations',
             'pageSections.pageFields.documentation'
             );
 
 foreach ($pages as $page) {
-    $page->load('pageSections.category.posts.docValues');
+    $page->load('pageSections.category.posts.docValues', 'pageSections.category.posts.user');
     Route::get($page->url, function() use ($page) {
         return Inertia::render('Home/Client/'.$page->template, [
             'getpage' => $page,
-            'getusers' => User::with('roles', 'user')->get(),
+            'getusers' => User::with('roles', 'user')->with('posts')->withCount('posts')->get(),
         ]);
     })->name($page->url_name);
 }
@@ -96,7 +99,7 @@ Route::get('/admin', function() {
 })->middleware('admin')->name('admin');
 
 Route::get('/test-email', [EmailController::class, 'test'])->name('test.email');
-Route::put('/admin/users/campaign', [UsersController::class, 'startCampaign'])->middleware('admin')->name('users.campaign');
+Route::post('/admin/users/campaign', [UsersController::class, 'startCampaign'])->middleware('admin')->name('users.campaign');
 
 Route::get('/posts/create/gift', [BlogController::class, 'create_gift'])->name('posts.create_gift');
 Route::get('/posts/edit/gift/{postId}', [BlogController::class, 'edit_gift'])->name('posts.edit_gift');
@@ -104,7 +107,10 @@ Route::get('/posts/edit/gift/{postId}', [BlogController::class, 'edit_gift'])->n
 
 //Route::resource('/admin/fields', PageFieldController::class);
 Route::resource('/admin/pages', PagesController::class, ['except' => ['pages.show']]);
+Route::resource('/admin/page_section', PageSectionController::class);
+Route::resource('/admin/page_field', PageFieldController::class);
 Route::resource('/admin/users', UsersController::class);
+Route::get('/admin/users-manage', [UsersController::class, 'manage'])->name('users.manage');
 Route::resource('/admin/posts', BlogController::class);
 Route::get('/admin/posts/create/{type}', [BlogController::class, 'create_type'])->name('posts.create_type');
 Route::get('/admin/posts/index/{type}', [BlogController::class, 'index_type'])->name('posts.index_type');
@@ -144,7 +150,15 @@ if (env('IS_ECOMMERCE') == 1) {
     Route::get('payment', ['PayPalController::class', 'payment'])->name('payment');
     Route::get('cancel', ['PayPalController::class', 'cancel'])->name('payment.cancel');
     Route::get('payment/success', ['PayPalController', 'success'])->name('payment.success');
+}
 
+if (env('CALENDAR') == 1) {
+    Route::get('/appointment', [CalendarController::class, 'calendar'])->name('calendar');
+    Route::post('/appointment', [CalendarController::class, 'store'])->name('calendar.store');
+    Route::put('/appointment/{appointment}', [CalendarController::class, 'update'])->name('calendar.update');
+    Route::put('/calendar/{calendar}', [CalendarController::class, 'updateCalendar'])->name('calendar.updateCalendar');
+    Route::get('/appointments', [CalendarController::class, 'index'])->name('calendar.index');
+    Route::delete('/appointment/{appointment}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
 }
 
 Route::get('event', function() {

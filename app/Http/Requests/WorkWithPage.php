@@ -14,7 +14,7 @@ class WorkWithPage extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->isDev();
+        return Auth::user()->isDev() || Auth::user()->isAdmin() || Auth::user()->isEditor();
     }
 
     /**
@@ -25,6 +25,8 @@ class WorkWithPage extends FormRequest
     public function rules()
     {
         return [
+            'header_title' => 'nullable|string',
+            'header_subtitle' => 'nullable|string',
             'title' => 'required|string',
             'url' => 'string',
             'description' => 'nullable',

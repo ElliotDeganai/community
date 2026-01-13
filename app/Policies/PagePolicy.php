@@ -11,7 +11,7 @@ class PagePolicy
     use HandlesAuthorization;
     public function before($user, $ability)
     {
-        if ($user->isDev()) {
+        if ($user->isDev() || $user->isAdmin() || $user->isEditor()) {
             return true;
         }
     }

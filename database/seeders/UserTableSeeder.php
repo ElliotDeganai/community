@@ -15,12 +15,41 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+
+        User::truncate();
         $devRole = Role::where('name', 'dev')->first();
         $adminRole = Role::where('name', 'admin')->first();
         $editorRole = Role::where('name', 'editor')->first();
         $clientRole = Role::where('name', 'client')->first();
+        $collaboratorRole = Role::where('name', 'collaborator')->first();
 
-        User::truncate();
+        $collaborator1 = User::create([
+            'name' => 'Collab1',
+            'email' => 'collaborator1@laracms.fr',
+            'password' => bcrypt("password"),
+            //'team' => 'paris'
+        ]);
+
+        $collaborator2 = User::create([
+            'name' => 'Collab2',
+            'email' => 'collaborator2@laracms.fr',
+            'password' => bcrypt("password"),
+            //'team' => 'paris'
+        ]);
+
+        $collaborator3 = User::create([
+            'name' => 'Collab3',
+            'email' => 'collaborator3@laracms.fr',
+            'password' => bcrypt("password"),
+            //'team' => 'paris'
+        ]);
+
+        $client1 = User::create([
+            'name' => 'Client1',
+            'email' => 'client1@laracms.fr',
+            'password' => bcrypt("password"),
+            //'team' => 'paris'
+        ]);
 
         $dev = User::create([
             'name' => 'Developper',
@@ -50,14 +79,14 @@ class UserTableSeeder extends Seeder
             //'team' => 'paris'0
         ]);
 
-        $soifia = User::create([
+        /*$soifia = User::create([
             'name' => 'Soifia',
             'email' => 'atikisoifia@gmail.com',
             'password' => bcrypt('password'),
             //'team' => 'paris'
         ]);
 
-        /*$client2 = User::create([
+        $client2 = User::create([
             'name' => 'Edwige',
             'email' => 'edwigedeganai@hotmail.com',
             'password' => bcrypt("password"),
@@ -140,12 +169,17 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('wWMf2qFc610Q4!p'),
             'team' => 'lux'
         ]); */
+
+        $collaborator1->roles()->attach($collaboratorRole);
+        $collaborator2->roles()->attach($collaboratorRole);
+        $collaborator3->roles()->attach($collaboratorRole);
+
+        $client1->roles()->attach($clientRole);
         $dev->roles()->attach($devRole);
         $admin->roles()->attach($adminRole);
         $editor->roles()->attach($editorRole);
         $elliot->roles()->attach($editorRole);
-        $soifia->roles()->attach($editorRole);
-          /*$client2->roles()->attach($editorRole);
+        /*$soifia->roles()->attach($editorRole);
         $client3->roles()->attach($editorRole);
         $client4->roles()->attach($editorRole);
         $client5->roles()->attach($editorRole);

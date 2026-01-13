@@ -1,5 +1,5 @@
 <template>
-    <div :class="[delete_modal ? 'h-screen overflow-hidden' : '']" class="bg-red-900  relative" style="font-family:  'Kalam', cursive;">
+    <div :class="[delete_modal || image_modal ? 'h-screen overflow-hidden' : '']" class="relative" style="font-family:  'Kalam', cursive;">
 
         <transition name="loading-fade">
             <loading class="z-70" v-if="isLoading"></loading>
@@ -9,13 +9,16 @@
             <div class="w-full h-full flex flex-wrap absolute top-0 left-0 overflow-hidden">
                 <div class="w-1/4 hidden lg:inline" :key="i" v-for="i in 24">
                     <div class="w-full p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm  opacity-10">
-                        <Gift :getSize="10" />
+                        <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
                     </div>
                 </div>
-                <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 48">
+                <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 12">
                     <div class="w-full p-1 lg:p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm opacity-10">
-                        <Gift :getSize="10" />
+                        <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
                     </div>
+                </div>
+                <div class="w-full h-full absolute top-0 left-0 bg-white opacity-70">
+
                 </div>
             </div>
             <div :class="[product ? 'h-screen overflow-hidden' : 'min-h-screen h-full']" class="relative w-full">
@@ -28,13 +31,20 @@
                     </main>
                     <div v-if="!$page.props.auth.user" class="w-full absolute bottom-0 left-0 h-24 bg-black opacity-50 blur-lg z-50">
                     </div>
-                    <div :class="[$page.props.auth.user ? 'text-white' : 'absolute bottom-0 left-0 text-white z-60']"  class="w-full py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
-                        <div class="self-center">Made by </div>
-                        <a class="self-center px-2" href="https://www.elliot-deganai.com/">
-                            <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
-                            <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
-                        </a>
-                        <div class="self-center">Web Factory</div>
+                    <div class="w-full" :class="[!$page.props.auth.user ? 'absolute bottom-0' : 'bg-stone-900']">
+                        <div class="w-full  text-white py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
+    <!--                         <div class="w-full text-center py-4">Rénovation Écologique - Votre partenaire pour un habitat durable</div>
+                            <div class="w-full text-center py-4">Certifications : RGE, Qualibat</div> -->
+                            <div class="self-center py-4">Made by </div>
+                            <a class="self-center px-2" href="https://www.elliot-deganai.com/">
+                                <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
+                                <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
+                            </a>
+                            <div class="self-center">Web Factory</div>
+                        </div>
+                        <div  class="w-full  text-white">
+                            <div class="border-t py-8 w-full text-center">© 2020 ED Web Factory. Tous droits réservés.</div>
+                        </div>
                     </div>
                     <div v-if="product" @click="unset_product_modal()" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
                     <Modal v-if="product">
@@ -70,10 +80,19 @@
                 </div>
             </div>
         </div>
+
+
+        <div v-if="model && image_modal" @click="$store.commit('UNSET_IMAGE_MODAL')" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
+        <div v-if="model && image_modal" @click="$store.commit('UNSET_IMAGE_MODAL')" class="z-60 absolute w-full h-full top-0 left-0 flex flex-wrap justify-center content-center">
+            <div class="w-1/2 h-1/2 ">
+                <img  class="w-full lg:w-full h-full object-contain" :src="model" />
+            </div>
+        </div>
     </div>
 </template>
 <script>
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue';
 import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
@@ -162,7 +181,7 @@ export default {
     },
     computed:{
         ...Vuex.mapState([
-            "cart", "product", "delete_modal", "model", "delete_route", "type"
+            "cart", "product", "delete_modal", "model",, "image_modal", "model", "delete_route", "type"
         ]),
         getScroll() {
             return this.scrollPosition;
@@ -179,7 +198,6 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.updateScroll);
         this.loadingSite();
-        console.log(this.$page.url)
     },
 }
 </script>

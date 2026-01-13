@@ -4,7 +4,8 @@ import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Head, useForm } from '@inertiajs/inertia-vue3';
+//import { Head, useForm } from '@inertiajs/inertia-vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
     email: String,
@@ -29,7 +30,7 @@ const submit = () => {
     <BreezeGuestLayout class="relative text-white">
         <div class="px-8 lg:px-32 relative overflow-hidden min-h-full ">
             <div class="w-full h-full opacity-20  blur-lg absolute top-0 left-0 bg-black"></div>
-            <div :class="'h-screen'" class=" w-full">
+            <div :class="'h-screen'" class=" w-full z-10 relative">
                 <div class="pt-8 px-4 md:pt-16 md:px-16 lg:pt-32 lg:px-32">
                 <div class="py-24    lg:py-32 relative">
                     <div class="text-xl font-bold w-full lg:pb-24">
@@ -43,17 +44,17 @@ const submit = () => {
                     <form @submit.prevent="submit">
                         <div>
                             <BreezeLabel  class=" text-white" for="email" value="Email" />
-                            <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
+                            <BreezeInput id="email" type="email" class="mt-1 block w-full text-black" v-model="form.email" required autofocus autocomplete="username" />
                         </div>
 
                         <div class="mt-4">
                             <BreezeLabel  class=" text-white" for="password" value="Password" />
-                            <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
+                            <BreezeInput id="password" type="password" class="mt-1 block w-full text-black" v-model="form.password" required autocomplete="new-password" />
                         </div>
 
                         <div class="mt-4">
                             <BreezeLabel  class=" text-white" for="password_confirmation" value="Confirm Password" />
-                            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
+                            <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full text-black" v-model="form.password_confirmation" required autocomplete="new-password" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

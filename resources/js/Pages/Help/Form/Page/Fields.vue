@@ -3,6 +3,12 @@
         <div>
             <div class="py-16">
                 <div class="header-config">
+                    Page header
+                </div>
+                <div class="header-config">
+                    Page Footer
+                </div>
+                <div class="header-config">
                     Page details
                 </div>
                 <div class="py-4">
@@ -26,6 +32,14 @@
                         </textarea>
                         <div class="w-full error-msg" v-if="errors.description">{{ errors.description }}</div>
                     </div>
+                </div>
+                <div class="">
+                    <custom-file
+                        :getFiles="getmodel.medias"
+                        :getId="'page_image'"
+                        :getType="'image'"
+                        :getObject="getmodel"
+                    />
                 </div>
             </div>
             <div class=" text-sm py-8">
@@ -98,7 +112,12 @@
 </template>
 <script>
 import moment from 'moment'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
+import FileInput from '../../File/FileInput.vue'
+import FilesInput from '../../File/FilesInput.vue'
+import CustomFile from '../../File/Custom/Parent.vue'
+import CustomFiles from '../../File/Custom/Parents.vue'
 export default {
     props: {
         getcategories: Array,
@@ -106,7 +125,7 @@ export default {
         getmodel: Object,
         errors: Object,
     },
-    components: {Link},
+    components: {Link, CustomFile},
     data() {
         return {
             model: this.getmodel,

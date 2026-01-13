@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\TestEmail2;
+use App\Mail\RegisteredUserEmail;
+use App\Models\Calendar;
 use App\Models\Role;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -26,9 +27,14 @@ class RegisteredUserController extends Controller
     {
         //dd(Auth::user()->isAdmin());
         if (Auth::check()) {
-            if (Auth::user()->isAdmin() || Auth::user()->isDev()) {
+            if (Auth::user()->isAdmin() || Auth::user()->isDev() || Auth::user()->isEditor()) {
+                if (Auth::user()->isAdmin() || Auth::user()->isDev()) {
+                    $roles = Role::all();
+                }else {
+                    $roles = Role::whereIn('name', ['editor', 'collaborator', 'client'])->get();
+                }
                 return Inertia::render('Auth/Register', [
-                    'getroles' => Role::all()
+                    'getroles' => $roles
                 ]);
             }else {
                 return redirect(RouteServiceProvider::HOME);
@@ -65,13 +71,19 @@ class RegisteredUserController extends Controller
         }
 
         event(new Registered($user));
-        //Mail::to($user->email)->send(new TestEmail2($user, $request->password));
+
+        if (!$user->isClient()) {
+            Calendar::create([
+                'user_id' => $user->id
+            ]);
+        }
+        Mail::to($user->email)->send(new RegisteredUserEmail($user, $request->password));
 
 
         //Auth::login($user);
 
         //return redirect(RouteServiceProvider::HOME);
 
-        return redirect()->route('users.index')->with('status', 'The user has been created !');
+        return redirect()->route('users.index')->with('status', 'The user has been created ! The email notification has been sent to the user');
     }
 }

@@ -27,10 +27,13 @@
 import Layout from '../../../Layouts/Authenticated.vue';
 import Fields from '../../Help/Form/Page/PageToCategory.vue'
 import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 export default {
     setup () {
         const form = reactive({
+            header_title: null,
+            header_subtitle: null,
             title: null,
             url: null,
             url_name: null,
@@ -40,11 +43,12 @@ export default {
             published_at: null,
             categories: [],
             page_sections: [],
-            page_fields: []
+            page_fields: [],
+            images: []
         })
 
         function submit() {
-            Inertia.post('/admin/pages', form);
+            router.post('/admin/pages', form);
         }
 
         return { form, submit }

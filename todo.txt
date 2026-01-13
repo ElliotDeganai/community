@@ -1,5 +1,41 @@
-Next steps:
-doc value creation vue to adapt with new fields
+Send heads up to Invitee
+Filter and sorting on the administration index
+Recap on the resume list
+eyJraWQiOiIxY2UxZTEzNjE3ZGNmNzY2YjNjZWJjY2Y4ZGM1YmFmYThhNjVlNjg0MDIzZjdjMzJiZTgzNDliMjM4MDEzNWI0IiwidHlwIjoiUEFUIiwiYWxnIjoiRVMyNTYifQ.eyJpc3MiOiJodHRwczovL2F1dGguY2FsZW5kbHkuY29tIiwiaWF0IjoxNzU1NzExODU2LCJqdGkiOiI5MTIxYjVmMy00MGQzLTQwODEtODhhYi0yZGUxZTEzNmI4YWMiLCJ1c2VyX3V1aWQiOiJBRkhBRDVDWEtBWUc0MkRDIn0.teGi6z_WYChaDwVNdNQF1b615Nr5l300F8x09qEWCxPPITW3zkOx7RrbOROsiMLtfAqQulpJFyIe3-Q8jJM8xw
 
-npm:
-npm i @tiptap/extension-color @tiptap/extension-text-style @tiptap/vue-3 @tiptap/starter-kit @tiptap/extension-highlight moment @tiptap/extension-text-align @tiptap/extension-underline vuex wavesurfer.js @types/wavesurfer.js @vue-stripe/vue-stripe --save
+Calendar feature:
+I want to select a date and send an appointment request
+I want the already selected date to not be available
+I want to be able to validate or cancel an appointment request
+I want to be able to define the time where I am available
+
+title
+subtitle
+service_title
+service_1_icone
+service_1_title
+service_1_description
+service_2_icone
+service_2_title
+service_2_description
+service_3_icone
+service_3_title
+service_3_description
+client_review_1_name
+client_review_1_review
+client_review_2_name
+client_review_2_review
+client_review_3_name
+client_review_3_review
+footer_certifications
+footer_description
+
+Copier folder content
+composer install
+npm install
+php artisan migrate
+--update database seeder
+delete public/storage folder
+php artisan storage:link
+
+

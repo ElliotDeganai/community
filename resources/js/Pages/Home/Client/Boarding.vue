@@ -89,8 +89,10 @@ import store from '../../../Store/index';
 import Vuex from "vuex";
 import Products from './Help/Products.vue'
 import Speak from './Help/Speak.vue'
-import { useForm } from "@inertiajs/inertia-vue3";
-import { Link } from '@inertiajs/inertia-vue3';
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Down from '../../Help/Icon/Down.vue'
 import Add from '../../Help/Icon/Add.vue'
 import Minus from '../../Help/Icon/Minus.vue'

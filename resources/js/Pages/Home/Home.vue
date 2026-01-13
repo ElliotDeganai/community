@@ -39,7 +39,8 @@
 </template>
 <script>
 import Layout from '../../Layouts/Default.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     layout: Layout,
     components: {Link},

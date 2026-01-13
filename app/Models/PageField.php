@@ -50,6 +50,10 @@ class PageField extends Model
         return $this->belongsTo('App\Models\Page');
     }
 
+    public function page_section() {
+        return $this->belongsTo('App\Models\PageSection');
+    }
+
     public function documentation() {
         return $this->belongsTo('App\Models\Documentation');
     }

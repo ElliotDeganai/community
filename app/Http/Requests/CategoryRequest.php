@@ -15,7 +15,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->isDev() || Auth::user()->isAdmin();
+        return Auth::user()->isDev();
     }
 
     /**

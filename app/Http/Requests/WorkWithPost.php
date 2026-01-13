@@ -14,7 +14,7 @@ class WorkWithPost extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->isDev() || Auth::user()->isAdmin() || Auth::user()->isEditor();
+        return Auth::user()->isDev() || Auth::user()->isAdmin() || Auth::user()->isEditor() || Auth::user()->isCollaborator() || Auth::user()->isClient();
     }
 
     /**
@@ -31,8 +31,9 @@ class WorkWithPost extends FormRequest
             'slug' => 'required|string',
             'excerpt' => 'nullable',
             'doc_values.*.value_date' => 'nullable|date',
-            'doc_values.*.value_date_time' => 'nullable|date',
-            'doc_values.*.value_html' => 'nullable|starts_with:<',
+            //'doc_values.*.value_date_time' => 'nullable|date_format:dd-mm-YYYY HH:ii',
+            'doc_values.*.value_date_time' => 'nullable',
+            'doc_values.*.value_html' => 'nullable|string',
             'doc_values.*.value_price' => 'nullable|numeric',
             'doc_values.*.value_number' => 'nullable|numeric',
             'doc_values.*.value_text' => 'nullable|string',
@@ -41,7 +42,7 @@ class WorkWithPost extends FormRequest
             'doc_values.*.value_carousel' => 'nullable|boolean',
             'doc_values.*.value_audio' => 'nullable|boolean',
             'doc_values.*.value_list' => 'nullable',
-            'doc_values.*.value_link' => 'nullable|url',
+            //'doc_values.*.value_link' => 'nullable|url',
             'doc_values.*.images.*' => 'sometimes|image|max:2048',
             'doc_values.*.audio.*' => 'sometimes|file|max:2048',
             'doc_values.*.gallery.*' => 'sometimes|image|max:2048',

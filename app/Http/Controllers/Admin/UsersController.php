@@ -32,7 +32,16 @@ class UsersController extends Controller
         }else {
             $pages=Auth::user()->pages()->get();
         } */
-        $users=User::with('roles')->withCount('posts')->withCount('categories')->paginate(10);
+       $excludedRoleName = ['dev', 'admin'];
+       if (Auth::user()->isEditor()) {
+            $users=User::with('roles')
+                ->whereDoesntHave('roles', function ($query) use ($excludedRoleName) {
+                    $query->whereIn('name', $excludedRoleName);
+                })->withCount('posts')->withCount('categories')->paginate(10);
+       }else {
+            $users=User::with('roles')->withCount('posts')->withCount('categories')->paginate(10);
+       }
+
         //dd($users);
         return Inertia::render('Admin/User/Index', ['getusers' => $users]);
     }
@@ -80,9 +89,14 @@ class UsersController extends Controller
         if (Auth::user()->cant('manageUsers', $user)) {
             return redirect()->route('admin')->with('status', "You cannot edit users !");
         }
+        if (Auth::user()->isAdmin() || Auth::user()->isDev()) {
+            $roles = Role::all();
+        }else {
+            $roles = Role::whereIn('name', ['editor', 'collaborator', 'client'])->get();
+        }
         return Inertia::render('Admin/User/Edit', [
-            'getuser' => $user->load('roles'),
-            'getroles' => Role::all()
+            'getuser' => $user->load('roles', 'calendar'),
+            'getroles' => $roles
         ]);
     }
 

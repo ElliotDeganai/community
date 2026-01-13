@@ -19,14 +19,6 @@
                 <div v-if="$page.props.status.message !== null" class="py-8">
                     <div v-if="$page.props.status.message" class="p-4 rounded-md bg-white text-red-900 bold">{{$page.props.status.message}}</div>
                 </div>
-                <div v-if="launched" class="py-4 lg:py-8">
-                    <div class="header-config-client">Voici le nouveau tirage au sort</div>
-                    <div class="py-2 lg:py-4 flex flex-wrap w-full">
-                        <div class="py-2 w-full" :key="user.id" v-for="user in getEditors">
-                            {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>, Mot de passe : {{user.password}}
-                        </div>
-                    </div>
-                </div>
                 <div>
                     <div class="header-config-client">Voici le tirage au sort actuel</div>
                     <div class="py-4">
@@ -35,6 +27,14 @@
                         </div>
                     </div>
 
+                </div>
+                <div v-if="launched" class="py-4 lg:py-8">
+                    <div class="header-config-client">Voici le nouveau tirage au sort</div>
+                    <div class="py-2 lg:py-4 flex flex-wrap w-full">
+                        <div class="py-2 w-full" :key="user.id" v-for="user in getEditors">
+                            {{user.name}}  offre un cadeau à <span v-if="user.new_user">{{getUser(user.new_user).name}}</span>, Nouveau Mot de passe : {{user.password}}
+                        </div>
+                    </div>
                 </div>
                 <div class="py-4 lg:py-8">
                     <div>
@@ -56,9 +56,11 @@ import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import helpers from '../../../helpers'
 import DocValue from './../Help/DocumentationValue.vue'
 import Couple from '../Help/Icon/Couple.vue'
-import { useForm } from "@inertiajs/inertia-vue3";
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     components:  {BreezeGuestLayout, DocValue, Couple, Link},
     layout: BreezeGuestLayout,
@@ -78,7 +80,7 @@ export default {
             launched: false,
             form : useForm({
                 users: this.getusers,
-                campaign: this.getCampaignSection().category.posts[0]
+                campaign: this.getCampaignSection().category.posts[0].id
             }),
         }
     },
@@ -168,7 +170,7 @@ export default {
         },
         submit() {
             let self = this;
-            this.form.put(route("users.campaign", this.form),  {
+            this.form.post(route("users.campaign", this.form),  {
                 onSuccess: (form) => {
                     self.updateMode = false;
                 },

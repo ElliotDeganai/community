@@ -22,7 +22,7 @@ class BlogPolicy
      */
     public function viewAll(User $user)
     {
-        return $user->isDev() || $user->isAdmin();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator();
     }
 
     /**
@@ -57,7 +57,7 @@ class BlogPolicy
     public function create(User $user)
     {
         //return $user->hasRole('editor') !== null;
-        return $user->isDev() || $user->isAdmin() || $user->isEditor();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator();
     }
 
     /**
@@ -70,7 +70,7 @@ class BlogPolicy
     public function update(User $user, Post $post)
     {
         //return $user->id == $post->user_id || $user->hasRole('admin') !== null;
-        return $user->isDev() || $user->isAdmin() || $user->isEditor();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator();
     }
 
     /**

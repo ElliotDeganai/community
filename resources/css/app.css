@@ -6,6 +6,9 @@
     .form-fields {
       @apply bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white;
     }
+    .form-fields-long {
+      @apply bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white w-full;
+    }
     .form-fields-client {
       @apply bg-white appearance-none border-2 border-red-900 rounded py-2 px-4 text-red-900 leading-tight focus:outline-none focus:bg-white;
     }
@@ -38,6 +41,14 @@
     }
     body{
       font-family: 'Kalam', cursive;
+    }
+
+    ul, menu {
+        @apply list-disc pl-6;
+    }
+
+    ol, menu {
+        @apply list-decimal pl-6;
     }
 
     .title-home {

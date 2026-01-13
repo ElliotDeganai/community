@@ -1,8 +1,9 @@
 import './bootstrap';
 
 import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/inertia-vue3';
-import { InertiaProgress } from '@inertiajs/progress';
+//import { createInertiaApp } from '@inertiajs/inertia-vue3';
+//import { createInertiaApp } from '@inertiajs/inertia-vue3'
+import { createInertiaApp } from '@inertiajs/vue3'
 import Store from './Store/index'
 //import VueRouter from 'vue-router'
 //import router from "./Router/index";
@@ -19,11 +20,11 @@ import helpers from './helpers';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
-createInertiaApp({
+/* createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}.vue`),
-    setup({ el, app, props, plugin }) {
-        const VueApp = createApp({ render: () => h(app, props) });
+    setup({ el, App, props, plugin }) {
+        const VueApp = createApp({ render: () => h(App, props) });
 
         VueApp.config.globalProperties.$helpers = helpers;
         //VueApp.config.globalProperties.$stripe = options;
@@ -36,6 +37,27 @@ createInertiaApp({
             .mixin({ methods: { route } })
             .mount(el);
     },
-});
+}); */
 
-InertiaProgress.init({ color: '#4B5563' });
+const app = document.getElementById('app')
+
+if (app) {
+    createInertiaApp({
+        title: (title) => `${title} - ${appName}`,
+        resolve: name => require(`./Pages/${name}`),
+        setup({el, App, props, plugin}) {
+            const VueApp = createApp({ render: () => h(App, props) });
+
+            VueApp.config.globalProperties.$helpers = helpers;
+            //VueApp.config.globalProperties.$stripe = options;
+            return VueApp
+                .use(plugin)
+                .use(require('moment'))
+                .use(Store)
+                //.use(router)
+                //.use(StripePlugin, options)
+                .mixin({ methods: { route } })
+                .mount(el);
+        },
+    })
+}

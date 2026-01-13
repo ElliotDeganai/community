@@ -186,6 +186,12 @@
                                     </Link>
                                 </div>
                             </div>
+                            <div v-if="!documentation.isNew" class="py-4 w-1/2">
+                                <div class="btn-delete cursor-pointer" @click.prevent="this.$store.dispatch('set_model', {model: documentation, route: 'documentation', type: 'documentation'})">Delete documentation</div>
+                            </div>
+                            <div v-else class="py-4 w-1/2">
+                                <div class="btn-delete cursor-pointer" @click.prevent="model.documentations = model.documentations.filter(d => d.id != documentation.id)">Remove new documentation</div>
+                            </div>
                         </div>
                     <!-- <remove-item getText="Supprimer l'activité" @itemToRemove.prevent="onButtonRemoveItem(activity.index)" /> -->
                         <div class="flex flex-wrap py-8">
@@ -206,7 +212,8 @@
 </template>
 <script>
 import moment from 'moment'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     props: {
         getcategories: Array,
@@ -242,7 +249,8 @@ export default {
                 suffix: null,
                 currency: null,
                 description: '',
-                doc_options: []
+                doc_options: [],
+                isNew: true
             };
             this.model.documentations.push(documentation);
             this.iteration++;
@@ -264,6 +272,7 @@ export default {
                 suffix: null,
                 currency: null,
                 description: '',
+                isNew: true
             };
             this.model.documentations.push(documentation);
             this.iteration++;

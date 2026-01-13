@@ -5,7 +5,8 @@ import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
 import BreezeNavLink from '@/Components/NavLink.vue';
 import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import { mapState } from 'vuex';
 import {computed} from "vue";
 import {useStore} from "vuex";
@@ -40,7 +41,7 @@ const showingNavigationDropdown = ref(false);
                             <div class="hidden sm:flex sm:items-center sm:ml-6">
                                 <!-- Settings Dropdown -->
                                 <div class="ml-3 relative flex">
-                                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
+                                    <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex py-2  rounded-md">
                                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -58,12 +59,12 @@ const showingNavigationDropdown = ref(false);
                                                 Page List
                                             </BreezeDropdownLink>
 
-                                            <BreezeDropdownLink :href="route('pages.create')" method="get" as="button">
+                                            <BreezeDropdownLink v-if="$page.props.auth.isDev" :href="route('pages.create')" method="get" as="button">
                                                 New Page
                                             </BreezeDropdownLink>
                                         </template>
                                     </BreezeDropdown>
-                                    <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" align="right" width="48">
+                                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex py-2 rounded-md">
                                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -109,7 +110,7 @@ const showingNavigationDropdown = ref(false);
                                             </BreezeDropdownLink>
                                         </template>
                                     </BreezeDropdown>
-                                    <BreezeDropdown align="right" width="48">
+                                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex py-2  rounded-md">
                                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -139,7 +140,8 @@ const showingNavigationDropdown = ref(false);
                                         </template>
                                     </BreezeDropdown>
 
-                                    <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" :href="route('users.index')" class="py-3 px-3 items-center">Manage Users</Link>
+                                    <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 items-center">Manage Users</Link>
+
                                     <div class="px-8 py-2">
                                         <Link :href="route('home')" class="shrink-0 flex items-center px-3 py-2 bg-slate-900 rounded-md font-bold text-white">See Website</Link>
                                     </div>
@@ -166,6 +168,9 @@ const showingNavigationDropdown = ref(false);
                                     <template #content>
                                         <BreezeDropdownLink :href="route('admin')" as="button">
                                             Admin
+                                        </BreezeDropdownLink>
+                                        <BreezeDropdownLink v-if="($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator) && $page.props.calendar == 1" :href="route('calendar.index')" as="button">
+                                            Gérer mes RDV
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                             Log Out

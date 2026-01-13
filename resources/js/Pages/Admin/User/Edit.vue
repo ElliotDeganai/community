@@ -27,7 +27,7 @@
                                                 <div class="label-fields">Email</div>
                                                 <input type="email" class="form-fields" id="email" name="email" v-model="form.email" />
                                             </div>
-                                            <div class="py-4 w-1/3">
+<!--                                             <div class="py-4 w-1/3">
                                                 <div class="label-fields">City</div>
                                                 <input type="text" class="form-fields" id="city" name="city" v-model="form.city" />
                                             </div>
@@ -38,8 +38,8 @@
                                             <div class="py-4 w-1/3">
                                                 <div class="label-fields">Zip Code</div>
                                                 <input type="text" class="form-fields" id="zip_code" name="zip_code" v-model="form.zip_code" />
-                                            </div>
-                                            <div class="py-4 w-1/3">
+                                            </div> -->
+<!--                                             <div class="py-4 w-1/3">
                                                 <label class="label-fields">
                                                     Has company ?
                                                 </label>
@@ -53,8 +53,8 @@
                                                         <span :class="[form.has_company ? 'right-0 bg-green-800' : 'left-0 bg-stone-700']" class="absolute -top-1  w-8 h-8 rounded-full shadow-lg"></span>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="py-8 w-full">
+                                            </div> -->
+  <!--                                          <div class="py-8 w-full">
                                                 <div class="header-config">
                                                     RSVP
                                                 </div>
@@ -71,13 +71,13 @@
                                                             </label>
                                                         </div>
                                                     </div>
-<!--                                                     <div v-else>
+                                                     <div v-else>
                                                         <div class="py-4">
                                                             <div class="border border-stone-700 rounded-lg p-8">The RSVP was not answered yet.</div>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                         </div>
                                         <div class="py-8">
                                             <div class="header-config">
@@ -93,6 +93,35 @@
                                                 </div>
                                             </div>
                                         </div>
+<!--                                         <div>
+                                            <div class="header-config">
+                                                Calendrier
+                                            </div>
+                                            <div>
+                                                <div class="flex flex-wrap">
+                                                    <div v-if="form.calendar.slot_duration_unit !== 'D'" class="py-4 w-1/3">
+                                                        <div class="label-fields">Heure de Début</div>
+                                                        <input type="time" class="form-fields" id="beginning_hour" name="beginning_hour" v-model="form.calendar.beginning_hour" />
+                                                    </div>
+                                                    <div v-if="form.calendar.slot_duration_unit !== 'D'" class="py-4 w-1/3">
+                                                        <div class="label-fields">Heure de Fin</div>
+                                                        <input type="time" class="form-fields" id="ending_hour" name="ending_hour" v-model="form.calendar.ending_hour" />
+                                                    </div>
+                                                    <div class="py-4 w-1/3">
+                                                        <div class="label-fields">Durée du créneau</div>
+                                                        <input type="text" class="form-fields" id="slot_duration_time" name="slot_duration_time" v-model="form.calendar.slot_duration_time" />
+                                                    </div>
+                                                    <div class="py-4 w-1/3">
+                                                        <div class="label-fields">Disponibilité</div>
+                                                        <input type="text" class="form-fields" id="availability_type" name="availability_type" v-model="form.calendar.availability_type" />
+                                                    </div>
+                                                    <div class="py-4 w-1/3">
+                                                        <div class="label-fields">Unité du créneau</div>
+                                                        <input type="text" class="form-fields" id="slot_duration_unit" name="slot_duration_unit" v-model="form.calendar.slot_duration_unit" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
                                         <div class="">
                                             <button class="btn-submit-fields" type="submit">Submit</button>
                                         </div>
@@ -109,8 +138,10 @@
 <script>
 import Layout from '../../../Layouts/Authenticated.vue';
 import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
-import { useForm } from "@inertiajs/inertia-vue3";
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 export default {
     layout: Layout,
     components: {},
@@ -126,13 +157,15 @@ export default {
             has_company: props.getuser.has_company,
             is_accompanied: props.getuser.is_accompanied,
             is_partying: props.getuser.is_partying,
+            calendar: props.getuser.calendar ? props.getuser.calendar : null,
             roles: [],
         });
         return { form };
     },
     data() {
         return {
-            all_roles: this.getroles
+            all_roles: this.getroles,
+            has_calendar: false
         }
     },
     props: {
@@ -155,12 +188,29 @@ export default {
         toggleCompany() {
             this.form.has_company = !this.form.has_company;
         },
+        setCalendar() {
+            if (!this.getuser.calendar) {
+                this.form.calendar = {
+                    beginning_hour: '09:00:00',
+                    ending_hour: '19:00:00',
+                    slot_duration_time: null,
+                    availability_type: null,
+                    slot_duration_unit: 'D',
+                    user: null
+                };
+            }
+        },
+    },
+    created() {
+        this.setCalendar();
+        if (this.getuser.calendar) {
+            this.has_calendar = true;
+        }
     },
     mounted() {
         for (let index = 0; index < this.form.user.roles.length; index++) {
             const element = this.form.user.roles[index];
             this.form.roles.push(this.form.user.roles[index].id);
-
         }
     },
 }

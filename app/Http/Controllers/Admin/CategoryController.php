@@ -163,7 +163,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, Category $category)
     {
-        dd($request['documentations']);
+        //dd($request['documentations']);
         if (Auth::user()->cant('update', $category)) {
             return redirect()->route('categories.index');
         }
@@ -223,7 +223,6 @@ class CategoryController extends Controller
                 $category->documentations()->save($doc);
             }
         }
-        dd($category);
         $category->save();
         return redirect()->route('categories.index')->with('status', "The category $category->name has been updated !");
     }

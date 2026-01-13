@@ -16,6 +16,8 @@ use Inertia\Inertia;
 use Mockery\Undefined;
 use App\Repositories\Home\CategoryRepository;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AppointmentSet;
 
 class BlogController extends Controller
 {
@@ -162,8 +164,8 @@ class BlogController extends Controller
     public function store(WorkWithPost $request)
     {
 
-        $page = Page::where('title', 'Wishlist')->first();
-        //dd($page);
+        $page = Page::where('title', 'Home')->first();
+        //dd($request);
         if (Auth::user()->cant('create', Post::class)) {
             return redirect()->route('posts.index')->with('status', "You cannot create posts !");
         }
@@ -172,6 +174,7 @@ class BlogController extends Controller
         $post = new Post($request->only(['name', 'slug', 'body', 'excerpt', 'published', 'published_at', 'post_id']));
         $post->category_id = $request->category_id['id'];
         $request->post_id !== null ? $post->post_id = $request->post_id['id'] : null;
+        $user = User::find(Auth::user()->id);
         //$post->post_id = $request->post_id['id'];
         Auth::user()->posts()->save($post);
 
@@ -218,16 +221,17 @@ class BlogController extends Controller
             $doc->save();
         }
         if (Auth::user()->isEditor()) {
-            //dd($page);
-/*             $page->load('pageSections.category.posts.docValues');
-                return Inertia::render('Home/Client/'.$page->template, [
-                    'getpage' => $page,
-                    'getusers' => User::with('roles', 'user')->get()
-                ]); */
+            Mail::to($user)->send(new AppointmentSet($user, $post, $doc_value['value_date_time']));
 
-                return redirect()->route($page->url_name)->with('status', 'Un nouveau voeu a été ajouté !');
+            return redirect()->route($page->url_name)->with('status', 'Votre rendez-vous est confirmé !');
         }else {
-            return redirect()->route('posts.index')->with('status', 'The post has been created !');
+            if (Auth::user()->isCollaborator() || Auth::user()->isClient()) {
+                return redirect()->route($page->url_name)->with('status', 'The post has been created !');
+            } else {
+                return redirect()->route('posts.index')->with('status', 'The post has been created !');
+            }
+
+
         }
 
     }
@@ -426,11 +430,7 @@ class BlogController extends Controller
             }
         }
         $page = Page::where('title', 'Wishlist')->first();
-        if (Auth::user()->isEditor()) {
-            return redirect()->route($page->url_name)->with('status', 'The post has been created !');
-        }else {
-            return redirect()->route('posts.index')->with('status', "The post $post->title has been updated !");
-        }
+        return redirect()->route('posts.index')->with('status', "The post $post->title has been updated !");
 
     }
 
@@ -456,9 +456,9 @@ class BlogController extends Controller
         $post->delete();
         //$deleted = DocValue::where('post_id', $post->id)->delete();
         if (Auth::user()->isEditor()) {
-            return redirect()->route($page->url_name)->with('status', 'Le cadeau a bien été supprimé !');
+            return redirect()->route($page->url_name)->with('status', 'Le rendez-vous a bien été supprimé !');
         }else {
-            return redirect()->route('posts.index')->with('status', "The post has been deleted !");
+            return redirect()->route('posts.index')->with('status', "Le rendez-vous a bien été supprimé !");
         }
 
     }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\PageField;
+use App\Models\PageSection;
 use App\Models\Post;
 use App\Repositories\Home\PageRepository;
 use App\Repositories\Home\PostRepository;
@@ -48,19 +50,23 @@ class HomeController extends Controller
     }
 
     public function index(){
+        //dd('test');
         $homePage = Page::where('url', '/')->get();
         $posts = $this->postRepository->getAllPosts();
-        $categories = $this->categoryRepository->getAllCategoriesWithPosts();
+        //dd(count($posts));
+        $categories = Category::with('categories')->with('documentations')->with('posts.docValues')->with('category')->get();
         if (count($posts) > 0) {
             if (count($homePage) > 0) {
                 $homePage[0]->load('pageSections')
-                    ->load('pageSections.pageFields',
+                    ->load('pageSections.pageFields', 'medias',
                     'pageSections.category',
                     'pageSections.category.documentations',
-                    'pageSections.pageFields.documentation'
+                    'pageSections.pageFields.documentation',
+                    'pageSections.category.posts.user',
             );
                     return Inertia::render('Home/Client/'.$homePage[0]->template, [
                         'getpage' => $homePage[0],
+                        'getcategories' => $categories
                     ]);
             }else {
                 return Inertia::render('Home/Default', [
@@ -161,8 +167,31 @@ class HomeController extends Controller
 
     public function post(int $postId){
         $post = $this->postRepository->getPostById($postId);
-        return Inertia::render('Home/Client/Show/Product', [
-            'getpost' => $post
+        $category = Category::find($post->category_id);
+        $section_fields = [];
+
+        $new_section = new PageSection([
+            'category_id' => $category->id,
+            'page_id' => 0,
+            'name' => $category->name,
+            'description' => '',
+            'user_id' => 0
+        ]);
+        //dd($post->docValues);
+
+        foreach($post->docValues as $field){
+            $new_field = new PageField([
+                'documentation_id' => $field['documentation']['id'],
+                'page_section_id' => 0,
+                'name' => $field['documentation']['name'],
+                'user_id' => 0
+            ]);
+            array_push($section_fields, $new_field);
+        }
+        return Inertia::render('Home/Client/Show/Item', [
+            'getpost' => $post,
+            'getprojetsection' => $new_section,
+            'getfields' => $section_fields
         ]);
     }
 

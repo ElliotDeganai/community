@@ -69,7 +69,8 @@
 <script>
 import helpers from '../../../helpers'
 import Layout from '../../../Layouts/Authenticated.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Pagination from '../../Help/Pagination.vue'
 import moment from 'moment';
 import store from '../../../Store/index'

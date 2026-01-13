@@ -52,16 +52,29 @@ class HandleInertiaRequests extends Middleware
 
         return array_merge(parent::share($request), [
             'is_ecommerce' => env('IS_ECOMMERCE'),
+            'calendar' => env('CALENDAR'),
+            'calendar_slot_time' => env('CALENDAR_SLOT_TIME'),
+            'calendar_slot_time_unit' => env('CALENDAR_SLOT_TIME_UNIT'),
             'test' => 'test',
             'pusher_key' => env('PUSHER_APP_KEY'),
             'pusher_id' => env('PUSHER_APP_ID'),
+            'test' => 'test',
             'auth' => [
-                'user' => Auth::user() ? User::where('id', $userId)->with('roles', 'user')->first() : null,
+                'user' => Auth::user() ? User::where('id', $userId)->with('roles', 'user', 'calendar')->first() : null,
                 'unReadNotifications' => Auth::user() ? User::where('id', $userId)->first()->unreadNotifications : null,
                 'isDev' => Auth::user() ? User::find(Auth::user()->id)->isDev() : null,
                 'isAdmin' => Auth::user() ? User::find(Auth::user()->id)->isAdmin() : null,
                 'isEditor' => Auth::user() ? User::find(Auth::user()->id)->isEditor() : null,
                 'isClient' => Auth::user() ? User::find(Auth::user()->id)->isClient() : null,
+                'isCollaborator' => Auth::user() ? User::find(Auth::user()->id)->isCollaborator() : null,
+            ],
+            'currentPage' => [
+                'url' => $request->fullUrl(),
+                'path' => $request->path(),
+                'route' => $request->route()?->getName(), // nom de la route (ex: 'pages.show')
+                'params' => $request->route()?->parameters(), // paramètres de la route (ex: ['slug' => 'contact'])
+                'query' => $request->query(), // paramètres GET
+                'pageObject' => Page::where('url_name', $request->route()?->getName())->with('medias')->first()
             ],
             'ziggy' => function () {
                 return (new Ziggy)->toArray();
@@ -70,12 +83,14 @@ class HandleInertiaRequests extends Middleware
             'pages' => Page::all()->load('pageSections')
                         ->load('pageSections.pageFields',
                         'pageSections.category',
+                        'medias',
                         'pageSections.category.posts',
+                        'pageSections.category.posts.user',
                         'pageSections.category.posts.docValues',
                         'pageSections.category.posts.docValues.medias',
                         'pageSections.category.posts.docValues.documentation',
                         'pageSections.category.documentations',
-                        'pageSections.pageFields.documentation', ),
+                        'pageSections.pageFields.documentation'),
 /*             'can' => [
                 'user' => [
                     'manage_user' => Auth::user() ? Auth::user()->can('manageUsers', User::class) : false,

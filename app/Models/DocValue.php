@@ -118,7 +118,6 @@ class DocValue extends Model implements HasMedia
 
     public function medias() {
         return $this->hasMany('App\Models\Media');
-
     }
 
     public function registerMediaCollections(): void

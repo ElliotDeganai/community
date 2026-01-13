@@ -38,7 +38,8 @@
 import Layout from '../../../../../Layouts/Guest.vue';
 import Fields from '../Field/Fields.vue'
 import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 export default {
     setup () {
         const form = reactive({
@@ -55,7 +56,7 @@ export default {
         })
 
         function submit() {
-            Inertia.post('/admin/posts', form);
+            router.post('/admin/posts', form);
         }
 
         return { form, submit }

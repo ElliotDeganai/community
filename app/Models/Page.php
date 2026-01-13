@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Page extends Model
+class Page extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
     protected $fillable = [
-        'title', 'url', 'url_name', 'template', 'description', 'published', 'published_at'
+        'header_title', 'header_subtitle', 'title', 'url', 'url_name', 'template', 'description', 'published', 'published_at',
+        'image'
     ];
 
     public static function boot() {
@@ -35,5 +39,15 @@ class Page extends Model
     public function pageSections()
     {
         return $this->hasMany(PageSection::class);
+    }
+
+    public function medias() {
+        return $this->hasMany('App\Models\Media');
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('image')
+        ->singleFile();
     }
 }

@@ -12,7 +12,9 @@
                 <div>
                     <div class="py-2">
                         <form  @submit.prevent="submit">
-                            <Fields  @modelSubmited="submit()" :getmodel="form" :categories="getcategories"
+                            <Fields v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" @modelSubmited="submit()" :getmodel="form" :categories="getcategories"
+                                :getparentcategory="parentCategory" :getparentpost="getParentPost()" :errors="errors"/>
+                            <FieldsProjet v-else @modelSubmited="submit()" :getmodel="form" :categories="getcategories"
                                 :getparentcategory="parentCategory" :getparentpost="getParentPost()" :errors="errors"/>
                         </form>
                     </div>
@@ -24,12 +26,15 @@
 <script>
 import Layout from '../../../Layouts/Authenticated.vue';
 import Fields from '../../Help/Form/Post/Fields.vue'
+import FieldsProjet from '../../Help/Form/Post/FieldsProjet.vue'
 import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
-import { useForm } from "@inertiajs/inertia-vue3";
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
+//import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
 export default {
     layout: Layout,
-    components: {Fields},
+    components: {Fields, FieldsProjet},
     setup(props) {
         function getParentPost(){
             if (props.getpost.post && props.getParentCategory) {
@@ -50,7 +55,8 @@ export default {
             category_id: props.getpost.category,
             doc_values: props.getpost.doc_values,
             excerpt: props.getpost.excerpt,
-            post_id: parentPost
+            post_id: parentPost,
+            image: null
         })
         return { form, getParentPost, parentPost };
     },

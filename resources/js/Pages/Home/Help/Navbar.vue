@@ -75,7 +75,8 @@ import Youtube from './Icon/Youtube.vue'
 import Instagram from './Icon/Instagram.vue'
 import Facebook from './Icon/Facebook.vue'
 import Twitter from './Icon/Twitter.vue'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     components: {
         Search, Cart, Youtube, Instagram, Facebook, Twitter, Link

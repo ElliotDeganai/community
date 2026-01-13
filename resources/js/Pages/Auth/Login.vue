@@ -5,7 +5,8 @@ import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+//import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 
 defineProps({
     canResetPassword: Boolean,
@@ -27,8 +28,8 @@ const submit = () => {
 
 <template>
     <BreezeGuestLayout class="relative text-white">
-        <div :style="'background-image: url(/storage/home/login-s.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg hidden md:block"></div>
-        <div :style="'background-image: url(/storage/home/login-s.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg block md:hidden"></div>
+        <div :style="'background-image: url(/storage/home/login2.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg hidden md:block"></div>
+        <div :style="'background-image: url(/storage/home/login2.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg block md:hidden"></div>
         <div class="w-full h-full opacity-20  blur-lg absolute top-0 left-0 bg-black"></div>
         <div class="px-8 lg:px-32 relative overflow-hidden ">
             <div class="py-24    lg:py-32 relative">

@@ -1,5 +1,5 @@
 <template>
-    <nav :class="[((scrollPosition === null && $page.url !== '/resume') || (scrollPosition < 0.1 && $page.url !== '/resume')) ? 'text-white border-b' : 'bg-red-900 border-b text-white']" class=" fixed top-0 w-full border-gray-200 z-60">
+    <nav :class="[((scrollPosition === null && current_page.route !== 'calendar' && current_page.route !== 'calendar' && current_page.route !== 'item_Projet') || (scrollPosition < 0.1 && current_page.route !== 'calendar' && current_page.route !== 'calendar.index' && current_page.route !== 'item_Projet')) ? 'border-b text-white' : 'border-b bg-white']" class=" fixed top-0 w-full border-gray-200 z-60">
         <div class=" mx-auto px-4 sm:px-6 lg:px-16">
             <div class="flex justify-between h-16">
                 <div class="flex ">
@@ -8,15 +8,21 @@
                     </div>
                     <Link :href="route('home')" class="shrink-0 flex items-center">
                         <div class="h-16 px-2 py-3">
-                            <img :src="'../storage/home/claus-2.png'" alt="" class="h-full" />
+                            <img v-if="(scrollPosition === null && current_page.route !== 'calendar' && current_page.route !== 'calendar' && current_page.route !== 'item_Projet') || (scrollPosition < 0.1 && current_page.route !== 'calendar' && current_page.route !== 'calendar.index' && current_page.route !== 'item_Projet')" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-full" alt="" />
+                            <img v-else :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
                         </div>
-                        <div class="text-lg lg:text-2xl font-bold">Secret Santa</div>
+                        <div class="text-lg lg:text-2xl font-bold">DevCommunity</div>
                     </Link>
                 </div>
-                <div v-if="$page.props.pages.length > 0" class="base:flex lg:flex xl:flex flex-wrap justify-around hidden sm:hidden " >
-                    <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
-                        <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor)" :href="route(page.url_name)" :class="[$page.props.getpage ? page.id === $page.props.getpage.id : false ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
+                <div v-if="$page.props.pages.length > 0 && $page.props.auth.user" class="base:flex lg:flex xl:flex flex-wrap justify-around hidden sm:hidden " >
+                    <div :class="[((page.url_name !== 'home')) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
+                        <Link v-if="((page.url_name !== 'home'))" :href="route(page.url_name)" :class="[$page.props.getpage ? page.id === $page.props.getpage.id : false ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
                     </div>
+                </div>
+                <div v-if="$page.props.calendar == 1 && $page.props.auth.user" class="py-2 px-3 shrink-0" >
+                    <Link :href="route('calendar')" class="text-white font-bold px-3 py-2 bg-teal-900 flex flex-wrap rounded-full">
+                        Prendre RDV
+                    </Link>
                 </div>
                 <div v-if="$page.props.is_ecommerce == 1" class="py-2 px-3 shrink-0 flex items-center" >
                     <Link :href="route('checkout')" class="text-white font-bold px-3 py-2 bg-sky-900 flex flex-wrap rounded-full">
@@ -40,14 +46,22 @@
                             </template>
 
                             <template #content>
-                                <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" :href="route('admin')" as="button">
+                                <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('admin')" as="button">
                                     Admin
+                                </BreezeDropdownLink>
+                                <BreezeDropdownLink v-if="($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator) && $page.props.calendar == 1" :href="route('calendar.index')" as="button">
+                                    Gérer mes RDV
                                 </BreezeDropdownLink>
                                 <BreezeDropdownLink :href="route('logout')" method="post" as="button">
                                     Log Out
                                 </BreezeDropdownLink>
                             </template>
                         </BreezeDropdown>
+                    </div>
+                </div>
+                <div  class="sm:flex sm:items-center sm:ml-6" v-else>
+                    <div class="lg:ml-3 relative">
+                        <Link :href="route('login')" class="shrink-0 uppercase flex items-center font-bold">Connexion</Link>
                     </div>
                 </div>
             </div>
@@ -65,7 +79,8 @@
 
 </template>
 <script>
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import BreezeApplicationLogo from '@/Components/ApplicationLogo.vue';
 import BreezeDropdown from '@/Components/Dropdown.vue';
 import BreezeDropdownLink from '@/Components/DropdownLink.vue';
@@ -89,11 +104,13 @@ export default {
         canRegister: Boolean,
         laravelVersion: String,
         phpVersion: String,
-        getpages: Array
+        getpages: Array,
+        getpage: Object
     },
     data() {
         return {
             pages: this.getpages,
+            page: this.getpage,
             scrollPosition: null,
             siteReady: false,
             loadingUp: true,
@@ -156,7 +173,10 @@ export default {
         },
         isLoading() {
             return this.loadingUp && this.$page.url === '/';
-        }
+        },
+        current_page() {
+            return this.$page.props.currentPage;
+        },
     },
     async created() {
         await this.$store.dispatch('setDb');
@@ -166,6 +186,7 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.updateScroll);
         this.loadingSite();
+        console.log(this.current_page_path);
     },
 }
 </script>

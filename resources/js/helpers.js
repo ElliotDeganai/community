@@ -1,6 +1,27 @@
+import { forEach } from "lodash";
+
 const helpers = {
     getProductImage: function(product){
-        return product.doc_values.filter(val => val.value_image === 1)[0].medias[0].original_url
+        if (product.doc_values.filter(val => val.value_image === 1).length > 0) {
+            if (product.doc_values.filter(val => val.value_image === 1)[0].medias.length > 0) {
+                return product.doc_values.filter(val => val.value_image === 1)[0].medias[0].original_url;
+            } else {
+                return '/storage/default/web_dev.jfif';
+            }
+        } else {
+            return '/storage/default/web_dev.jfif';
+        }
+    },
+    getObjectImage: function(obj){
+        return obj.medias[0].original_url
+    },
+    getGalleryImages: function(obj){
+        let arr_images = [];
+        obj.medias.forEach(media => {
+            console.log(media.original_url)
+            arr_images.push(media.original_url);
+        });
+        return arr_images;
     },
     getProductPrice: function(product){
         return product.doc_values.filter(val => val.value_image === 1)[0].medias[0].original_url

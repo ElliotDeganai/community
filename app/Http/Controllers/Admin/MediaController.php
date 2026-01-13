@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DocValue;
+use App\Models\Page;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
@@ -83,6 +84,9 @@ class MediaController extends Controller
     public function destroy(Media $media)
     {
         $model = DocValue::find($media->model_id);
+        if(!isset($model)){
+            $model = Page::find($media->model_id);
+        }
         $collection = $media->collection_name;
         $media->delete();
         if (count($model->medias) <= 0) {

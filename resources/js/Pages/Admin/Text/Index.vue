@@ -91,9 +91,11 @@
 </template>
 <script>
 import Layout from '../../../Layouts/Authenticated.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Pagination from '../../Help/Pagination.vue'
-import { Inertia } from '@inertiajs/inertia'
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 export default {
     layout: Layout,
     components: {Link, Pagination},
@@ -107,7 +109,7 @@ export default {
     },
     methods: {
         submit_delete(post) {
-            Inertia.delete(route("posts.delete", post.id));
+            router.delete(route("posts.delete", post.id));
         },
         formatDate(date){
             return moment(date).format('YYYY-MM-DD HH:mm:ss');

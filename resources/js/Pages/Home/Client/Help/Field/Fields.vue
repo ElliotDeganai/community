@@ -219,7 +219,8 @@ import FilesInput from '../../../../Help/File/FilesInput.vue'
 import CustomFile from '../../../../Help/File/Custom/Parent.vue'
 import CustomFiles from '../../../../Help/File/Custom/Parents.vue'
 import InputAudio from '../../../../Help/File/Custom/ParentAudio.vue'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     props: {
         getmodel: Object,

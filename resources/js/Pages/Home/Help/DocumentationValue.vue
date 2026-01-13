@@ -20,8 +20,8 @@
         </div>
         <div v-html="docValue" v-if="type == 'html'">
         </div>
-        <div v-if="type == 'image' && medias[0]" class="inline-block" :class="[imgSize ? 'h-'+imgHeight-20+' '+'md:h-'+imgHeight+' '+'w-'+imgWidth : '']">
-            <img class="w-full h-full object-contain" v-if="type == 'image'" :src="medias[0].original_url" />
+        <div v-if="type == 'image' && medias[0]" class="inline-block" :class="[imgSize ? 'h-'+(imgHeight-20)+' '+'md:h-'+imgHeight+' '+'w-'+imgWidth : '']">
+            <img class="w-full h-full object-cover" v-if="type == 'image'" :src="medias[0].original_url" />
         </div>
         <Audio v-if="type == 'audio'" :getdoc="'wavesurfer_'+getobject.id" :getaudio="medias[0].original_url"></Audio>
         <Gallery v-if="type == 'gallery'" :getphotos="medias" />
@@ -36,13 +36,33 @@ export default {
     components: {Audio, Gallery},
     data() {
         return {
-            docValue: this.getdoc ? this.getdoc.docValue : '',
+/*             docValue: this.getdoc ? this.getdoc.docValue : '',
             type: this.getdoc ? this.getdoc.type : '',
             medias: this.getdoc ? this.getdoc.medias : '',
             object: this.getdoc ? this.getobject : '',
             imgHeight: this.imgSize ? this.imgSize.height : '',
-            imgWidth: this.imgSize ? this.imgSize.width : ''
+            imgWidth: this.imgSize ? this.imgSize.width : '' */
         }
+    },
+    computed: {
+        docValue(){
+            return this.getdoc ? this.getdoc.docValue : '';
+        },
+        type(){
+            return this.getdoc ? this.getdoc.type : '';
+        },
+        medias(){
+            return this.getdoc ? this.getdoc.medias : '';
+        },
+        object(){
+            return this.getdoc ? this.getobject : '';
+        },
+        imgHeight(){
+            return this.imgSize ? this.imgSize.height : '';
+        },
+        imgWidth(){
+            return this.imgSize ? this.imgSize.width : '';
+        },
     },
 }
 </script>

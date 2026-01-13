@@ -33,7 +33,8 @@
 </template>
 <script>
 import File from "./File.vue"
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     props: ["getFiles", "geterror", "getType", "getObject", "getId"],
   components: { File, Link },

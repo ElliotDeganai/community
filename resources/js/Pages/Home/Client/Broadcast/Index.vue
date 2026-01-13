@@ -25,9 +25,11 @@
 <script>
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import Receive from './Receive.vue';
-import { Inertia } from '@inertiajs/inertia'
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 import { reactive } from 'vue'
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from "@inertiajs/vue3";
+//import { useForm } from "@inertiajs/inertia-vue3";
 
 export default {
     components:  {BreezeGuestLayout, Receive},

@@ -172,7 +172,8 @@
 <script>
 
 import {loadStripe} from '@stripe/stripe-js';
-import { Inertia } from '@inertiajs/inertia'
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 import { reactive } from 'vue'
 import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import CheckoutForm from './CheckoutForm.vue'
@@ -257,7 +258,7 @@ export default {
                     form.payment_method_id = this.customer.payment_method_id;
                     form.zip_code = this.customer.zip_code;
 
-                    Inertia.post('/payment', form);
+                    router.post('/payment', form);
 /*                         .then((response) => {
                             this.paymentProcessing = false;
                             console.log(response);

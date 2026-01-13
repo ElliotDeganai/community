@@ -47,7 +47,7 @@
                                 <div class="text-left w-1/7 py-2">{{page.categories_count}}</div>
                                 <div class="text-left w-1/7 py-2">{{page.published}}</div>
                                 <div class="text-left w-1/7 py-2">{{formatDate(page.published_at)}}</div>
-                                <button class="btn-delete" @click="this.$store.dispatch('set_model', {model: page, route: 'page', type: 'page'})">Delete</button>
+                                <button v-if="$page.props.auth.isDev" class="btn-delete" @click="this.$store.dispatch('set_model', {model: page, route: 'page', type: 'page'})">Delete</button>
                             </div>
                             <div class="w-full" v-if="detail !== null">
                                 <div v-if="detail.id === page.id" class="w-full bg-stone-100">
@@ -80,7 +80,8 @@
 </template>
 <script>
 import Layout from '../../../Layouts/Authenticated.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import Pagination from '../../Help/Pagination.vue'
 import moment from 'moment';
 import store from '../../../Store/index'

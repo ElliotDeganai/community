@@ -33,8 +33,10 @@
 import Layout from '../../../../../Layouts/Guest.vue';
 import Fields from '../Field/Fields.vue'
 import { reactive } from 'vue'
-import { Inertia } from '@inertiajs/inertia'
-import { useForm } from "@inertiajs/inertia-vue3";
+//import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
+import { useForm } from "@inertiajs/vue3";
+//import { useForm } from "@inertiajs/inertia-vue3";
 export default {
     layout: Layout,
     components: {Fields},

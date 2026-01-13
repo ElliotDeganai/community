@@ -6,6 +6,7 @@ import idb from '../FrontDb/indexedDBService';
 const store = createStore({
     state: {
         delete_modal: false,
+        image_modal: false,
         model: null,
         delete_route: null,
         type: null,
@@ -48,6 +49,14 @@ const store = createStore({
         UNSET_DELETE_MODAL(state){
             state.delete_modal = false;
         },
+        SET_IMAGE_MODAL(state, model){
+            state.image_modal = true;
+            state.model = model;
+        },
+        UNSET_IMAGE_MODAL(state){
+            state.image_modal = false;
+            state.model = null;
+        },
         SET_MODEL(state, model){
             state.model = model;
         },
@@ -76,6 +85,15 @@ const store = createStore({
                     break;
                 case 'page':
                     state.delete_route = 'pages.destroy';
+                    break;
+                case 'page_section':
+                    state.delete_route = 'page_section.destroy';
+                    break;
+                case 'page_field':
+                    state.delete_route = 'page_field.destroy';
+                    break;
+                case 'appointment':
+                    state.delete_route = 'calendar.destroy';
                     break;
 
                 default:
@@ -111,6 +129,12 @@ const store = createStore({
         },
         set_delete_modal ({ commit, state }) {
           commit('SET_DELETE_MODAL');
+        },
+        unset_image_modal ({ commit, state }) {
+          commit('UNSET_IMAGE_MODAL');
+        },
+        set_image_modal ({ commit, state }, model) {
+          commit('SET_IMAGE_MODAL', model.image);
         },
         unset_delete_modal ({ commit, state }) {
           commit('UNSET_DELETE_MODAL');

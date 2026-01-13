@@ -119,12 +119,18 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <rich-text v-if="attribute.type === 'html'"
+<!--                             <rich-text v-if="attribute.type === 'html'"
                                 class="w-full h-64"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_html">
-                            </rich-text>
+                            </rich-text> -->
+                            <rich-text-2 v-if="attribute.type === 'html'"
+                                class="w-full h-64"
+                                :id="'doc_'+attribute.id"
+                                :name="'doc_'+attribute.id"
+                                v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_html">
+                            </rich-text-2>
                             <div class="w-1/5" v-if="attribute.type === 'boolean'">
                                 <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="0" /> False
                                 <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="1" /> True
@@ -245,12 +251,14 @@
 import moment from 'moment'
 import '../../RichText.vue'
 import RichText from '../../RichText.vue'
+import RichText2 from '../../RichText2.vue'
 import FileInput from '../../File/FileInput.vue'
 import FilesInput from '../../File/FilesInput.vue'
 import CustomFile from '../../File/Custom/Parent.vue'
 import CustomFiles from '../../File/Custom/Parents.vue'
 import InputAudio from '../../File/Custom/ParentAudio.vue'
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 export default {
     props: {
         getmodel: Object,
@@ -260,7 +268,7 @@ export default {
         getparentcategory: Object,
         getparentpost: Object
     },
-    components: {RichText, FileInput, FilesInput, CustomFile, CustomFiles, InputAudio, Link},
+    components: {RichText, RichText2, FileInput, FilesInput, CustomFile, CustomFiles, InputAudio, Link},
     data() {
         return {
             startCategory: this.getmodel.category_id,
@@ -336,8 +344,22 @@ export default {
                 console.log(objectForm)
                 //this.model.value_image = objectForm;
         },
+        setImages(){
+            this.getmodel.doc_values.forEach(doc_value => {
+                if (!doc_value.images) {
+                    doc_value.images = [];
+                };
+                if (!doc_value.gallery) {
+                    doc_value.gallery = [];
+                };
+                if (!doc_value.carousel) {
+                    doc_value.carousel = [];
+                };
+            });
+        },
     },
     created() {
+        this.setImages();
         if (this.getmodel.doc_values.length === 0 && this.getmodel.category_id !== null) {
             this.resetDoc();
         }

@@ -8,7 +8,7 @@
         <div>
             <div>This is your admin page, from here your can manage all the resources on your website !</div>
             <div class="py-8">
-                <div class="py-8" id="categories">
+                <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="py-8" id="categories">
                     <div class="header-config">
                         Last templates
                     </div>
@@ -64,7 +64,8 @@
 </template>
 <script>
 import Layout from '../../Layouts/Authenticated.vue';
-import { Link } from '@inertiajs/inertia-vue3';
+//import { Link } from '@inertiajs/inertia-vue3';
+import { Link } from '@inertiajs/vue3'
 import moment from 'moment';
 import RichText from '../Help/RichText.vue';
 import { mapActions } from 'vuex'
