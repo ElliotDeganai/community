@@ -32,6 +32,10 @@ class RegisteredUserEmail extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com', 'Example with markdown')->markdown('email.registered');
+
+        return $this->from('dev-community@elliot-deganai.net')
+        ->cc('edeganai@gmail.com')
+        ->subject('ED Web Factory - Commence ton aventure avec nos services !')
+        ->markdown('email.registered');
     }
 }

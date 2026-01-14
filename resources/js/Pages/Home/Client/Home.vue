@@ -10,7 +10,7 @@
                             <div v-if="page.header_title || page.header_subtitle" :class="[page.medias.length > 0 ? 'text-white' : '']" class="w-full h-full absolute top-0 left-0 flex flex-wrap justify-center content-center">
                                 <div v-if="page.header_title" class="font-bold text-4xl lg:text-6xl w-full text-center">{{page.header_title}}</div>
                                 <div v-if="page.header_subtitle" class="font-bold lg:text-xl text-center">{{page.header_subtitle}}</div>
-                                <div class="w-full text-center py-8" v-if="!$page.props.auth.user"><Link :href="route('login')" class="text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">Se connecter pour ajouter un projet</Link></div>
+                                <div class="w-full text-center py-8" v-if="!$page.props.auth.user"><Link :href="route('login')" class="text-lg font-bold bg-sky-800 px-3 py-2 rounded-md text-white">Se connecter pour ajouter un projet</Link></div>
                                 <div class="w-full text-center py-8" v-else>
                                     <Link :href="route('posts.create_type', 'Projet')" class="text-base lg:text-lg font-bold bg-sky-800 px-3 py-2 rounded-md text-white">
                                         Ajouter un nouveau projet
