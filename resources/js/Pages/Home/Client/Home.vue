@@ -25,7 +25,7 @@
                 <div v-if="getProjetSection()" class="">
                     <div class="px-4 md:px-8 xl:px-24 py-16">
                         <div class="text-4xl pb-4 w-full text-center font-bold">Projets</div>
-                        <div class="w-full flex flex-wrap justify-center py-16">
+                        <div v-if="getProjects.length > 0" class="w-full flex flex-wrap justify-center py-16">
                             <div :key="projet.id" v-for="projet in getProjects" class="px-4 xl:px-12 py-4 md:w-1/2 lg:w-1/3">
                                 <Link :href="route('item_Projet', projet.id )" class="">
                                     <div class="projet-card overflow-hidden relative">
@@ -53,6 +53,16 @@
                                             </div>
                                         </div> -->
                                     </div>
+                                </Link>
+                            </div>
+                        </div>
+                        <div class="text-sm md:text-base" v-else>
+                            <div class="w-full flex flex-wrap justify-center py-16">
+                                Tu n'as pas encore de projets. Clique sur le boutton ci-dessous pour en ajouter !
+                            </div>
+                            <div class="w-full text-center py-8">
+                                <Link :href="route('posts.create_type', 'Projet')" class="text-base lg:text-lg font-bold bg-sky-800 px-3 py-2 rounded-md text-white">
+                                    Ajouter un nouveau projet
                                 </Link>
                             </div>
                         </div>
