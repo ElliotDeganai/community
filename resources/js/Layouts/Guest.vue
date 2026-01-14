@@ -12,7 +12,7 @@
                         <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
                     </div>
                 </div>
-                <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 12">
+                <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 36">
                     <div class="w-full p-1 lg:p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm opacity-10">
                         <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
                     </div>

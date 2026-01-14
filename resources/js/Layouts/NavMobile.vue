@@ -22,8 +22,8 @@
             </div>
             <div class="flex items-center md:ml-6">
                 <!-- Settings Dropdown -->
-                <div class="md:ml-3 relative flex">
-                    <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="right" width="48">
+                <div class="md:ml-3 relative md:flex">
+                    <BreezeDropdown class="mx-2" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="left" width="48">
                         <template #trigger>
                             <span class="inline-flex py-2  rounded-md">
                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -46,7 +46,7 @@
                             </BreezeDropdownLink>
                         </template>
                     </BreezeDropdown>
-                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
+                    <BreezeDropdown class="mx-2" v-if="$page.props.auth.isDev" align="left" width="48">
                         <template #trigger>
                             <span class="inline-flex py-2 rounded-md">
                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -92,7 +92,7 @@
                             </BreezeDropdownLink>
                         </template>
                     </BreezeDropdown>
-                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
+                    <BreezeDropdown class="mx-2" v-if="$page.props.auth.isDev" align="left" width="48">
                         <template #trigger>
                             <span class="inline-flex py-2  rounded-md">
                                 <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
@@ -106,18 +106,14 @@
                         </template>
 
                         <template #content>
-                            <BreezeDropdownLink :href="route('posts.index_type', 'Text')" method="get" as="button">
+                            <BreezeDropdownLink :href="route('posts.index_type', 'Legal')" method="get" as="button">
                                 Free Text
                             </BreezeDropdownLink>
-                            <BreezeDropdownLink :href="route('posts.index_type', 'Contact Forms')" method="get" as="button">
+                            <BreezeDropdownLink :href="route('posts.index_type', 'Contact Form')" method="get" as="button">
                                 Contact Form
                             </BreezeDropdownLink>
-                            <BreezeDropdownLink :href="route('posts.index_type', 'FAQs')" method="get" as="button">
+                            <BreezeDropdownLink :href="route('posts.index_type', 'FAQ')" method="get" as="button">
                                 FAQ
-                            </BreezeDropdownLink>
-
-                            <BreezeDropdownLink :href="route('posts.index_type', 'Footers')" method="get" as="button">
-                                Footer
                             </BreezeDropdownLink>
                         </template>
                     </BreezeDropdown>

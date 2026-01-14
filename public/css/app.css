@@ -1094,10 +1094,6 @@ ol, menu {
   margin-top: auto;
   margin-bottom: auto;
 }
-.mx-8 {
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
 .-ml-px {
   margin-left: -1px;
 }
@@ -2202,6 +2198,10 @@ ol, menu {
   --tw-text-opacity: 1;
   color: rgb(127 29 29 / var(--tw-text-opacity, 1));
 }
+.text-sky-900 {
+  --tw-text-opacity: 1;
+  color: rgb(12 74 110 / var(--tw-text-opacity, 1));
+}
 .text-slate-500 {
   --tw-text-opacity: 1;
   color: rgb(100 116 139 / var(--tw-text-opacity, 1));
@@ -2229,10 +2229,6 @@ ol, menu {
 .text-yellow-500 {
   --tw-text-opacity: 1;
   color: rgb(234 179 8 / var(--tw-text-opacity, 1));
-}
-.text-sky-900 {
-  --tw-text-opacity: 1;
-  color: rgb(12 74 110 / var(--tw-text-opacity, 1));
 }
 .underline {
   text-decoration-line: underline;
@@ -2761,6 +2757,10 @@ ol, menu {
     width: 25%;
   }
 
+  .md\:w-1\/8 {
+    width: 12.5%;
+  }
+
   .md\:w-12 {
     width: 3rem;
   }
@@ -2771,10 +2771,6 @@ ol, menu {
 
   .md\:w-8 {
     width: 2rem;
-  }
-
-  .md\:w-1\/8 {
-    width: 12.5%;
   }
 
   .md\:grid-cols-2 {
@@ -2839,6 +2835,11 @@ ol, menu {
     padding-bottom: 0px;
   }
 
+  .md\:py-16 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
   .md\:py-2 {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -2862,11 +2863,6 @@ ol, menu {
   .md\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
-  }
-
-  .md\:py-16 {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
   }
 
   .md\:pb-8 {

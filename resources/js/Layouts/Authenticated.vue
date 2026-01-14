@@ -68,7 +68,7 @@ const emit = defineEmits(['toggleLateral']);
                             <!-- Navigation Links -->
                             <div class="lg:flex items-center md:ml-6 hidden">
                                 <!-- Settings Dropdown -->
-                                <div class="md:ml-3 relative flex">
+                                <div class="md:ml-3 relative lg:flex">
                                     <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex py-2  rounded-md">
@@ -194,7 +194,7 @@ const emit = defineEmits(['toggleLateral']);
                                     </template>
 
                                     <template #content>
-                                        <BreezeDropdownLink :href="route('admin')" as="button">
+                                        <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('admin')" as="button">
                                             Admin
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink v-if="($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator) && $page.props.calendar == 1" :href="route('calendar.index')" as="button">
