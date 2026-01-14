@@ -13,7 +13,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-        <link rel="icon" href="/storage/base/ED_2_Noir_Sans_fond_no_space.png">
+        <link rel="icon" href="{{ asset('storage/base/ED_2_Noir_Sans_fond_no_space.png') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
         <!-- Scripts -->
