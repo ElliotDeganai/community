@@ -43,7 +43,7 @@ const app = document.getElementById('app')
 
 if (app) {
     createInertiaApp({
-        title: (title) => `${title} - ${appName}`,
+        title: () => `${appName}`,
         resolve: name => require(`./Pages/${name}`),
         setup({el, App, props, plugin}) {
             const VueApp = createApp({ render: () => h(App, props) });
