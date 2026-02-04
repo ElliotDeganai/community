@@ -31,11 +31,11 @@
                     </main>
                     <div v-if="!$page.props.auth.user" class="w-full absolute bottom-0 left-0 h-24 bg-black opacity-50 blur-lg z-50">
                     </div>
-                    <div class="w-full" :class="[!$page.props.auth.user ? 'absolute bottom-0 border border-t-white z-60 text-white' : 'text-white bg-sky-950']">
+                    <div class="w-full" :class="[!$page.props.auth.user ? 'absolute bottom-0 border-t border-t-white z-60 text-white' : 'text-white bg-sky-950']">
                         <div class="w-full   pt-4 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
                             <div class="w-full text-center uppercase">{{ site_name }}</div>
                             <div class="self-center py-4">Made by </div>
-                            <a class="self-center px-2" href="https://www.elliot-deganai.com/">
+                            <a class="self-center px-2" href="https://www.ed-factory.com/">
                                 <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-4 md:h-6 " alt="" />
                                 <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-4 md:h-6 " alt="" />
                             </a>

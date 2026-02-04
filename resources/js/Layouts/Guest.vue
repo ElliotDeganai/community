@@ -17,7 +17,7 @@
                         <div class="w-full   pt-4 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
                             <div class="w-full text-center uppercase">{{ site_name }}</div>
                             <div class="self-center py-4">Made by </div>
-                            <a class="self-center px-2" href="https://www.elliot-deganai.com/">
+                            <a class="self-center px-2" href="https://www.ed-factory.com/">
                                 <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-4 md:h-6 " alt="" />
                                 <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-4 md:h-6 " alt="" />
                             </a>

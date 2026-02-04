@@ -108,16 +108,16 @@ Route::get('/posts/edit/gift/{postId}', [BlogController::class, 'edit_gift'])->n
 
 
 //Route::resource('/admin/fields', PageFieldController::class);
-Route::resource('/admin/pages', PagesController::class, ['except' => ['pages.show']]);
-Route::resource('/admin/page_section', PageSectionController::class);
-Route::resource('/admin/page_field', PageFieldController::class);
+Route::resource('/admin/pages', PagesController::class, ['except' => ['pages.show']])->middleware('admin');
+Route::resource('/admin/page_section', PageSectionController::class)->middleware('admin');
+Route::resource('/admin/page_field', PageFieldController::class)->middleware('admin');
 Route::resource('/admin/users', UsersController::class);
-Route::get('/admin/users-manage', [UsersController::class, 'manage'])->name('users.manage');
-Route::resource('/admin/posts', BlogController::class);
-Route::get('/admin/posts/create/{type}', [BlogController::class, 'create_type'])->name('posts.create_type');
-Route::get('/admin/posts/index/{type}', [BlogController::class, 'index_type'])->name('posts.index_type');
-Route::resource('/admin/categories', CategoryController::class);
-Route::get('/admin/categories/create/{type}', [CategoryController::class, 'create_type'])->name('categories.create_type');
+Route::get('/admin/users-manage', [UsersController::class, 'manage'])->name('users.manage')->middleware('admin');
+Route::resource('/admin/posts', BlogController::class)->middleware('auth');
+Route::get('/admin/posts/create/{type}', [BlogController::class, 'create_type'])->name('posts.create_type')->middleware('auth');
+Route::get('/admin/posts/index/{type}', [BlogController::class, 'index_type'])->name('posts.index_type')->middleware('admin');
+Route::resource('/admin/categories', CategoryController::class)->middleware('admin');
+Route::get('/admin/categories/create/{type}', [CategoryController::class, 'create_type'])->name('categories.create_type')->middleware('admin');
 Route::resource('/admin/documentations', DocumentationController::class);
 Route::resource('/admin/options', OptionController::class);
 Route::resource('/admin/medias', MediaController::class);

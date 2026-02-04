@@ -43,10 +43,10 @@ class WorkWithPost extends FormRequest
             'doc_values.*.value_audio' => 'nullable|boolean',
             'doc_values.*.value_list' => 'nullable',
             //'doc_values.*.value_link' => 'nullable|url',
-            'doc_values.*.images.*' => 'sometimes|image|max:2048',
-            'doc_values.*.audio.*' => 'sometimes|file|max:2048',
-            'doc_values.*.gallery.*' => 'sometimes|image|max:2048',
-            'doc_values.*.carousel.*' => 'sometimes|image|max:2048',
+            'doc_values.*.images.*' => 'sometimes|image',
+            'doc_values.*.audio.*' => 'sometimes|file',
+            'doc_values.*.gallery.*' => 'sometimes|image',
+            'doc_values.*.carousel.*' => 'sometimes|image',
             'doc_values.*.documentation_id' => 'required|integer',
         ];
     }

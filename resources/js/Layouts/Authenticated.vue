@@ -54,7 +54,7 @@ const emit = defineEmits(['toggleLateral']);
                 <div class=" xl:mx-auto container-px-inside-lg">
                     <div class="flex justify-between h-16">
                         <div class="lg:hidden xl:hidden">
-                            <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
+                            <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="8" />
                         </div>
                         <div class="flex flex-wrap">
                             <!-- Logo -->
@@ -63,7 +63,7 @@ const emit = defineEmits(['toggleLateral']);
                                     <!-- <BreezeApplicationLogo class="block h-9 w-auto" /> -->
                                     <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" alt="" class="h-full" />
                                 </div>
-                                <div class="post-title font-bold">LaraCMS</div>
+                                <div class="post-title font-bold">{{ $page.props.site_infos.site_name }}</div>
                             </Link>
                             <!-- Navigation Links -->
                             <div class="hidden lg:flex sm:items-center sm:ml-6">
@@ -139,7 +139,7 @@ const emit = defineEmits(['toggleLateral']);
                                         </template>
                                     </BreezeDropdown>
                                     <div class="px-8 py-2">
-                                        <Link :href="route('parameters.show', $page.props.site_infos.id)" class="shrink-0 flex items-center px-3 py-2 ">Settings</Link>
+                                        <Link :href="route('parameters.show', $page.props.site_infos.id)" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="shrink-0 flex items-center px-3 py-2 ">Settings</Link>
                                     </div>
 
                                     <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 shrink-0 flex  items-center">Manage Users</Link>
@@ -168,7 +168,7 @@ const emit = defineEmits(['toggleLateral']);
                                     </template>
 
                                     <template #content>
-                                        <BreezeDropdownLink :href="route('admin')" as="button">
+                                        <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" :href="route('admin')" as="button">
                                             Admin
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink v-if="($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator) && $page.props.calendar == 1" :href="route('calendar.index')" as="button">
@@ -199,7 +199,7 @@ const emit = defineEmits(['toggleLateral']);
             <div class="w-full container-py-inside-md flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
 
                     <div class="self-center">Made by </div>
-                    <a class="self-center px-2" href="https://www.elliot-deganai.com/">
+                    <a class="self-center px-2" href="https://www.ed-factory.com/">
                         <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-6 md:h-10 " alt="" />
                     </a>
                     <div class="self-center">Web Factory</div>

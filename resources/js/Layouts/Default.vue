@@ -30,7 +30,7 @@
                     </div>
                     <div class="w-full py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm absolute bottom-0 left-0 text-white z-60">
                         <div class="self-center">Made by </div>
-                        <a class="self-center px-2" href="https://www.elliot-deganai.com/">
+                        <a class="self-center px-2" href="https://www.ed-factory.com/">
                             <img :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
                         </a>
                         <div class="self-center">Web Factory</div>

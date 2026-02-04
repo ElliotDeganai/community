@@ -80,7 +80,7 @@
                     </template>
                 </BreezeDropdown>
                 <div class="lg:px-8 py-2">
-                    <Link @click.prevent="toggleLateral()" :href="route('parameters.show', $page.props.site_infos.id)" class="breeze-button-dropdown">Settings</Link>
+                    <Link @click.prevent="toggleLateral()" :href="route('parameters.show', $page.props.site_infos.id)" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="breeze-button-dropdown">Settings</Link>
                 </div>
                 <Link @click.prevent="toggleLateral()" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="breeze-button-dropdown">Manage Users</Link>
 

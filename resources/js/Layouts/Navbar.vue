@@ -3,8 +3,8 @@
         <div class=" md:mx-auto px-1 md:px-4 sm:px-6 lg:px-16">
             <div class="flex justify-between h-16">
                 <div class="flex ">
-                    <div class="lg:hidden xl:hidden">
-                        <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
+                    <div class="lg:hidden xl:hidden px-4">
+                        <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="8" />
                     </div>
                     <Link :href="route('home')" class="shrink-0 flex items-center px-2 ">
                         <div class="h-8 md:h-12 px-2 py-1 rounded-full">
