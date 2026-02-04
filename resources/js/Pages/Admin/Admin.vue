@@ -1,21 +1,21 @@
 <template>
-    <div class="px-2 md:px-16 lg:px-32">
-        <div class="py-16 md:py-16 lg:py-32">
-            <div class="text-lg md:text-xl font-bold w-full">
+    <div class="container-px-lg post-text-normal">
+        <div class="container-py-login">
+            <div class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">Dashboard</div>
             </div>
         </div>
         <div>
-            <div class="text-xs md:text-base">This is your admin page, from here your can manage all the resources on your website !</div>
-            <div class="py-8">
-                <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="py-8" id="categories">
+            <div class="">This is your admin page, from here your can manage all the resources on your website !</div>
+            <div class="container-py-inside-md">
+                <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="container-py-inside-md" id="categories">
                     <div class="header-config">
                         Last templates
                     </div>
                     <div v-if="categories.length > 0" class="flex flex-wrap">
-                        <div class="w-1/3 p-8" :key="category.id" v-for="category in categories">
+                        <div class="w-full md:w-1/2 lg:w-1/3 button-choice-p" :key="category.id" v-for="category in categories">
                             <div class=" bg-stone-100 shadow-md h-full rounded-md p-2">
-                                <div class="text-xl font-bold">
+                                <div class="page-subtitle font-bold">
                                     <Link :href="route('categories.show', category.id)" class="">
                                         {{category.name}}
                                     </Link>
@@ -26,21 +26,21 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="p-8 w-1/5">
+                    <div v-else class="button-choice-p w-full lg:w-1/5">
                         <Link class="btn-submit-fields" :href="route('categories.create')">Create Templates</Link>
                     </div>
-                    <div v-if="categories.length > 0" class="px-8 w-1/5">
+                    <div v-if="categories.length > 0" class="container-px-inside-md w-full lg:w-1/5">
                         <Link class="btn-submit-fields" :href="route('categories.index')">See all templates</Link>
                     </div>
                 </div>
-                <div v-if="categories.length > 0" class="py-8" id="posts">
+                <div v-if="categories.length > 0" class="container-py-inside-md" id="posts">
                     <div class="header-config">
                         Last resources
                     </div>
                     <div v-if="posts.length > 0" class="flex flex-wrap">
-                        <div class="w-1/3 p-8" :key="post.id" v-for="post in posts">
+                        <div class="w-full md:w-1/2 lg:w-1/3 button-choice-p" :key="post.id" v-for="post in posts">
                             <div class="bg-stone-100 shadow-md h-full rounded-md p-2">
-                                <div class="text-xl font-bold">
+                                <div class="page-subtitle font-bold">
                                     <Link :href="route('posts.show', post.id)" class="">
                                         {{post.name}}
                                     </Link>
@@ -51,10 +51,10 @@
                             </div>
                         </div>
                     </div>
-                    <div v-else class="p-8 w-1/5">
+                    <div v-else class="button-choice-p w-full lg:w-1/5">
                         <Link class="btn-submit-fields" :href="route('posts.create')">Create resources</Link>
                     </div>
-                    <div v-if="posts.length > 0" class="px-8 w-1/5">
+                    <div v-if="posts.length > 0" class="container-px-inside-md w-full lg:w-1/5">
                         <Link class="btn-submit-fields" :href="route('posts.index')">See all resources</Link>
                     </div>
                 </div>

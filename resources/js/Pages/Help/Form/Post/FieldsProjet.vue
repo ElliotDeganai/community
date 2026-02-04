@@ -1,7 +1,7 @@
 <template>
     <div class="">
         <div>
-            <div class="py-16">
+            <div class="container-py">
                 <div class="header-config">
                     Détails du projet
                 </div>
@@ -81,11 +81,11 @@
                 </div> -->
 
             </div>
-            <div class="py-8">
+            <div class="container-py-inside-md">
                 <div class="header-config">
                     Documentation
                 </div>
-                <div class="py-8" v-if="model.category_id !== null">
+                <div class="container-py-inside-md" v-if="model.category_id !== null">
                     <div class="error-msg" v-if="errors.doc_values">
                         <div class="text-sm md:text-base" :key="index" v-for="(error, index) in errors.doc_values">Your form has some issues</div>
                     </div>
@@ -132,8 +132,8 @@
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_html">
                             </rich-text-2>
                             <div class="w-full lg:w-1/5" v-if="attribute.type === 'boolean'">
-                                <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="0" /> False
-                                <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="1" /> True
+                                <input type="radio" class="" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="0" /> False
+                                <input type="radio" class="" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="1" /> True
                             </div>
                             <input type="number"
                                 v-if="attribute.type === 'numeric'"

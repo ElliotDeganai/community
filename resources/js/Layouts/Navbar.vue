@@ -1,29 +1,34 @@
 <template>
-    <nav :class="[((scrollPosition === null && current_page.route !== 'calendar' && current_page.route !== 'calendar' && current_page.route !== 'item_Projet') || (scrollPosition < 0.1 && current_page.route !== 'calendar' && current_page.route !== 'calendar.index' && current_page.route !== 'item_Projet')) ? 'border-b text-white' : 'border-b bg-white']" class=" fixed top-0 w-full border-gray-200 z-60">
-        <div class=" mx-auto px-4 sm:px-6 lg:px-16">
+    <nav :class="[current_nav_text_color_is_white ? 'border-b text-white' : 'border-b bg-white']" class=" fixed top-0 w-full border-gray-200 z-60">
+        <div class=" md:mx-auto px-1 md:px-4 sm:px-6 lg:px-16">
             <div class="flex justify-between h-16">
                 <div class="flex ">
-                    <div  class="base:hidden md:hidden xl:hidden">
+                    <div class="lg:hidden xl:hidden">
                         <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
                     </div>
-                    <Link :href="route('home')" class="shrink-0 flex items-center">
-                        <div class="h-16 px-2 py-3">
-                            <img v-if="(scrollPosition === null && current_page.route !== 'calendar' && current_page.route !== 'calendar' && current_page.route !== 'item_Projet') || (scrollPosition < 0.1 && current_page.route !== 'calendar' && current_page.route !== 'calendar.index' && current_page.route !== 'item_Projet')" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-full" alt="" />
-                            <img v-else :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
+                    <Link :href="route('home')" class="shrink-0 flex items-center px-2 ">
+                        <div class="h-8 md:h-12 px-2 py-1 rounded-full">
+                            <img v-if="current_nav_text_color_is_white" :src="logo_light" alt="" class="h-full" />
+                            <img v-else :src="logo_dark" alt="" class="h-full" />
                         </div>
-                        <div class="text-xs md:text-lg lg:text-2xl font-bold">{{$page.props.app_name}}</div>
+                        <div class="text-lg lg:text-2xl font-bold">{{ site_name }}</div>
                     </Link>
                 </div>
-                <div v-if="$page.props.pages.length > 0 && $page.props.auth.user" class="base:flex lg:flex xl:flex flex-wrap justify-around hidden sm:hidden " >
-                    <div :class="[((page.url_name !== 'home')) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
+                <div v-if="$page.props.pages.length > 0" class="lg:flex xl:flex flex-wrap justify-around hidden " >
+                    <div :class="[((page.url_name !== 'home')) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages.filter(p => p.display_navbar)">
                         <Link v-if="((page.url_name !== 'home'))" :href="route(page.url_name)" :class="[$page.props.getpage ? page.id === $page.props.getpage.id : false ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
                     </div>
                 </div>
-                <div v-if="$page.props.calendar == 1 && $page.props.auth.user" class="py-2 px-3 shrink-0" >
-                    <Link :href="route('calendar')" class="text-white font-bold px-3 py-2 bg-teal-900 flex flex-wrap rounded-full">
-                        Prendre RDV
+                <div v-if="$page.props.calendar == 1 && $page.props.auth.user && $page.props.auth.isOrganisme" class="hidden md:flex py-2 px-3 shrink-0" >
+                    <Link :href="route('calendar')" class="text-white border border-white font-bold px-3 py-2 bg-sky-900 flex flex-wrap rounded-full">
+                        Réserver un formateur
                     </Link>
                 </div>
+<!--                 <div v-if="$page.props.auth.user && $page.props.auth.isOrganisme" class="py-2 px-3 shrink-0" >
+                    <Link :href="route('calendar')" class="text-white border border-white font-bold px-3 py-2 bg-sky-900 flex flex-wrap rounded-full">
+                        Prendre RDV
+                    </Link>
+                </div> -->
                 <div v-if="$page.props.is_ecommerce == 1" class="py-2 px-3 shrink-0 flex items-center" >
                     <Link :href="route('checkout')" class="text-white font-bold px-3 py-2 bg-sky-900 flex flex-wrap rounded-full">
                         <span class="pr-4"><Cart :getSize="5" /></span>
@@ -31,7 +36,7 @@
                     </Link>
                 </div>
 
-                <div v-if="$page.props.auth.user" class="flex items-center sm:ml-6">
+                <div v-if="$page.props.auth.user" class="hidden md:flex items-center ml-6">
                     <div class="lg:ml-3 relative">
                         <BreezeDropdown align="right" width="48">
                             <template #trigger>
@@ -53,7 +58,7 @@
                                     Gérer mes RDV
                                 </BreezeDropdownLink>
                                 <BreezeDropdownLink :href="route('logout')" method="post" as="button">
-                                    Log Out
+                                    Déconnexion
                                 </BreezeDropdownLink>
                             </template>
                         </BreezeDropdown>
@@ -61,7 +66,7 @@
                 </div>
                 <div  class="flex items-center ml-6" v-else>
                     <div class="lg:ml-3 relative">
-                        <Link :href="route('login')" class="text-sm md:text-base shrink-0 uppercase flex items-center font-bold">Connexion</Link>
+                        <Link :href="route('login')" class="shrink-0 uppercase hidden md:flex items-center font-bold">Connexion</Link>
                     </div>
                 </div>
             </div>
@@ -114,7 +119,11 @@ export default {
             scrollPosition: null,
             siteReady: false,
             loadingUp: true,
-            border: 'border-b'
+            border: 'border-b',
+            pages_nav_not_white: ['calendar', 'confidentiality', 'legals', 'calendar.index', 'item_Projet'],
+            site_name: this.$page.props.site_infos.site_name,
+            logo_light: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light')[0].original_url : '/storage/base/ED 2 Blanc Sans fond.png',
+            logo_dark: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark')[0].original_url : '/storage/base/ED_2_Noir_Sans_fond_no_space.png'
         }
     },
     methods: {
@@ -177,6 +186,9 @@ export default {
         current_page() {
             return this.$page.props.currentPage;
         },
+        current_nav_text_color_is_white() {
+            return ((this.scrollPosition === null && this.pages_nav_not_white.filter(nav => nav == this.current_page.route).length == 0) || (this.scrollPosition < 0.1 && this.pages_nav_not_white.filter(nav => nav == this.current_page.route).length == 0));
+        },
     },
     async created() {
         await this.$store.dispatch('setDb');
@@ -186,7 +198,6 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.updateScroll);
         this.loadingSite();
-        console.log(this.current_page_path);
     },
 }
 </script>

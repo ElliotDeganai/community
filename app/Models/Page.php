@@ -12,7 +12,7 @@ class Page extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
     protected $fillable = [
-        'header_title', 'header_subtitle', 'title', 'url', 'url_name', 'template', 'description', 'published', 'published_at',
+        'header_title', 'header_subtitle', 'title', 'url', 'url_name', 'template', 'description', 'published', 'published_at','navmenu',
         'image'
     ];
 
@@ -49,5 +49,6 @@ class Page extends Model implements HasMedia
     {
         $this->addMediaCollection('image')
         ->singleFile();
+        $this->addMediaCollection('carousel');
     }
 }

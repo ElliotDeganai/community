@@ -280,6 +280,7 @@ class BlogController extends Controller
         ->load('category.documentations')); */
         //dd($parentCat);
         return Inertia::render('Admin/Post/Edit', [
+            'getusers' => User::all(),
             'getpost' => $post->load('user')
                                 ->load('docValues')
                                 ->load('docValues.medias')

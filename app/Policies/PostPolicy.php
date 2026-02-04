@@ -22,7 +22,7 @@ class PostPolicy
      */
     public function viewAll(User $user)
     {
-        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator() || $user->isClient();
+        return $user->isDev() || $user->isAdmin() || $user->isEditor() || $user->isCollaborator();
     }
 
     /**

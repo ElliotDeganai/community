@@ -1,53 +1,53 @@
 <template>
     <div class="">
         <div>
-            <div class="py-16">
+            <div class="container-py-inside">
                 <div class="header-config">
                     Post details
                 </div>
-                <div class="py-4">
+                <div class="container-py-field">
                     <label class="label-fields" for="title">Name</label>
                     <div class="py-2">
                         <input @blur.prevent="setSlug()" type="text" class="form-fields" id="name" name="name" v-model="model.name" />
                         <div class="error-msg" v-if="errors.name">{{ errors.name }}</div>
                     </div>
                 </div>
-                <div class="py-4">
+                <div class="container-py-field">
                     <label class="label-fields" for="slug">Slug</label>
                     <div class="py-2">
                         <input type="text" class="form-fields" id="slug" name="slug" v-model="model.slug" />
                         <div class="error-msg" v-if="errors.slug">{{ errors.slug }}</div>
                     </div>
                 </div>
-                <div class="py-4">
+                <div class="container-py-field">
                     <label class="label-fields" for="body">Body</label>
                     <div class="py-2">
-                        <textarea class="w-1/2 form-fields" id="body" name="body" v-model="model.body">
+                        <textarea class="form-fields" id="body" name="body" v-model="model.body">
                         </textarea>
                         <div class="error-msg" v-if="errors.body">{{ errors.body }}</div>
                     </div>
                 </div>
-                <div v-if="startCategory === null" class="py-4">
+                <div v-if="startCategory === null" class="container-py-field">
                     <label class="label-fields"  for="category">Template</label>
-                    <select @change.prevent="resetDoc()" v-model="model.category_id" id="category" name="category" class="w-1/5 form-fields">
+                    <select @change.prevent="resetDoc()" v-model="model.category_id" id="category" name="category" class="w-full lg:w-1/5 form-fields">
                         <option :key="category.id" v-for="category in categories" :value="category">{{category.name}}</option>
                     </select>
                 </div>
-                <div v-else class="py-4">
-                        <div class="bg-stone-700 w-1/5 text-white font-bold uppercase px-3 py-2 rounded-md">Template: {{model.category_id.name}}</div>
+                <div v-else class="container-py-field">
+                        <div class="bg-stone-700 w-full lg:w-1/5 text-white font-bold uppercase px-3 py-2 rounded-md">Template: {{model.category_id.name}}</div>
                 </div>
-                <div class="py-4">
+                <div class="container-py-field">
                     <label class="label-fields"  for="published">Published</label>
                     <div class="py-2">
-                        <input type="radio" class=" form-fields" id="published" name="published" v-model="model.published" value="0" /> False
-                        <input type="radio" class=" form-fields" id="published" name="published" v-model="model.published" value="1" /> True
+                        <input type="radio" class="" id="published" name="published" v-model="model.published" value="0" /> False
+                        <input type="radio" class="" id="published" name="published" v-model="model.published" value="1" /> True
                         <div class="error-msg" v-if="errors.published">{{ errors.published }}</div>
                     </div>
                 </div>
-                <div class="py-4">
+                <div class="container-py-field">
                     <label class="label-fields" for="excerpt">Excerpt</label>
                     <div class="py-2">
-                        <textarea class="w-1/2 form-fields" id="excerpt" name="excerpt" v-model="model.excerpt">
+                        <textarea class="form-fields" id="excerpt" name="excerpt" v-model="model.excerpt">
                         </textarea>
                         <div class="error-msg" v-if="errors.excerpt">{{ errors.excerpt }}</div>
                     </div>
@@ -60,7 +60,7 @@
                 <div v-if="parentCategory">
                     <label class="label-fields">Parent post</label>
                     <div class="py-2">
-                        <select v-model="model.post_id" class="w-1/5 form-fields">
+                        <select v-model="model.post_id" class="form-fields">
                             <option :key="post.id" v-for="post in parentCategory.posts" :value="post">{{post.name}}</option>
                         </select>
                     </div>
@@ -81,27 +81,27 @@
                 </div> -->
 
             </div>
-            <div class="py-8">
+            <div class="container-py-inside-md">
                 <div class="header-config">
                     Documentation
                 </div>
-                <div class="py-8" v-if="model.category_id !== null">
+                <div class="container-py-inside-md" v-if="model.category_id !== null">
                     <div class="error-msg" v-if="errors.doc_values">
                         <div :key="index" v-for="(error, index) in errors.doc_values">Your form has some issues</div>
                     </div>
                     <div class="w-full" :key="attribute.id" v-for="(attribute, index) in model.category_id.documentations">
                         <label class="label-fields" :for="'doc_'+attribute.id">{{ attribute.name }}</label>
-                        <div v-if="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0]" class="py-4">
+                        <div v-if="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0]" class="container-py-field">
                             <input type="text"
                                 v-if="attribute.type === 'text'"
-                                class="w-2/3 form-fields"
+                                class="w-full lg:w-2/3 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_text"
                             />
                             <input type="text"
                                 v-if="attribute.type === 'link'"
-                                class="w-2/3 form-fields"
+                                class="w-full lg:w-2/3 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_link"
@@ -131,34 +131,34 @@
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_html">
                             </rich-text-2>
-                            <div class="w-1/5" v-if="attribute.type === 'boolean'">
+                            <div class="w-full lg:w-1/5" v-if="attribute.type === 'boolean'">
                                 <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="0" /> False
                                 <input type="radio" class=" form-fields" :id="'doc_'+attribute.id" :name="'doc_'+attribute.id" v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_boolean" value="1" /> True
                             </div>
                             <input type="number"
                                 v-if="attribute.type === 'numeric'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_number"
                             />
                             <input type="number"
                                 v-if="attribute.type === 'price'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_price"
                             />
                             <input type="date"
                                 v-if="attribute.type === 'date'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_date"
                             />
                             <input type="datetime-local"
                                 v-if="attribute.type === 'date_time'"
-                                class="w-1/5 form-fields"
+                                class="w-full lg:w-1/5 form-fields"
                                 :id="'doc_'+attribute.id"
                                 :name="'doc_'+attribute.id"
                                 v-model="model.doc_values.filter(doc => doc.documentation_id === attribute.id )[0].value_date_time"
@@ -203,7 +203,7 @@
                                     />
                                 </div>
                             </div>
-                            <div class="py-4">
+                            <div class="container-py-field">
                                 <div class="error-msg w-full" v-if="errors['doc_values.'+index+'.value_text'] !== undefined && errors['doc_values.'+index+'.value_text'] !== null">
                                     <p>{{errors['doc_values.'+index+'.value_text']}}</p>
                                 </div>

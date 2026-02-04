@@ -1,14 +1,14 @@
 <template>
-    <div class="px-32">
-        <div class="py-32">
-            <div class="text-xl font-bold w-full">
+    <div class="container-px-inside-lg post-text-normal">
+        <div class="container-py-login">
+            <div class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">Edit a page</div>
             </div>
         </div>
         <div>From here you can edit your pages and their associated categories</div>
         <div>
             <div>
-                <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
+                <div v-if="$page.props.status.message" class="container-p rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
                 <div>
                     <div class="py-2">
                         <form  @submit.prevent="submit">

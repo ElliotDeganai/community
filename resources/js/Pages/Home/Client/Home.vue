@@ -26,7 +26,7 @@
                     <div class="px-4 md:px-8 xl:px-24 py-16">
                         <div class="text-4xl pb-4 w-full text-center font-bold">Projets</div>
                         <div v-if="getProjects.length > 0" class="w-full flex flex-wrap justify-center py-16">
-                            <div :key="projet.id" v-for="projet in getProjects" class="px-4 xl:px-12 py-4 md:w-1/2 lg:w-1/3">
+                            <div :key="projet.id" v-for="projet in getProjects" class="px-4 xl:px-12 py-4 w-full md:w-1/2 lg:w-1/3">
                                 <Link :href="route('item_Projet', projet.id )" class="">
                                     <div class="projet-card overflow-hidden relative">
                                         <div class="h-48 md:h-48 lg:h-48 w-full">
@@ -73,7 +73,7 @@
     </div>
 </template>
 <script>
-import BreezeGuestLayout from '@/Layouts/Guest.vue';
+import BreezeGuestLayout from '@/Layouts/GuestAbsolute.vue';
 import Carousel from '../Help/Carousel/Carousel.vue'
 import helpers from '../../../helpers'
 import DocValue from '../Help/DocumentationValue.vue'

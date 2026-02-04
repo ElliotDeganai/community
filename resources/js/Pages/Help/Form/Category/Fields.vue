@@ -15,7 +15,7 @@
                 <div class="py-4">
                     <label class="label-fields" for="content">Description</label>
                     <div class="py-2">
-                        <textarea class="w-1/2 form-fields" id="description" name="description" v-model="model.description">
+                        <textarea class="form-fields" id="description" name="description" v-model="model.description">
                         </textarea>
                         <div class="w-full error-msg" v-if="errors.description">{{ errors.description }}</div>
                     </div>
@@ -41,7 +41,7 @@
                 <div class="py-4">
                     <label class="label-fields">Parent template</label>
                     <div class="py-2">
-                        <select v-model="model.category_id" class="w-1/5 form-fields">
+                        <select v-model="model.category_id" class="form-fields">
                             <option :key="category.id" v-for="category in categories" :value="category">{{category.name}}</option>
                         </select>
                     </div>
@@ -58,13 +58,13 @@
                     </div>
                 </div> -->
             </div>
-            <div class=" text-sm py-8">
+            <div class=" text-sm container-py-inside-md">
                 <div>
                     <div class="header-config">
                         Documentation
                     </div>
                     <div>
-                        <div :key="documentation.id" v-for="(documentation, index) in this.model.documentations" class="py-4 border-b border-gray-300">
+                        <div :key="documentation.id" v-for="(documentation, index) in this.model.documentations" class="container-py-field border-b border-gray-300">
                             <div class="py-2">
                                 <label class="label-fields" :for="'doc'+index">
                                     Name
@@ -96,7 +96,7 @@
                             <div v-else class="py-2">
                                 <label class="label-fields">Type</label>
                                 <div class="py-2 w-full">
-                                    <div class="w-1/5 rounded-md px-3 py-2 bg-stone-800 text-white uppercase">{{documentation.type}}</div>
+                                    <div class="w-full lg:w-1/5 rounded-md px-3 py-2 bg-stone-800 text-white uppercase">{{documentation.type}}</div>
                                 </div>
                             </div>
                             <div v-if="documentation.type === 'list'" class="py-2">

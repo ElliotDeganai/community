@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .form-fields {
+      @apply bg-gray-100 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white;
+    }
+    .form-fields-client {
+      @apply bg-white appearance-none border-2 border-red-900 rounded py-2 px-4 text-red-900 leading-tight focus:outline-none focus:bg-white;
+    }
+    .label-fields {
+      @apply block uppercase tracking-wide text-gray-700 font-bold;
+    }
+    .label-fields-client {
+      @apply block uppercase tracking-wide text-white font-bold;
+    }
+    .btn-submit-fields {
+      @apply rounded-md flex flex-wrap justify-center px-3 py-2 text-white hover:bg-teal-400 hover:text-white hover:font-bold bg-teal-600;
+    }
+    .btn-delete {
+      @apply font-bold text-red-700 bg-red-200  px-3 py-2 rounded-md;
+    }
+    .btn-add {
+      @apply font-bold text-white bg-sky-800  px-3 py-2 rounded-md;
+    }
+    .header-config {
+      @apply font-bold w-full py-4 bg-gray-50 border-t border-b border-gray-400 text-center uppercase;
+    }
+    .header-config-client {
+      @apply font-bold w-full py-4 bg-gray-50 border-t border-b border-gray-400 text-center uppercase text-red-900;
+    }
+    .error-msg {
+      @apply px-3 py-2 my-2 bg-red-200 text-red-700 rounded-md;
+    }
+    .rich-text-style-button {
+        @apply border border-black px-2 py-1 rounded-lg;
+    }
+    body{
+      font-family: 'Kalam', cursive;
+    }
+
+    .title-home {
+        @apply w-full text-center font-bold text-2xl lg:text-4xl;
+    }
+
+    .summary-home {
+        @apply w-full flex flex-wrap text-sm lg:text-2xl;
+    }
+
+  }
+

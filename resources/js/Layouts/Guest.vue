@@ -1,49 +1,37 @@
 <template>
-    <div :class="[delete_modal || image_modal ? 'h-screen overflow-hidden' : '']" class="relative" style="font-family:  'Kalam', cursive;">
+    <div :class="[delete_modal || image_modal ? 'h-screen overflow-hidden' : '']" class="relative min-h-screen" style="font-family:  'Kalam', cursive;">
 
         <transition name="loading-fade">
             <loading class="z-70" v-if="isLoading"></loading>
         </transition>
-        <div v-show="!isLoading">
-
-            <div class="w-full h-full flex flex-wrap absolute top-0 left-0 overflow-hidden">
-                <div class="w-1/4 hidden lg:inline" :key="i" v-for="i in 24">
-                    <div class="w-full p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm  opacity-10">
-                        <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
-                    </div>
-                </div>
-                <div :class="[]" class="w-1/4 inline lg:hidden" :key="i" v-for="i in 36">
-                    <div class="w-full p-1 lg:p-10 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm opacity-10">
-                        <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" class="object-contain h-full" alt="" />
-                    </div>
-                </div>
-                <div class="w-full h-full absolute top-0 left-0 bg-white opacity-70">
-
-                </div>
-            </div>
+        <div class="" v-show="!isLoading">
             <div :class="[product ? 'h-screen overflow-hidden' : 'min-h-screen h-full']" class="relative w-full">
                 <Navbar @toggleLateral="changeMobileNav" class="" />
 
-                <div class="relative h-full min-h-screen">
-                    <main  class="h-full relative">
-                        <!-- <div class=" bg-white absolute opacity-90 w-full h-full top-0 left-0"></div> -->
+                <div class="relative h-full flex flex-col min-h-screen">
+                    <main  class="h-full relative flex-grow">
                         <slot class="relative"  />
                     </main>
-                    <div v-if="!$page.props.auth.user" class="w-full absolute bottom-0 left-0 h-24 bg-black opacity-50 blur-lg z-50">
-                    </div>
-                    <div class="w-full" :class="[!$page.props.auth.user ? 'absolute bottom-0' : 'bg-stone-900']">
-                        <div class="w-full  text-white py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
-    <!--                         <div class="w-full text-center py-4">Rénovation Écologique - Votre partenaire pour un habitat durable</div>
-                            <div class="w-full text-center py-4">Certifications : RGE, Qualibat</div> -->
+                    <!-- <div v-if="!$page.props.auth.user" class="w-full absolute bottom-0 left-0 h-24 bg-black opacity-50 blur-lg z-50"></div> -->
+                    <div class="w-full text-white bg-sky-950 mt-auto z-50">
+                        <div class="w-full   pt-4 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
+                            <div class="w-full text-center uppercase">{{ site_name }}</div>
                             <div class="self-center py-4">Made by </div>
                             <a class="self-center px-2" href="https://www.elliot-deganai.com/">
-                                <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
-                                <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-6 md:h-10 " alt="" />
+                                <img v-if="!$page.props.auth.user" :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-4 md:h-6 " alt="" />
+                                <img v-else :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-4 md:h-6 " alt="" />
                             </a>
                             <div class="self-center">Web Factory</div>
                         </div>
-                        <div  class="w-full  text-white">
-                            <div class="border-t text-sm lg:text-base py-8 w-full text-center">© 2020 ED Web Factory. Tous droits réservés.</div>
+                        <div>
+                            <div class="w-full flex flex-wrap justify-center ">
+                                <div class="px-3 py-2 " :key="page.id" v-for="page in $page.props.pages.filter(p => p.display_footer)">
+                                    <Link :href="route(page.url_name)" class="shrink-0 uppercase flex items-center text-sm md:text-base font-bold">{{ page.title }}</Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="w-full  ">
+                            <div class="border-t text-sm lg:text-base py-2 w-full text-center">© 2026 {{ site_name }}. Tous droits réservés.</div>
                         </div>
                     </div>
                     <div v-if="product" @click="unset_product_modal()" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
@@ -57,8 +45,8 @@
                     </transition>
 
                     <transition name="nav-mobile">
-                        <div v-if="mobileNav"  class="z-70 lg:hidden xl:hidden fixed w-3/5 h-full top-0">
-                            <NavMobile class="" />
+                        <div v-if="mobileNav" @toggleLateral="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-4/5 h-full top-0">
+                            <NavMobile @toggleLateral="changeMobileNav" class="" />
                         </div>
                     </transition>
                 </div>
@@ -128,6 +116,9 @@ export default {
             loadingUp: true,
             mobileNav: false,
             textClass: '',
+            site_name: this.$page.props.site_infos.site_name,
+            logo_light: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light')[0].original_url : '/storage/base/ED 2 Blanc Sans fond.png',
+            logo_dark: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark')[0].original_url : '/storage/base/ED_2_Noir_Sans_fond_no_space.png'
         }
     },
     methods: {
@@ -181,7 +172,7 @@ export default {
     },
     computed:{
         ...Vuex.mapState([
-            "cart", "product", "delete_modal", "model",, "image_modal", "model", "delete_route", "type"
+            "cart", "product", "delete_modal", "image_modal", "model", "delete_route", "type"
         ]),
         getScroll() {
             return this.scrollPosition;

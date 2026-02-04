@@ -1,6 +1,6 @@
 <script setup>
 import BreezeButton from '@/Components/Button.vue';
-import BreezeGuestLayout from '@/Layouts/Guest.vue';
+import BreezeGuestLayout from '@/Layouts/GuestAbsolute.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
@@ -22,17 +22,20 @@ const submit = () => {
 
 <template>
     <BreezeGuestLayout class="relative text-white">
-        <div class="px-8 lg:px-32 relative overflow-hidden min-h-full ">
-            <div class="w-full h-full opacity-20  blur-lg absolute top-0 left-0 bg-black"></div>
-            <div class="py-24    lg:py-32 relative">
-                <div class="text-xl font-bold w-full lg:pb-24">
+        <div :style="'background-image: url(/storage/home/login2.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg hidden md:block"></div>
+        <div :style="'background-image: url(/storage/home/login2.jpg)'" class="bg-cover bg-center w-full h-screen absolute top-0 left-0 blur-lg block md:hidden"></div>
+        <div class="w-full h-full opacity-20  blur-lg absolute top-0 left-0 bg-black"></div>
+        <div class="px-8 md:px-16 lg:px-32 relative overflow-hidden min-h-full ">
+            <div class="pt-32  relative">
+                <div class="text-xl font-bold w-full py-8 md:py-16 lg:py-16">
                     <div class="w-full font-bold text-xl lg:text-3xl text-center text-white">Mot de passe oublié</div>
                 </div>
             </div>
             <Head title="Forgot Password" />
 
-            <div class="mb-4 text-sm text-white">
-                Vous avez oublié votre mot de passe ? Pas de problème. Indiquez-nous votre adresse électronique et nous vous enverrons un lien de réinitialisation du mot de passe qui vous permettra d'en choisir un nouveau.    </div>
+            <div class="mb-4 text-sm text-white w-full text-center">
+                Vous avez oublié votre mot de passe ? Pas de problème. Indiquez-nous votre adresse électronique et nous vous enverrons un lien de réinitialisation du mot de passe qui vous permettra d'en choisir un nouveau.
+            </div>
 
             <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                 {{ status }}
@@ -45,10 +48,13 @@ const submit = () => {
                         <BreezeLabel for="email" value="Email"  class=" text-white"/>
                         <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus autocomplete="username" />
                     </div>
+                    <div>
+                        <div class="w-full error-msg" v-if="form.errors.email">{{ form.errors.email }}</div>
+                    </div>
 
-                    <div class="flex items-center justify-end mt-4">
-                        <BreezeButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                            Email Password Reset Link
+                    <div class="flex items-center justify-end mt-4 w-full">
+                        <BreezeButton class="w-full" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                            Envoyer email de réinitialisation
                         </BreezeButton>
                     </div>
                 </form>

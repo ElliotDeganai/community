@@ -11,6 +11,7 @@ use App\Http\Controllers\PageFieldController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Admin\OptionController;
+use App\Http\Controllers\Admin\ParametersController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\CalendarController;
 use App\Models\Category;
@@ -25,6 +26,7 @@ use App\Http\Controllers\Stripe\StripeController;
 
 use App\Http\Controllers\PayPalController;
 use App\Http\Controllers\PusherController;
+use App\Models\Parameters;
 use App\Models\User;
 
 /*
@@ -60,7 +62,7 @@ Route::get('/', function () {
 $categories = Category::all();
 
 foreach ($categories as $category) {
-    Route::get('/'.$category->name.'/{postId}', [HomeController::class, 'post'])->name('item_'.$category->name);
+    Route::get('/'.$category->name.'/{postId}', [HomeController::class, 'post'])->name('item_'.$category->name)->middleware('auth');
 }
 
 $pages = Page::all()->load('pageSections')
@@ -119,6 +121,8 @@ Route::get('/admin/categories/create/{type}', [CategoryController::class, 'creat
 Route::resource('/admin/documentations', DocumentationController::class);
 Route::resource('/admin/options', OptionController::class);
 Route::resource('/admin/medias', MediaController::class);
+
+Route::resource('admin/parameters', ParametersController::class)->middleware('admin');
 
  Route::get('/', [HomeController::class, 'index'])->name('home');
 //Route::get('/default', [HomeController::class, 'default'])->name('default');

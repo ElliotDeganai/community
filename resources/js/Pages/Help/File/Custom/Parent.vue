@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <File @files-updated="captureFile($event)" :getType="type" :getId="getId"></File>
+        <File @files-updated="captureFile($event)" :getType="type" :getcollection="collection" :getId="getId"></File>
     </div>
 </template>
 <script>
@@ -36,14 +36,15 @@ import File from "./File.vue"
 //import { Link } from '@inertiajs/inertia-vue3';
 import { Link } from '@inertiajs/vue3'
 export default {
-    props: ["getFiles", "geterror", "getType", "getObject", "getId"],
+    props: ["getFiles", "geterror", "getType", "getObject", "getId", "getcollection"],
   components: { File, Link },
   data() {
     return {
       hover: null,
-      files: this.getObject.images,
+      files: this.getObject.images ? this.getObject.images : this.getFiles,
       type: this.getType,
-      object: this.getObject
+      object: this.getObject,
+      collection: this.getcollection
     }
   },
   methods: {
@@ -52,6 +53,15 @@ export default {
       this.object.images.push($event);
         if (this.object.images.length > 0) {
             this.object.value_image = 1;
+        }
+        if (this.collection == 'logo_light') {
+            this.object.logo_light.push($event);
+        }
+        if (this.collection == 'logo_dark') {
+            this.object.logo_dark.push($event);
+        }
+        if (this.collection == 'logo_footer') {
+            this.object.logo_footer.push($event);
         }
     },
     setHover(key) {

@@ -22,7 +22,7 @@
             </div>
             <div class="flex flex-wrap justify-center w-full h-full absolute my-auto">
                 <div class="flex flex-wrap content-center items-stretch h-full">
-                    <img alt="Logo chargement" class="object-contain w-24 self-center" :src="'/storage/base/ED 2 Blanc Sans fond.png'" />
+                    <img alt="Logo chargement" class="object-contain w-24 self-center" :src="logo_light" />
                 </div>
             </div>
         </div>
@@ -32,7 +32,13 @@
 import Palm from '../../../Help/Icon/Palm.vue'
 import Gift from '../../../Help/Icon/Gift.vue'
 export default {
-    components:{Palm, Gift}
+    components:{Palm, Gift},
+    data() {
+        return {
+            logo_light: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light')[0].original_url : '/storage/base/ED 2 Blanc Sans fond.png',
+            logo_dark: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark')[0].original_url : '/storage/base/ED_2_Noir_Sans_fond_no_space.png'
+        }
+    },
 
 }
 </script>

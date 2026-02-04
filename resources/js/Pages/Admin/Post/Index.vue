@@ -1,68 +1,68 @@
 <template>
-    <div class="px-2 md:px-16 lg:px-32">
-        <div class="py-16 md:py-32">
-            <div v-if="category" class="text-base lg:text-xl font-bold w-full">
+    <div class="container-px-lg post-text-normal">
+        <div class="container-py-login">
+            <div v-if="category" class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">List of {{category.name}} type resources</div>
             </div>
-            <div v-else class="text-base lg:text-xl font-bold w-full">
+            <div v-else class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">Resources</div>
             </div>
         </div>
-        <div class="text-xs md:text-base">This is the resource admin page. From here, you can see the list of all your resources and their associated documentation values</div>
+        <div class="">This is the resource admin page. From here, you can see the list of all your resources and their associated documentation values</div>
         <div>
             <div>
-                <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
+                <div v-if="$page.props.status.message" class="container-p rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
 
-                <div v-if="category" class="py-8">
-                    <Link :href="route('posts.create_type', type)" class="text-sm lg:text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
+                <div v-if="category" class="container-py-inside-md">
+                    <Link :href="route('posts.create_type', type)" class="post-content font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                         Add a new {{category.name}} type resource
                     </Link>
                 </div>
-                <div v-else class="py-8">
-                    <Link :href="route('posts.create')" class="text-sm lg:text-lg font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
+                <div v-else class="container-py-inside-md">
+                    <Link :href="route('posts.create')" class="post-content font-bold bg-gray-800 px-3 py-2 rounded-md text-white">
                         Add a new resource
                     </Link>
                 </div>
-                <div v-if="posts.length !== 0" class="w-full text-xs md:text-sm lg:text-base">
+                <div v-if="posts.length !== 0" class="w-full post-text-normal">
                     <div class="w-full">
-                        <div class="w-full font-bold flex flex-wrap py-4 border-b-2 border-gray-800">
-                            <div class="w-1/12">
+                        <div class="w-full font-bold flex flex-wrap container-py-field border-b-2 border-gray-800">
+                            <div class="article-index-collapse">
                             </div>
-                            <div class="text-left w-1/5 md:w-1/8 truncate">Name</div>
-                            <div class="text-left w-1/5 md:w-1/8 truncate">Author</div>
-                            <div class="text-left w-1/5 md:w-1/8 truncate">Template</div>
-                            <div class="text-left w-1/8 hidden md:block truncate">Published</div>
-                            <div class="text-left w-1/5 md:w-1/8 truncate">Published at</div>
-                            <div class="text-left w-1/8 hidden md:block truncate">Body</div>
-                            <div class="text-left w-1/8 hidden md:block truncate">Slug</div>
+                            <div class="article-index-visible truncate">Name</div>
+                            <div class="article-index-visible truncate">Author</div>
+                            <div class="article-index-visible truncate">Template</div>
+                            <div class="article-index-invisible truncate">Published</div>
+                            <div class="article-index-invisible truncate">Published at</div>
+                            <div class="article-index-invisible truncate">Body</div>
+                            <div class="article-index-invisible truncate">Slug</div>
                         </div>
                     </div>
                     <div class="w-full">
                         <div :key="post.id" v-for="post in posts" class="w-full">
                             <div class="w-full flex flex-wrap py-4 border-b border-gray-200">
-                                <div class="w-1/12 py-2">
+                                <div class="article-index-collapse py-2">
                                     <button @click.prevent="deploy(post)" type="button">
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                         </svg>
                                     </button>
                                 </div>
-                                <div class="text-left w-1/5 md:w-1/8 py-2">
+                                <div class="article-index-visible py-2">
                                     <Link :href="route('posts.show', post.id)" class="">
                                         {{post.name}}
                                     </Link>
                                 </div>
-                                <div class="text-left w-1/5 md:w-1/8 py-2 truncate">{{post.user.name}}</div>
-                                <div class="text-left w-1/5 md:w-1/8 py-2 truncate">
+                                <div class="article-index-visible py-2 truncate">{{post.user.name}}</div>
+                                <div class="article-index-visible py-2 truncate">
                                     <Link :href="route('categories.show', post.category.id)" class="px-3 py-2 bg-stone-800 rounded-full truncate text-white font-bold">
                                         {{post.category.name}}
                                     </Link>
                                 </div>
-                                <div class="text-left w-1/8 py-2 hidden md:block" v-if="post.published !== 0">true</div>
-                                <div class="text-left w-1/8 py-2 hidden md:block" v-else>false</div>
-                                <div class="text-left w-1/5 md:w-1/8 py-2 truncate">{{post.published_at}}</div>
-                                <div class="text-left w-1/8 py-2 hidden md:block truncate">{{post.body}}</div>
-                                <div class="text-left w-1/8 py-2 hidden md:block truncate">{{post.slug}}</div>
+                                <div class="article-index-invisible py-2" v-if="post.published !== 0">true</div>
+                                <div class="article-index-invisible py-2" v-else>false</div>
+                                <div class="article-index-invisible md:w-1/8 truncate">{{post.published_at}}</div>
+                                <div class="article-index-invisible py-2 truncate">{{post.body}}</div>
+                                <div class="article-index-invisible py-2 truncate">{{post.slug}}</div>
                                 <button v-if="$page.props.auth.isDev || $page.props.auth.isAdmin" class="btn-delete" @click="this.$store.dispatch('set_model', {model: post, route: 'resource', type: 'resource'})">Delete</button>
 <!--                                 <div>
                                     <Link as="button" data-message="Are you sure ?" class="btn-delete" method="delete" :href="route('posts.destroy', post.id)" :preserve-state="false">
@@ -70,7 +70,7 @@
                                     </Link>
                                 </div> -->
                             </div>
-                            <div class="w-full" v-if="detail !== null">
+                            <div class="w-full hidden lg:block" v-if="detail !== null">
                                 <div v-if="detail.id === post.id" class="w-full bg-stone-100">
                                     <div class="uppercase font-bold text-sm md:text-lg py-2 w-full text-white bg-gray-900 text-center">Documentation</div>
                                     <div class="w-full text-xs md:text-base">
@@ -100,7 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex py-8 flex-wrap justify-center w-full">
+                <div class="flex container-py-inside-md flex-wrap justify-center w-full">
                     <pagination :getpagination="getposts" />
                 </div>
             </div>

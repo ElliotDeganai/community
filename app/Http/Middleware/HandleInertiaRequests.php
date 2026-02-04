@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Parameters;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -60,6 +61,7 @@ class HandleInertiaRequests extends Middleware
             'pusher_key' => env('PUSHER_APP_KEY'),
             'pusher_id' => env('PUSHER_APP_ID'),
             'test' => 'test',
+            'site_infos' => Parameters::first()->load('medias'),
             'auth' => [
                 'user' => Auth::user() ? User::where('id', $userId)->with('roles', 'user', 'calendar')->first() : null,
                 'unReadNotifications' => Auth::user() ? User::where('id', $userId)->first()->unreadNotifications : null,

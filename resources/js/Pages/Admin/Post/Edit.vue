@@ -1,17 +1,17 @@
 <template>
-    <div class="px-4 md:px-32">
-        <div class="py-16 md:py-32">
-            <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="text-xl font-bold w-full">
+    <div class="container-px-lg post-text-normal">
+        <div class="container-py-login">
+            <div v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">Edit a resource</div>
             </div>
-            <div v-else class="text-xl font-bold w-full">
+            <div v-else class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">Mettre à jour un projet</div>
             </div>
         </div>
-        <div class="text-xs md:text-base">From here, you can edit your resources and their associated documentation values</div>
+        <div class="">From here, you can edit your resources and their associated documentation values</div>
         <div>
             <div>
-                <div v-if="$page.props.status.message" class="p-4 rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
+                <div v-if="$page.props.status.message" class="container-p rounded-md bg-blue-100 text-blue-700 bold">{{$page.props.status.message}}</div>
                 <div>
                     <div class="py-2">
                         <form  @submit.prevent="submit">
@@ -67,6 +67,7 @@ export default {
         getpost: Object,
         errors: Object,
         getcategories: Array,
+        getusers: Array,
         getParentCategory: Object
     },
     methods: {

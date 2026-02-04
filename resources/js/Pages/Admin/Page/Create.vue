@@ -1,7 +1,7 @@
 <template>
-    <div class="px-32">
-        <div class="py-32">
-            <div class="text-xl font-bold w-full">
+    <div class="container-px-lg post-text-normal">
+        <div class="container-py-login">
+            <div class="page-subtitle font-bold w-full">
                 <div class="text-center w-full uppercase">Create a Page</div>
             </div>
         </div>

@@ -11,7 +11,7 @@ import { mapState } from 'vuex';
 import {computed} from "vue";
 import {useStore} from "vuex";
 import Menu from '../Pages/Help/Icon/Menu.vue'
-import NavMobile from './NavMobile.vue'
+import NavMobile from './NavMobileAdmin.vue'
 
 const store = useStore();
 const modal = computed(() => store.state.delete_modal);
@@ -51,24 +51,24 @@ const emit = defineEmits(['toggleLateral']);
         <div class="min-h-screen relative">
             <nav class="bg-white border-b  z-50 border-gray-200 fixed top-0 w-full">
                 <!-- Primary Navigation Menu -->
-                <div class=" md:mx-auto px-1 sm:px-6 lg:px-16">
+                <div class=" xl:mx-auto container-px-inside-lg">
                     <div class="flex justify-between h-16">
+                        <div class="lg:hidden xl:hidden">
+                            <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
+                        </div>
                         <div class="flex flex-wrap">
                             <!-- Logo -->
-                            <div  class="lg:hidden">
-                                <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
-                            </div>
                             <Link :href="route('admin')" class="shrink-0 flex items-center">
                                 <div class="h-8 md:h-16">
                                     <!-- <BreezeApplicationLogo class="block h-9 w-auto" /> -->
                                     <img :src="'/storage/base/ED_2_Noir_Sans_fond_no_space.png'" alt="" class="h-full" />
                                 </div>
-                                <div class="text-xs md:text-2xl font-bold">{{$page.props.app_name}}</div>
+                                <div class="post-title font-bold">LaraCMS</div>
                             </Link>
                             <!-- Navigation Links -->
-                            <div class="lg:flex items-center md:ml-6 hidden">
+                            <div class="hidden lg:flex sm:items-center sm:ml-6">
                                 <!-- Settings Dropdown -->
-                                <div class="md:ml-3 relative lg:flex">
+                                <div class="ml-3 relative flex">
                                     <BreezeDropdown v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="right" width="48">
                                         <template #trigger>
                                             <span class="inline-flex py-2  rounded-md">
@@ -138,48 +138,22 @@ const emit = defineEmits(['toggleLateral']);
                                             </BreezeDropdownLink>
                                         </template>
                                     </BreezeDropdown>
-                                    <BreezeDropdown v-if="$page.props.auth.isDev" align="right" width="48">
-                                        <template #trigger>
-                                            <span class="inline-flex py-2  rounded-md">
-                                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                                    Settings
+                                    <div class="px-8 py-2">
+                                        <Link :href="route('parameters.show', $page.props.site_infos.id)" class="shrink-0 flex items-center px-3 py-2 ">Settings</Link>
+                                    </div>
 
-                                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                    </svg>
-                                                </button>
-                                            </span>
-                                        </template>
+                                    <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 shrink-0 flex  items-center">Manage Users</Link>
 
-                                        <template #content>
-                                            <BreezeDropdownLink :href="route('posts.index_type', 'Text')" method="get" as="button">
-                                                Free Text
-                                            </BreezeDropdownLink>
-                                            <BreezeDropdownLink :href="route('posts.index_type', 'Contact Forms')" method="get" as="button">
-                                                Contact Form
-                                            </BreezeDropdownLink>
-                                            <BreezeDropdownLink :href="route('posts.index_type', 'FAQs')" method="get" as="button">
-                                                FAQ
-                                            </BreezeDropdownLink>
-
-                                            <BreezeDropdownLink :href="route('posts.index_type', 'Footers')" method="get" as="button">
-                                                Footer
-                                            </BreezeDropdownLink>
-                                        </template>
-                                    </BreezeDropdown>
-
-                                    <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 items-center">Manage Users</Link>
-
-                                    <div class="px-2 md:px-8 py-2">
-                                        <Link :href="route('home')" class="text-xs md:text-base shrink-0 flex items-center px-1 md:px-3 py-1 md:py-2 bg-slate-900 rounded-md font-bold text-white">See Website</Link>
+                                    <div class="px-8 py-2">
+                                        <Link :href="route('home')" class="shrink-0 flex items-center px-3 py-2 bg-slate-900 rounded-md font-bold text-white">See Website</Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex items-center md:ml-6">
+                        <div class="hidden sm:flex sm:items-center sm:ml-6">
                             <!-- Settings Dropdown -->
-                            <div class="md:ml-3 relative">
+                            <div class="ml-3 relative">
                                 <BreezeDropdown align="right" width="48">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -194,36 +168,18 @@ const emit = defineEmits(['toggleLateral']);
                                     </template>
 
                                     <template #content>
-                                        <BreezeDropdownLink v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('admin')" as="button">
+                                        <BreezeDropdownLink :href="route('admin')" as="button">
                                             Admin
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink v-if="($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator) && $page.props.calendar == 1" :href="route('calendar.index')" as="button">
                                             Gérer mes RDV
                                         </BreezeDropdownLink>
                                         <BreezeDropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
+                                            Déconnexion
                                         </BreezeDropdownLink>
                                     </template>
                                 </BreezeDropdown>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">{{ $page.props.auth.user.name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.props.auth.user.email }}</div>
-                        </div>
-
-                        <div class="mt-3 space-y-1">
-                            <BreezeResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
-                            </BreezeResponsiveNavLink>
                         </div>
                     </div>
                 </div>
@@ -240,7 +196,7 @@ const emit = defineEmits(['toggleLateral']);
             <main>
                 <slot />
             </main>
-            <div class="w-full py-8 flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
+            <div class="w-full container-py-inside-md flex flex-wrap justify-center content-center items-stretch text-xs md:text-sm ">
 
                     <div class="self-center">Made by </div>
                     <a class="self-center px-2" href="https://www.elliot-deganai.com/">
@@ -249,7 +205,6 @@ const emit = defineEmits(['toggleLateral']);
                     <div class="self-center">Web Factory</div>
 
             </div>
-
             <div class="relative w-full h-full base:hidden lg:hidden xl:hidden z-70 top-0 left-0">
                 <transition name="nav-mobile">
                     <div v-if="mobileNav" @toggleLateral="changeMobileNav" @click="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-full h-full bg-black opacity-75 top-0 left-0">
@@ -257,17 +212,17 @@ const emit = defineEmits(['toggleLateral']);
                 </transition>
 
                 <transition name="nav-mobile">
-                    <div v-if="mobileNav" class="z-70 lg:hidden xl:hidden fixed w-3/5 h-full top-0">
-                        <NavMobile class="" />
+                    <div v-if="mobileNav" @toggleLateral="changeMobileNav" class="z-70 lg:hidden xl:hidden fixed w-4/5 h-full top-0">
+                        <NavMobile @toggleLateral="changeMobileNav" class="" />
                     </div>
                 </transition>
             </div>
         </div>
         <div v-if="modal && delete_model" @click="$store.commit('UNSET_DELETE_MODAL')" class="z-60 bg-black absolute opacity-75 w-full h-full top-0 left-0"></div>
         <div v-if="modal && delete_model" class="z-60 absolute w-full h-full top-0 left-0 flex flex-wrap justify-center content-center">
-            <div class="w-1/4 h-56 p-8 bg-gray-200 rounded-md">
-                <div class="font-bold text-2xl">Confirm</div>
-                <div class="py-4">You will delete the {{delete_type}} {{delete_model.name}}, Are you sure ?</div>
+            <div class="w-full md:w-1/4 h-56 button-choice-p bg-gray-200 rounded-md">
+                <div class="font-bold post-title">Confirm</div>
+                <div class="container-py-field">You will delete the {{delete_type}} {{delete_model.name}}, Are you sure ?</div>
                 <div class="flex flex-wrap justify-around">
                     <button class="" @click="$store.dispatch('unset_model')">Cancel</button>
                     <div class="">
@@ -280,3 +235,40 @@ const emit = defineEmits(['toggleLateral']);
         </div>
     </div>
 </template>
+<style>
+
+
+
+
+     .nav-mobile-enter-active{
+        animation: nav-mobileInVisibility .4s linear, nav-mobileIn .4s linear;
+    }
+
+       .nav-mobile-leave-active, .nav-mobile-leave-to, .nav-mobile-leave{
+        animation: nav-mobileOutVisibility .4s linear, nav-mobileOut .4s linear;
+    }
+
+     @keyframes nav-mobileIn{
+        from{ transform: translateX(-100%); }
+        to{ transform: translateX(0); }
+    }
+    @keyframes nav-mobileInVisibility{
+        from{ opacity: 0; }
+        to{ opacity: 1; }
+    }
+
+    @keyframes nav-mobileOut{
+        from{ transform: translateX(0); }
+        to{ transform: translateX(-100%); }
+
+    }
+
+    @keyframes nav-mobileOutVisibility{
+        from{ opacity: 1; }
+        to{ opacity: 0; }
+    }
+
+     .nav-mobile-enter-active{
+        animation: nav-mobileInVisibility .4s linear, nav-mobileIn .4s linear;
+    }
+</style>

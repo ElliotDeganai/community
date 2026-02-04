@@ -1,34 +1,33 @@
 <template>
-    <div class="bg-sky-900 text-white h-full">
-            <div class="flex flex-wrap items-center px-1 md:px-4 py-8">
-                <div class="base:hidden lg:hidden xl:hidden">
-                    <Menu class="cursor-pointer" @click.prevent="toggleLateral" :getSize="5" />
-                </div>
-                <Link :href="route('home')" class="shrink-0 flex items-center">
-                    <div class="h-8 px-1">
-                        <img :src="'/storage/base/ED 2 Blanc Sans fond.png'" class="object-contain h-full" alt="" />
+    <div class="bg-sky-900 text-white h-full py-8 pl-4">
+            <div class="flex flex-wrap ">
+                <Link @click.prevent="toggleLateral()" :href="route('home')" class="shrink-0 flex items-center">
+                    <div class="h-8 md:h-12 px-2 py-1 rounded-full">
+                        <img :src="logo_light" alt="" class="h-full" />
                     </div>
-                    <div class="text-xs md:text-lg lg:text-2xl font-bold">{{$page.props.app_name}}</div>
+                    <div class="text-lg lg:text-2xl font-bold text-wrap ">{{ site_name }}</div>
                 </Link>
             </div>
-            <div class="px-2 md:px-8 py-2">
-                <Link :href="route('home')" class="text-xs md:text-base text-center shrink-0 px-1 md:px-3 py-1 md:py-2 bg-white rounded-md font-bold text-sky-900">See Website</Link>
+
+            <div v-if="$page.props.calendar == 1 && $page.props.auth.user && $page.props.auth.isOrganisme" class="md:hidden flex py-2 px-3 shrink-0" >
+                <Link @click.prevent="toggleLateral()" :href="route('calendar')" class="text-white border border-white font-bold px-3 py-2 bg-sky-900 flex flex-wrap rounded-full">
+                    Réserver un formateur
+                </Link>
             </div>
 
-            <div v-if="$page.props.pages.length > 0" class=" block base:hidden lg:hidden xl:hidden flex-wrap justify-around" >
+            <div v-if="$page.props.pages.length > 0" class=" " >
                 <div :class="[((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor) ? '' : 'hidden']" class="py-2 px-3 shrink-0 flex flex-wrap justify-between" :key="page.id" v-for="page in $page.props.pages">
-                    <Link v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor)" :href="route(page.url_name)" :class="[page.id === $page.props.getpage.id ? 'underline underline-offset-8' : '']" class="shrink-0 uppercase flex items-center font-bold">{{ page.title }}</Link>
+                    <Link @click.prevent="toggleLateral()" v-if="((page.url_name !== 'home' && page.url_name !== 'resume')  && $page.props.auth.user) || (page.url_name === 'resume' && $page.props.auth.user && !$page.props.auth.isClient && !$page.props.auth.isEditor)" :href="route(page.url_name)" class="shrink-0 uppercase flex items-center font-bold text-wrap">{{ page.title }}</Link>
                 </div>
             </div>
-            <div class="flex items-center md:ml-6">
-                <!-- Settings Dropdown -->
-                <div class="md:ml-3 relative md:flex">
-                    <BreezeDropdown class="mx-2" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" align="left" width="48">
-                        <template #trigger>
-                            <span class="inline-flex py-2  rounded-md">
-                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    Pages
 
+            <div v-if="$page.props.auth.user" class="flex items-center py-4">
+                <div class="lg:ml-3 relative">
+                    <BreezeDropdown align="left" width="48">
+                        <template #trigger>
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white/75 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    <span class="text-xs lg:text-base">{{ $page.props.auth.user.name }}</span>
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                     </svg>
@@ -37,89 +36,33 @@
                         </template>
 
                         <template #content>
-                            <BreezeDropdownLink :href="route('pages.index')" method="get" as="button">
-                                Page List
-                            </BreezeDropdownLink>
-
-                            <BreezeDropdownLink v-if="$page.props.auth.isDev" :href="route('pages.create')" method="get" as="button">
-                                New Page
-                            </BreezeDropdownLink>
+                            <div @click.prevent="toggleLateral()">
+<!--                                 <BreezeDropdownLink @click_mobile="toggleLateral" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('admin')" as="button">
+                                    Admin
+                                </BreezeDropdownLink>
+                                <BreezeDropdownLink @click_mobile="toggleLateral" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator" :href="route('calendar.index')" as="button">
+                                    Gérer mes RDV
+                                </BreezeDropdownLink>
+                                <BreezeDropdownLink @click_mobile="toggleLateral" :href="route('logout')" method="post" as="button">
+                                    Déconnexion
+                                </BreezeDropdownLink> -->
+                                <Link @click.prevent="toggleLateral()" :href="route('admin')" v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                    Admin
+                                </Link>
+                                <Link @click.prevent="toggleLateral()" v-if="($page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor || $page.props.auth.isCollaborator) && $page.props.calendar == 1" :href="route('calendar.index')" class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                    Gérer mes RDV
+                                </Link>
+                                <Link @click.prevent="toggleLateral()" :href="route('logout')" method="post" class="block w-full px-4 py-2 text-left text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+                                    Déconnexion
+                                </Link>
+                            </div>
                         </template>
                     </BreezeDropdown>
-                    <BreezeDropdown class="mx-2" v-if="$page.props.auth.isDev" align="left" width="48">
-                        <template #trigger>
-                            <span class="inline-flex py-2 rounded-md">
-                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    Templates
-
-                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </span>
-                        </template>
-
-                        <template #content>
-                            <BreezeDropdownLink :href="route('categories.index')" method="get" as="button">
-                                Template List
-                            </BreezeDropdownLink>
-
-                            <BreezeDropdownLink :href="route('categories.create')" method="get" as="button">
-                                New template
-                            </BreezeDropdownLink>
-                        </template>
-                    </BreezeDropdown>
-                    <BreezeDropdown class="mx-2" v-if="!$page.props.auth.isClient" align="left" width="48">
-                        <template #trigger>
-                            <span class="inline-flex py-2  rounded-md">
-                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-xs md:text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    Resources
-
-                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </span>
-                        </template>
-
-                        <template #content>
-                            <BreezeDropdownLink :href="route('posts.index')" method="get" as="button">
-                                Resources List
-                            </BreezeDropdownLink>
-
-                            <BreezeDropdownLink :href="route('posts.create')" method="get" as="button">
-                                New Resource
-                            </BreezeDropdownLink>
-                        </template>
-                    </BreezeDropdown>
-                    <BreezeDropdown class="mx-2" v-if="$page.props.auth.isDev" align="left" width="48">
-                        <template #trigger>
-                            <span class="inline-flex py-2  rounded-md">
-                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    Settings
-
-                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </span>
-                        </template>
-
-                        <template #content>
-                            <BreezeDropdownLink :href="route('posts.index_type', 'Legal')" method="get" as="button">
-                                Free Text
-                            </BreezeDropdownLink>
-                            <BreezeDropdownLink :href="route('posts.index_type', 'Contact Form')" method="get" as="button">
-                                Contact Form
-                            </BreezeDropdownLink>
-                            <BreezeDropdownLink :href="route('posts.index_type', 'FAQ')" method="get" as="button">
-                                FAQ
-                            </BreezeDropdownLink>
-                        </template>
-                    </BreezeDropdown>
-
-                    <Link v-if="$page.props.auth.isDev || $page.props.auth.isAdmin || $page.props.auth.isEditor" :href="route('users.index')" class="py-3 px-3 items-center">Manage Users</Link>
-
+                </div>
+            </div>
+            <div  class="flex items-center py-4" v-else>
+                <div class="lg:ml-3 relative">
+                    <Link @click.prevent="toggleLateral()" :href="route('login')" class="shrink-0 uppercase flex items-center font-bold">Connexion</Link>
                 </div>
             </div>
     </div>
@@ -158,6 +101,9 @@ export default {
             scrollPosition: null,
             siteReady: false,
             loadingUp: true,
+            site_name: this.$page.props.site_infos.site_name,
+            logo_light: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_light')[0].original_url : '/storage/base/ED 2 Blanc Sans fond.png',
+            logo_dark: this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark').length > 0 ? this.$page.props.site_infos.medias.filter(m => m.collection_name == 'logo_dark')[0].original_url : '/storage/base/ED_2_Noir_Sans_fond_no_space.png'
         }
     },
     methods: {
@@ -212,7 +158,10 @@ export default {
         },
         isLoading() {
             return this.loadingUp && this.$page.url === '/';
-        }
+        },
+        current_page() {
+            return this.$page.props.currentPage;
+        },
     },
     async created() {
         await this.$store.dispatch('setDb');
@@ -222,7 +171,6 @@ export default {
     mounted() {
         window.addEventListener('scroll', this.updateScroll);
         this.loadingSite();
-        console.log(this.$page.url)
     },
 }
 </script>
