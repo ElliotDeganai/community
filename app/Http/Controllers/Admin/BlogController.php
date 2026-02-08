@@ -122,12 +122,6 @@ class BlogController extends Controller
      */
     public function create_type($type='custom')
     {
-
-        dd([
-    'upload_max_filesize' => ini_get('upload_max_filesize'),
-    'post_max_size'       => ini_get('post_max_size'),
-    'memory_limit'        => ini_get('memory_limit'),
-]);
         $text_category = Category::where('name', $type)->first();
         if (Auth::user()->cant('create', Post::class)) {
             return redirect()->route('posts.index')->with('status', "You cannot create posts !");
@@ -271,6 +265,7 @@ class BlogController extends Controller
     public function edit(Post $post)
     {
         //dd($post->docValues()->load('docValues.documentation')->get());
+        //dd(ini_get('upload_max_filesize'));
         if (Auth::user()->cant('update', $post)) {
             return redirect()->route('posts.index');
         }

@@ -26,7 +26,7 @@ class Helpers {
         }
     }
 
-    public static function addMediaToModel($pic, $collection, $object){
+/*     public static function addMediaToModel($pic, $collection, $object){
          $collectionOriginal = $collection;
         $mediaItems = $object
         ->addMedia($pic)
@@ -35,9 +35,9 @@ class Helpers {
             //$mediaItems->setCustomProperty('watermark', $mediaItems->getUrl('watermark'));
             $mediaItems->save();
             $object->medias()->save($mediaItems);
-    }
+    } */
 
-/* public static function addMediaToModel(
+    public static function addMediaToModel(
         $pic,
         string $collection,
         $object,
@@ -89,6 +89,6 @@ class Helpers {
             Log::error("Erreur lors de l'ajout du média : " . $e->getMessage());
             return null;
         }
-    } */
+    }
 
 }
